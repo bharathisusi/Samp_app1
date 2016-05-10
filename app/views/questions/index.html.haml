@@ -1,0 +1,16 @@
+
+%h1 Questions
+%table
+  %tbody
+    - @questions.each do |question|
+      %tr
+      - if question.user.present?
+        %td= link_to question.question_box, question
+      - if question.user.present?
+        - if current_user == question.user
+          %td= link_to 'Edit', edit_question_path(question)
+          %td= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+%br/
+= link_to 'create questions', new_question_path

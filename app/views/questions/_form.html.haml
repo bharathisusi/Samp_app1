@@ -1,0 +1,21 @@
+.col-lg-2
+.col-lg-8
+  = form_for(@question) do |f|
+    - if @question.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@question.errors.count, "error")
+          prohibited this post from being saved:
+        %ul
+          - @question.errors.full_messages.each do |message|
+            %li= message
+    .field
+      = f.label :Questions
+      %br/
+      = f.text_area :question_box,  :class => "span6", :placeholder => 'Enter your question'
+
+
+
+    .actions
+      = f.submit
+.col-lg-2

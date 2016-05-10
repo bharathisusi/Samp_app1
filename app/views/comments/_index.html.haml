@@ -1,0 +1,9 @@
+.comment
+  - question.comments.each do |comment|
+
+    %span= comment.comment
+    %span.fullname= "- #{comment.user.full_name}"
+    - if current_user == comment.user
+      %span.fullname= link_to 'Edit', edit_question_comment_path(path1(comment, question))
+      %span.fullname= link_to 'Destroy', question_answer_path(path1(comment, question)), method: :delete, data: { confirm: 'Are you sure?' }
+    %br/

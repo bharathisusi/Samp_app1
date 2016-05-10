@@ -1,0 +1,15 @@
+.question
+  %span.question= @question.question_box
+  %span.fullname= "- #{@question.user.full_name}"
+  %hr
+  = render partial: "comments/index", locals: {comments: @comments, question: @question}
+%br/
+.linkbutton= link_to 'Add comment', new_question_comment_path(@question)
+%br/
+= render partial: "answers/index", locals: {answers: @answers, question: @question}
+
+
+
+
+
+

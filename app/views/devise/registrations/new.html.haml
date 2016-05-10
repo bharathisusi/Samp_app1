@@ -1,0 +1,42 @@
+.inner-container
+  .col-lg-3
+  .col-lg-6
+    .inner-box
+      %h2 Sign up
+      %hr
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .form-horizontal
+          - devise_error_messages!
+          .form-group
+            = f.label :firstname, :class => "col-sm-3 control-label"
+
+            = f.text_field :first_name, autofocus: true, :class => "col-sm-9"
+          .form-group
+            = f.label :lastname, :class => "col-sm-3 control-label"
+
+
+            = f.text_field :last_name,  :class => "col-sm-9"
+          .form-group
+            = f.label :email, :class => "col-sm-3 control-label"
+
+
+            = f.email_field :email, autofocus: true, :class => "col-sm-9"
+          .form-group
+            = f.label :password, :class => "col-sm-3 control-label"
+
+            = f.password_field :password, autocomplete: "off", :class => "col-sm-9"
+            .minimum-password
+              - if @minimum_password_length
+                %em
+                  (#{@minimum_password_length} characters minimum)
+
+
+          .form-group
+            = f.label :password_confirmation, :class => "col-sm-3 control-label"
+
+
+            = f.password_field :password_confirmation, autocomplete: "off", :class => "col-sm-9"
+          .actions
+            = f.submit "Sign up",  :class => " btn btn-primary"
+        = render "devise/shared/links"
+        .col-lg-3`

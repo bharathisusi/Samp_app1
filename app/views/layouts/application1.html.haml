@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title SampApp1
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    - if user_signed_in?
+      %span.sign_right= image_tag(current_user.image.thumb.url)#image_tag(current_user.image.url)
+      %span.sign_right= link_to current_user.full_name,edit_user_registration_path
+      %span.sign_right= link_to "Sign out",destroy_user_session_path,method: :delete
+    - else
+      %span.sign_right= link_to "Sign in",new_user_session_path
+      %span.sign_right= link_to "Sign up",new_user_registration_path
+    %p.notice= notice
+    %p.alert= alert
+    = yield
