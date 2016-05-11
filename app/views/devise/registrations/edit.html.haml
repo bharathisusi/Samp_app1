@@ -44,6 +44,7 @@
 
           = f.file_field :image
         - if current_user.image.url.present?
+          .col-sm-2
           .col-sm-10
             = f.check_box :remove_image
             = f.label :remove_avatar
