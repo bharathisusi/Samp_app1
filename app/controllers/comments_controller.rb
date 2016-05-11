@@ -14,18 +14,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    #p request.method
     @commentable.destroy
     if(@commentable.commentable_type == "Question")
       redirect_to @question, notice: 'Question_Comment was successfully destroyed.'
     else
       redirect_to @question, notice: 'Answer_Comment was successfully created.'
     end
-
   end
-
-
-
 
   def update
     @commentable.update(post_params)
@@ -42,21 +37,20 @@ class CommentsController < ApplicationController
     commentable = find_commentable
     @commentable = commentable.comments.new(post_params)
     @commentable.user = current_user
-
-    p "===#{commentable.id}"
-      if @commentable.save
-        if(@commentable.commentable_type == "Question")
-          redirect_to @question, notice: 'Question_Comment was successfully created.'
-        else
-          redirect_to @question, notice: 'Answer_Comment was successfully created.'
-        end
+    if @commentable.save
+      if(@commentable.commentable_type == "Question")
+        redirect_to @question, notice: 'Question_Comment was successfully created.'
       else
-        render :new
+        redirect_to @question, notice: 'Answer_Comment was successfully created.'
       end
+    else
+      render :new
+    end
   end
 
   def edit
   end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -74,6 +68,7 @@ class CommentsController < ApplicationController
     end
     return "#{klass}".singularize.classify.constantize.find(id)
   end
+  
   def set_post
     @commentable = Comment.find(params[:id])
   end
