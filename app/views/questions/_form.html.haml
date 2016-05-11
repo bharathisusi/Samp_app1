@@ -12,10 +12,15 @@
     .field
       = f.label :Questions
       %br/
-      = f.text_area :question_box,  :class => "span6", :placeholder => 'Enter your question'
+      = f.text_area :question_box, :placeholder => 'Enter your question', :class =>"form-control", :rows => "8"
+
 
 
 
     .actions
-      = f.submit
+      = f.submit"Create Question",:class => " btn btn-primary btn-xs"
+
+      = link_to 'Back', questions_path
+
+
 .col-lg-2
