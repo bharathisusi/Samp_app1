@@ -23,12 +23,37 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @commentable.update(post_params)
+    commentable = find_commentable
+    if @commentable.check_history?
+      p true
+      params = post_params.merge(history_id: @commentable.id)
+      @commentable = commentable.comments.new(params)
+      @commentable.user = current_user
+      @commentable.save
+    else
+      p false
+      params = post_params.merge(history_id: @commentable.history_id)
+      @commentable = commentable.comments.new(params)
+      @commentable.user = current_user
+      @commentable.save
+
+    end
+    # @commentable.update(post_params)
     if(@commentable.commentable_type == "Question")
       redirect_to @question, notice: 'Question_Comment was successfully updated.'
     else
       redirect_to @question, notice: 'Answer_Comment was successfully updated.'
     end
+
+  end
+  def show
+
+    p "params======$#{params}"
+    p "params[:history_id]====#{params[:history_id]}"
+    @show_history = Comment.show_history(params[:history_id])
+    p "@comment_history=====#{@comment_history.inspect}"
+    # Comment.where("history_id IS NULL AND id =? XOR history_id =? AND id != ?", 143,143, 143).order("id DESC").first
+
 
   end
 
@@ -51,6 +76,15 @@ class CommentsController < ApplicationController
   def edit
   end
 
+
+  def comment_history
+    p "params======$#{params}"
+    p "params[:history_id]====#{params[:history_id]}"
+    @comment_history = Comment.list_comment_history(params[:history_id], params[:dont_show])
+    p "@comment_history=====#{@comment_history.inspect}"
+    # Comment.where("history_id IS NULL AND id =? XOR history_id =? AND id != ?", 143,143, 143).order("id DESC").first
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -68,7 +102,7 @@ class CommentsController < ApplicationController
     end
     return "#{klass}".singularize.classify.constantize.find(id)
   end
-  
+
   def set_post
     @commentable = Comment.find(params[:id])
   end
@@ -78,3 +112,4 @@ class CommentsController < ApplicationController
   end
 
 end
+

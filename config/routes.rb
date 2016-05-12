@@ -1,18 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'comments/new'
-
-  get 'comments/index'
-
-  get 'comments/destroy'
-
-  get 'comments/update'
-
-  get 'comments/create'
-
-  get 'comments/edit'
-
+  get 'comments/comment_history'
   #get 'questions/index'
   concern :commentable do
     resources :comments

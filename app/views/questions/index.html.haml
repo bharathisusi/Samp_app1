@@ -6,9 +6,9 @@
     = link_to question.question_box, question
   - if question.user.present?
     - if current_user == question.user
-      %span.fullname= link_to 'Edit', edit_question_path(question)
+      %span.fullname= link_to 'Edit', edit_question_path(question),  :class => " btn btn-primary btn-xs"
 
-      %span.fullname= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
+      %span.fullname= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }, :class => " btn btn-primary btn-xs"
   %br
 = link_to 'create question', new_question_path,  :class => "btn btn-primary btn-xs"
 

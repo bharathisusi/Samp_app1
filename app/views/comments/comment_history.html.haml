@@ -1,0 +1,7 @@
+%p sdfdsfdsfdsfdsfdsfdsfdsffdsfsfdsfdshgfdagsfdgsgfdsf
+.answer-comment
+  - @comment_history.each do |comment|
+    %span= comment.comment
+    %span.fullname= "- #{comment.user.full_name}"
+    %br/
+    %br/
