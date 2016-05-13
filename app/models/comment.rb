@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   end
 
   def self.show_history(num)
-    where("history_id IS NULL AND id =? XOR history_id =? AND id != ?", num, num, num).order("id DESC").first
+    where("history_id IS NULL AND id =? OR history_id =? AND id != ?", num, num, num).order("id DESC").first
   end
 
   def self.list_comment_history(num,not_num)

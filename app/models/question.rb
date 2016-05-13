@@ -13,4 +13,6 @@ class Question < ActiveRecord::Base
       "#{a} Answers"
     end
   end
+
+
 end

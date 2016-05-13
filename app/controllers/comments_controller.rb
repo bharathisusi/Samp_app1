@@ -46,18 +46,6 @@ class CommentsController < ApplicationController
     end
 
   end
-  def show
-
-    p "params======$#{params}"
-    p "params[:history_id]====#{params[:history_id]}"
-    @show_history = Comment.show_history(params[:history_id])
-    p "@comment_history=====#{@comment_history.inspect}"
-    # Comment.where("history_id IS NULL AND id =? XOR history_id =? AND id != ?", 143,143, 143).order("id DESC").first
-
-
-  end
-
-
   def create
     commentable = find_commentable
     @commentable = commentable.comments.new(post_params)
