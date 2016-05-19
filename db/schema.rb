@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512073813) do
+ActiveRecord::Schema.define(version: 20160518061451) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -67,8 +67,22 @@ ActiveRecord::Schema.define(version: 20160512073813) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "upvote",       limit: 4
+    t.integer  "downvote",     limit: 4
+    t.integer  "votable_id",   limit: 4
+    t.string   "votable_type", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",      limit: 4
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "votes", "users"
 end

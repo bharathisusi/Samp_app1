@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
   get 'comments/comment_history'
   #get 'questions/index'
+  resources :votes, :except => [:edit, :update, :show, :destroy] do
+    collection do
+      post 'upvote'
+    end
+  end
+
   concern :commentable do
     resources :comments
   end

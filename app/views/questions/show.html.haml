@@ -1,4 +1,7 @@
 .question
+  %span= link_to_vote('', @question, 'upvote')
+  %span= display_sum_of_votes(@question)
+  %span= link_to_vote('', @question, 'downvote')
   %span.question= @question.question_box
   %span.fullname= "- #{@question.user.full_name}"
   %hr

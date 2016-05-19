@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   belongs_to :user
+  has_many :votes, as: :votable, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :answered_users, :source => :user, :through => :answers
   has_many :comments, as: :commentable
@@ -13,6 +14,5 @@ class Question < ActiveRecord::Base
       "#{a} Answers"
     end
   end
-
 
 end
