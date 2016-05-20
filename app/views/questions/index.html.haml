@@ -3,7 +3,7 @@
 
 - @questions.each do |question|
   - if question.user.present?
-    = link_to question.question_box, question
+    = link_to question.question_box.html_safe, question
   - if question.user.present?
     - if current_user == question.user
       %span.fullname= link_to 'Edit', edit_question_path(question),  :class => " btn btn-primary btn-xs"

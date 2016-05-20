@@ -2,11 +2,11 @@ module VotesHelper
 
   def link_to_vote(current_count, question, from)
     if from == 'upvote'
-      from ='upvote'
+      #from ='upvote'
       arrow_class = 'up'
       btn = question.votes.if_already_upvote_notify?(current_user,question).present? ? "btn-warning" : ''
     else
-      from = 'downvote'
+      #from = 'downvote'
       arrow_class = 'down'
       btn = question.votes.if_already_downvote_notify?(current_user,question).present? ? "btn-warning" : ''
     end

@@ -1,3 +1,4 @@
+
 class QuestionsController < ApplicationController
 
 
@@ -36,10 +37,10 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(post_params)
-      format.html { redirect_to questions_path, notice: 'Question was successfully updated.' }
+       redirect_to questions_path, notice: 'Question was successfully updated.'
 
     else
-      format.html { render :edit }
+      render :edit
 
     end
 

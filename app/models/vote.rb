@@ -1,7 +1,8 @@
 class Vote < ActiveRecord::Base
   belongs_to :votable, polymorphic: true
   belongs_to :user
-  # validate :validate_upvote_downvote_message
+
+  #validate :validate_upvote_downvote_message
 
   # def validate_upvote_downvote_message
   #   self_record = Vote.find self.id #rescue nil
@@ -59,6 +60,8 @@ class Vote < ActiveRecord::Base
       vote = check_if_already_voted?(current_user,votable)
       if vote.downvote == 0 || vote.downvote == nil
         vote.upvote == 0 ? vote.update_if_already_voted_with_zero : vote.update_if_already_voted
+
+
       end
     end
 

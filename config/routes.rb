@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   get 'comments/comment_history'
   #get 'questions/index'
   resources :votes, :except => [:edit, :update, :show, :destroy] do
@@ -26,6 +27,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'questions#index'
+
+  mount Ckeditor::Engine => '/ckeditor'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

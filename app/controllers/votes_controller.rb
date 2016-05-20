@@ -2,18 +2,38 @@ class VotesController < ApplicationController
 
   def upvote
     from_where = find_votable
+    current_user_upvote = Vote.check_if_already_voted?(current_user,from_where)
     if params[:upvote]
-      Vote.check_if_already_voted?(current_user,from_where) ? Vote.get_current_user_vote_id(current_user,from_where) : from_where.votes.save_new_record(secure_params,current_user,params[:upvote])
+      current_user_upvote ? Vote.get_current_user_vote_id(current_user,from_where) : from_where.votes.save_new_record(secure_params,current_user,params[:upvote])
     else
-      Vote.check_if_already_voted?(current_user,from_where) ? Vote.get_current_user_downvote_id(current_user,from_where) : from_where.votes.save_new_record(secure_params,current_user,params[:downvote])
+      current_user_upvote ? Vote.get_current_user_downvote_id(current_user,from_where) : from_where.votes.save_new_record(secure_params,current_user,params[:downvote])
     end
-    redirect_to :back
+    if params[:downvote]
+      if current_user_upvote
+        if current_user_upvote.upvote == 1
+          redirect_to :back, error: "you already voted.so you cant downvoted"
+        else
+          redirect_to :back
+        end
+      else
+        redirect_to :back
+      end
+    else
+      if current_user_upvote
+        if current_user_upvote.downvote == -1
+          redirect_to :back, error: "you already downvoted.so you cant voted"
+        else
+          redirect_to :back
+        end
+      else
+        redirect_to :back
+      end
+    end
   end
-
   private
 
-   def secure_params
-    params.require(:vote).permit
+ def secure_params
+  params.require(:vote).permit
   end
 
   def find_votable
@@ -26,5 +46,4 @@ class VotesController < ApplicationController
     end
     return "#{klass}".singularize.classify.constantize.find(id)
   end
-
 end

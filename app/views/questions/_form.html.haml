@@ -1,3 +1,4 @@
+/ = javascript_include_tag "application"
 .col-lg-2
 .col-lg-8
   = form_for(@question) do |f|
@@ -5,7 +6,8 @@
     .field
       = f.label :Questions
       %br/
-      = f.text_area :question_box, :placeholder => 'Enter your question', :class =>"form-control", :rows => "8"
+      = f.text_area :question_box, :placeholder => 'Enter your question', :class =>"ckeditor", :rows => "8"
+
     .actions
       = f.submit"Create Question",:class => " btn btn-primary btn-xs"
 
