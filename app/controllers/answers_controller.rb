@@ -51,13 +51,37 @@ class AnswersController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def update
-    if @answer.update(post_params)
-      redirect_to @question, notice: 'Answer was successfully updated.'
-      #format.json { render :show, status: :ok, location: @article }
+
+    if @answer.check_history?
+      p true
+      params = post_params.merge(history_id: @answer.id)
+      @answer= @question.answers.new(params)
+       @answer.user = current_user
+      @answer.save
+    else
+      p false
+      params = post_params.merge(history_id: @answer.history_id)
+      @answer= @question.answers.new(params)
+       @answer.user = current_user
+      @answer.save
+    end
+
+
+    if @answer.save
+       redirect_to  @question, notice: 'Answer was successfully updated.'
+
     else
       render :edit
-      #format.json { render json: questions_path.errors, status: :unprocessable_entity }
+
     end
+
+    # if @answer.update(post_params)
+    #   redirect_to @question, notice: 'Answer was successfully updated.'
+    #   #format.json { render :show, status: :ok, location: @article }
+    # else
+    #   render :edit
+    #   #format.json { render json: questions_path.errors, status: :unprocessable_entity }
+    # end
   end
 
   # DELETE /posts/1
@@ -68,6 +92,10 @@ class AnswersController < ApplicationController
     redirect_to @question, notice: 'Answer was successfully destroyed.'
 
   end
+  def answer_history
+    @answer_history = Answer.list_comment_history(params[:history_id], params[:dont_show])
+  end
+
 
 
 

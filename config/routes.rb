@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
 
   get 'comments/comment_history'
+  get 'questions/question_history'
+  get 'answers/answer_history'
   #get 'questions/index'
   resources :votes, :except => [:edit, :update, :show, :destroy] do
     collection do

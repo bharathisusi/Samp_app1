@@ -36,7 +36,20 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(post_params)
+    if @question.check_history?
+      p true
+      params = post_params.merge(history_id: @question.id)
+      @question = current_user.questions.new(params)
+      @question.save
+    else
+      p false
+      params = post_params.merge(history_id: @question.history_id)
+      @question = current_user.questions.new(params)
+      @question.save
+    end
+
+
+    if @question.save
        redirect_to questions_path, notice: 'Question was successfully updated.'
 
     else
@@ -51,6 +64,11 @@ class QuestionsController < ApplicationController
     @question.destroy
     redirect_to questions_url, notice: 'Question was successfully destroyed.'
 
+  end
+
+  def question_history
+    p "yyyyyyyyyyyyyyy"
+    @question_history = Question.list_comment_history(params[:history_id], params[:dont_show])
   end
 
 

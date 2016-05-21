@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Common
   belongs_to :user
   has_many :votes, as: :votable, dependent: :destroy
   has_many :answers, dependent: :destroy

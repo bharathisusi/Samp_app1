@@ -1,14 +1,18 @@
-
 %h1 Question
 
-- @questions.each do |question|
+- @questions.where("history_id IS NULL").each do |question|
+  - question_edited = Question.show_history(question.id)
+  /- if question.user.present?
+  = link_to question_edited.question_box.html_safe, question
   - if question.user.present?
-    = link_to question.question_box.html_safe, question
-  - if question.user.present?
-    - if current_user == question.user
-      %span.fullname= link_to 'Edit', edit_question_path(question),  :class => " btn btn-primary btn-xs"
-
+    - if current_user == question_edited.user
+      %span.fullname= link_to 'Edit', edit_question_path(question_edited),  :class => " btn btn-primary btn-xs"
+      - unless question_edited.check_history?
+        %span.fullname= link_to 'Edited', questions_question_history_path(history_id: question_edited.history_id, dont_show: question_edited.id), :class => " btn btn-primary btn-xs"
       %span.fullname= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }, :class => " btn btn-primary btn-xs"
   %br
 = link_to 'create question', new_question_path,  :class => "btn btn-primary btn-xs"
+
+
+
 

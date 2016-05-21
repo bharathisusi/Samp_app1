@@ -66,11 +66,7 @@ class CommentsController < ApplicationController
 
 
   def comment_history
-    p "params======$#{params}"
-    p "params[:history_id]====#{params[:history_id]}"
     @comment_history = Comment.list_comment_history(params[:history_id], params[:dont_show])
-    p "@comment_history=====#{@comment_history.inspect}"
-    # Comment.where("history_id IS NULL AND id =? XOR history_id =? AND id != ?", 143,143, 143).order("id DESC").first
   end
 
   private

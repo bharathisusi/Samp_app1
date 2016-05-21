@@ -7,4 +7,9 @@ module ApplicationHelper
     {id: com.id, question_id: que}
   end
 
+
+
+
+
+
 end

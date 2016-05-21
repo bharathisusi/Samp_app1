@@ -3,13 +3,17 @@
   %span.linkbutton.link_space= link_to 'Add Answer', new_question_answer_path(question)
 
 %hr/
-- question.answers.each do |answer|
-  %span.answer= answer.answer
-  %span.fullname= "- #{answer.user.full_name}"
+- question.answers.where("history_id IS NULL").each do |answer|
+  - question_answer= Answer.show_history(answer.id)
+  %span.answer= question_answer.answer.html_safe
+  %span.fullname= "- #{question_answer.user.full_name}"
   - if current_user == answer.user
-    %span.fullname= link_to 'Edit', edit_question_answer_path(path(answer, question))
+    %span.fullname= link_to 'Edit', edit_question_answer_path(path(question_answer, question))
+    - unless question_answer.check_history?
+      %span.fullname= link_to 'Edited', answers_answer_history_path(history_id: question_answer.history_id, dont_show: question_answer.id)
 
-    %span.fullname= link_to 'Destroy', question_answer_path(path(answer, question)), method: :delete, data: { confirm: 'Are you sure?' }
+
+    %span.fullname= link_to 'Destroy', question_answer_path(path(question_answer, question)), method: :delete, data: { confirm: 'Are you sure?' }
 
 
   %hr
@@ -29,6 +33,5 @@
   .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)
 
   %hr
-
 
 
