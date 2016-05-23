@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   include Common
+  has_many :votes, as: :votable, dependent: :destroy
   belongs_to :user
   belongs_to :question
   has_many :comments, as: :commentable, dependent: :destroy
