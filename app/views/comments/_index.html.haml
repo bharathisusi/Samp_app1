@@ -1,9 +1,9 @@
 .answer-comment
   - question.comments.where("history_id IS NULL").each do |comment|
     - question_comment = Comment.show_history(comment.id)
-    %span= link_to_question_comment_vote('', question, comment, 'upvote')
+    %span= link_to_comment_vote( 'upvote', '', question, comment)
     %span= display_sum_of_votes(comment)
-    %span= link_to_question_comment_vote('', question, comment, 'downvote')
+    %span= link_to_comment_vote('downvote', '', question, comment)
     %span= question_comment.comment.html_safe
     %span.fullname= "- #{question_comment.user.full_name}"
     - if current_user == question_comment.user

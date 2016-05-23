@@ -4,6 +4,11 @@
   = form_for(@question) do |f|
     - question_error_messages!
     .field
+      = f.label :Title
+      %br/
+      = f.text_field :title, :placeholder => 'Enter your title', :rows => "8"
+
+    .field
       = f.label :Questions
       %br/
       = f.text_area :question_box, :placeholder => 'Enter your question', :class =>"ckeditor", :rows => "8"

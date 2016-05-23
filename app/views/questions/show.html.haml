@@ -1,8 +1,9 @@
 .question
-  %span= link_to_question_answer_vote('upvote', '', @question)
+  %span= link_to_vote('upvote', '', @question)
   %span= display_sum_of_votes(@question)
-  %span= link_to_question_answer_vote('downvote', '', @question)
-  %span.question= @question.question_box.html_safe
+  %span= link_to_vote('downvote', '', @question)
+  .question= @question.title
+  %span= @question.question_box.html_safe
   %span.fullname= "- #{@question.user.full_name}"
   %hr
   = render partial: "comments/index", locals: {comments: @comments, question: @question}
