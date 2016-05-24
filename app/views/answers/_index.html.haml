@@ -1,6 +1,7 @@
 %span.linkbutton= question.answers_count
-- if current_user.answers.where(question_id: question.id).first.blank?
-  %span.linkbutton.link_space= link_to 'Add Answer', new_question_answer_path(question)
+- if current_user.present?
+  - if current_user.answers.where(question_id: question.id).first.blank?
+    %span.linkbutton.link_space= link_to 'Add Answer', new_question_answer_path(question)
 
 %hr/
 - question.answers.where("history_id IS NULL").each do |answer|
@@ -10,13 +11,14 @@
   %span= link_to_vote('downvote', '', question, answer)
   %span.answer= question_answer.answer.html_safe
   %span.fullname= "- #{question_answer.user.full_name}"
-  - if current_user == answer.user
-    %span.fullname= link_to 'Edit', edit_question_answer_path(path(question_answer, question))
-    - unless question_answer.check_history?
-      %span.fullname= link_to 'Edited', answers_answer_history_path(history_id: question_answer.history_id, dont_show: question_answer.id)
+  - if current_user.present?
+    - if current_user == answer.user
+      %span.fullname= link_to 'Edit', edit_question_answer_path(path(question_answer, question))
+      - unless question_answer.check_history?
+        %span.fullname= link_to 'Edited', answers_answer_history_path(history_id: question_answer.history_id, dont_show: question_answer.id)
 
 
-    %span.fullname= link_to 'Destroy', question_answer_path(path(question_answer, question)), method: :delete, data: { confirm: 'Are you sure?' }
+      %span.fullname= link_to 'Destroy', question_answer_path(path(question_answer, question)), method: :delete, data: { confirm: 'Are you sure?' }
 
 
   %hr
@@ -30,13 +32,15 @@
       %span= link_to_comment_vote( 'downvote','', question, comment, answer)
       %span= question_comment.comment.html_safe
       %span.fullname= "- #{question_comment.user.full_name}"
-      - if current_user == comment.user
-        %span.fullname= link_to 'Edit', edit_question_answer_comment_path(id: question_comment.id, answer_id: answer.id, question_id:question)
-        - unless question_comment.check_history?
-          %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: question_comment.history_id, dont_show: question_comment.id)
+      - if current_user.present?
+        - if current_user == comment.user
+          %span.fullname= link_to 'Edit', edit_question_answer_comment_path(id: question_comment.id, answer_id: answer.id, question_id:question)
+          - unless question_comment.check_history?
+            %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: question_comment.history_id, dont_show: question_comment.id)
 
-        %span.fullname= link_to 'Destroy', question_answer_comment_path(id: question_comment.id,answer_id: answer.id, question_id:question), method: :delete, data: { confirm: 'Are you sure?' }
-  .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)
+          %span.fullname= link_to 'Destroy', question_answer_comment_path(id: question_comment.id,answer_id: answer.id, question_id:question), method: :delete, data: { confirm: 'Are you sure?' }
+  - if current_user.present?
+    .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)
 
   %hr
 

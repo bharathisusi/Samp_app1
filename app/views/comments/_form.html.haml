@@ -1,13 +1,17 @@
 .col-lg-2
 .col-lg-8
   = form_for([@question, @commentable]) do |f|
-    - comment_error_messages!
+    - all_views_side_error_messages!(@commentable)
     .field
       = f.label :Comment
       %br/
       = f.text_area :comment, :placeholder => 'Enter your comment', :class =>"form-control", :rows => "8"
       - if params[:answer_id].present?
         = hidden_field_tag :answer_id, params[:answer_id]
+      = p "ffffffffff"
+      = p params[:commentable_id]
     .actions
-      = f.submit "Create Comment", :class => " btn btn-primary btn-xs"
+      = params[:comment_id].present? ? (f.submit "Update Comment", :class => " btn btn-primary btn-xs") : (f.submit "Create Comment", :class => " btn btn-primary btn-xs")
+
+
 .col-lg-2

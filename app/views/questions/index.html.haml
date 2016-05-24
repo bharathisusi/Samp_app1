@@ -2,8 +2,8 @@
 
 - @questions.where("history_id IS NULL").each do |question|
   - question_edited = Question.show_history(question.id)
-  /- if question.user.present?
   %span= link_to question_edited.title, question
+  - @a = question_edited.question_box
   - if question.user.present?
     - if current_user == question_edited.user
       %span.fullname= link_to 'Edit', edit_question_path(question_edited),  :class => " btn btn-primary btn-xs"

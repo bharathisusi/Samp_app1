@@ -1,12 +1,17 @@
+.question_title
+  = @question.title
+  %br
 .question
-  %span= link_to_vote('upvote', '', @question)
-  %span= display_sum_of_votes(@question)
-  %span= link_to_vote('downvote', '', @question)
-  .question= @question.title
-  %span= @question.question_box.html_safe
-  %span.fullname= "- #{@question.user.full_name}"
+  .pull-left
+    %span= link_to_vote('upvote', '', @question)
+    %span= display_sum_of_votes(@question)
+    %span= link_to_vote('downvote', '', @question)
+  .pull-left
+    %span= recent_question_update
+    %span.fullname= "- #{@question.user.full_name}"
+  .clearfix
   %hr
-  = render partial: "comments/index", locals: {comments: @comments, question: @question}
+= render partial: "comments/index", locals: {comments: @comments, question: @question}
 %br/
 .linkbutton= link_to 'Add comment', new_question_comment_path(@question)
 %br/

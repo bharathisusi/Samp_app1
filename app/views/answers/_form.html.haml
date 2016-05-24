@@ -1,7 +1,7 @@
 .col-lg-2
 .col-lg-8
   = form_for([@question, @answer]) do |f|
-    - answer_error_messages!
+    - all_views_side_error_messages!(@answer)
     .field
       = f.label :Answer
       %br/

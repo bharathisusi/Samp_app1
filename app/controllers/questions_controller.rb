@@ -11,6 +11,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    # if current_user.present?
+    #  p "========================="
+    #  test= "joshva"
+    # end
+    # p defined?(: )
+    # puts "===out side #{test}"
+
   end
 
   # GET /posts/new
@@ -81,7 +88,7 @@ class QuestionsController < ApplicationController
 
 
     def post_params
-      params.require(:question).permit(:question_box)
+      params.require(:question).permit(:title, :question_box)
     end
     def require_permission
       if current_user != @question.user

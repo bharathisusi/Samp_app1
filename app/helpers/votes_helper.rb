@@ -5,10 +5,17 @@ module VotesHelper
 
     if from == 'upvote'
       arrow_class = 'up'
-      btn = resource.votes.if_already_upvote_notify?(current_user,resource).present? ? "btn-warning" : ''
+
+      if current_user.present?
+        p "1111111111111111111"
+         btn = resource.votes.if_already_upvote_notify?(current_user,resource).present? ? "btn-warning" : ''
+      end
     else
       arrow_class = 'down'
-      btn = resource.votes.if_already_downvote_notify?(current_user,resource).present? ? "btn-warning" : ''
+      if current_user.present?
+        p "2222222222222222222"
+        btn = resource.votes.if_already_downvote_notify?(current_user,resource).present? ? "btn-warning" : ''
+      end
     end
 
     link_to upvote_votes_path(vote: {current_count: current_count}, question_id: question.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}"), method: :post, class: btn do
@@ -22,11 +29,15 @@ module VotesHelper
     if from == 'upvote'
       #from ='upvote'
       arrow_class = 'up'
-      btn = comment.votes.if_already_upvote_notify?(current_user,comment).present? ? "btn-warning" : ''
+      if current_user.present?
+        btn = comment.votes.if_already_upvote_notify?(current_user,comment).present? ? "btn-warning" : ''
+      end
     else
       #from = 'downvote'
       arrow_class = 'down'
-      btn = comment.votes.if_already_downvote_notify?(current_user,comment).present? ? "btn-warning" : ''
+      if current_user.present?
+        btn = comment.votes.if_already_downvote_notify?(current_user,comment).present? ? "btn-warning" : ''
+      end
     end
 
     link_to upvote_votes_path(vote: {current_count: current_count}, question_id: question.id, comment_id: comment.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}"), method: :post, class: btn do
