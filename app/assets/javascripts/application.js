@@ -15,4 +15,6 @@
 //= require ckeditor/init
 //= require twitter/bootstrap
 //= require turbolinks
+//= require vote
 //= require_tree .
+

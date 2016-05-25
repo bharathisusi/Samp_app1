@@ -1,16 +1,9 @@
 .question_title
   = @question.title
   %br
-.question
-  .pull-left
-    %span= link_to_vote('upvote', '', @question)
-    %span= display_sum_of_votes(@question)
-    %span= link_to_vote('downvote', '', @question)
-  .pull-left
-    %span= recent_question_update
-    %span.fullname= "- #{@question.user.full_name}"
-  .clearfix
-  %hr
+.append_question
+  = render partial: 'questions/append_question_vote', locals: {:question => @question}
+
 = render partial: "comments/index", locals: {comments: @comments, question: @question}
 %br/
 .linkbutton= link_to 'Add comment', new_question_comment_path(@question)

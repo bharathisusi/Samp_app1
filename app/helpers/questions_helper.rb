@@ -4,9 +4,7 @@ module QuestionsHelper
   #  flash.now[:error] = @question.errors.full_messages.map { |msg| "#{msg}." }[0]
   # end
 
-  def recent_question_update
-    p "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    p @question
-    Question.show_history(@question).question_box.html_safe
+  def recent_question_update(question)
+    Question.show_history(question).question_box.html_safe
   end
 end

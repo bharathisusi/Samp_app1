@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
 
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :append_question_vote, :edit, :update, :destroy]
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
@@ -11,13 +11,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # if current_user.present?
-    #  p "========================="
-    #  test= "joshva"
-    # end
-    # p defined?(: )
-    # puts "===out side #{test}"
 
+  end
+
+  def append_question_vote
+    render :json => {:html => render_to_string('/questions/_append_question_vote', :locals => {:question => @question})}
   end
 
   # GET /posts/new
