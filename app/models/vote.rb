@@ -42,6 +42,10 @@ class Vote < ActiveRecord::Base
     update_attributes(downvote: -1)
   end
 
+  def append_vote_change
+    render :json => {:html => render_to_string('/questions/_append_question_vote', :layout => false, :locals => {:question => self})} and return
+  end
+
   class << self
 
     def check_if_already_voted?(current_user,votable)

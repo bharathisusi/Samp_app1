@@ -18,9 +18,11 @@ module VotesHelper
       end
     end
 
-    link_to upvote_votes_path(vote: {current_count: current_count}, question_id: question.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}"), method: :post, class: btn, remote: true, id: "submit_button", question_id: question.id do
+    link_to "javascript:void();", current_count: current_count, question_id: question.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}", class: btn, id: "submit_button" do
         "<i class='fa fa-chevron-#{arrow_class}'></i>".html_safe
       end
+
+
 end
 
 
