@@ -1,9 +1,6 @@
-
 class VotesController < ApplicationController
 
   def upvote
-    p "hariiiiiiiiiiiiiiiiiii"
-    p find_votable
     from_where = find_votable
     current_user_upvote = Vote.check_if_already_voted?(current_user,from_where)
     if params[:upvote].present?
@@ -19,7 +16,6 @@ class VotesController < ApplicationController
           append_vote_change(from_where)
         end
       else
-        p 111111111111111111111111111
         append_vote_change(from_where)
       end
     else
@@ -30,11 +26,11 @@ class VotesController < ApplicationController
           append_vote_change(from_where)
         end
       else
-        # redirect_to :back
         append_vote_change(from_where)
       end
     end
   end
+
   private
 
   def secure_params
@@ -45,25 +41,17 @@ class VotesController < ApplicationController
     if params[:question_id] && params[:answer_id] && params[:comment_id]
       klass = "comments"
       id = params[:comment_id]
-
     elsif params[:question_id] && params[:answer_id]
       klass = "answers"
       id = params[:answer_id]
     elsif params[:question_id] && params[:comment_id]
       klass = "comments"
       id = params[:comment_id]
-
     else
       klass = "questions"
       id = params[:question_id]
-
-
-
     end
-    p "******************************************************"
-
-    p "#{klass}".singularize.classify.constantize.find(id)
     return "#{klass}".singularize.classify.constantize.find(id)
-
   end
+
 end

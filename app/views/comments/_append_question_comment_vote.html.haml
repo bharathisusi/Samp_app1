@@ -1,0 +1,17 @@
+.answer-comment
+  - question.comments.where("history_id IS NULL").each do |comment|
+    - question_comment = Comment.show_history(comment.id)
+    %span= link_to_comment_vote( 'upvote', '', question, comment)
+    %span= display_sum_of_votes(comment)
+    %span= link_to_comment_vote('downvote', '', question, comment)
+    %span= question_comment.comment.html_safe
+    %span.fullname= "- #{question_comment.user.full_name}"
+    - if current_user == question_comment.user
+      %span.fullname= link_to 'Edit', edit_question_comment_path(path1(question_comment, question))
+      - unless question_comment.check_history?
+        %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: question_comment.history_id, dont_show: question_comment.id)
+
+
+      %span.fullname= link_to 'Destroy', question_comment_path(path1(question_comment, question)), method: :delete, data: { confirm: 'Are you sure?' }
+    %br/
+    %br/

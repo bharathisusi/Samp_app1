@@ -1,12 +1,16 @@
 
 $( document ).ready(function() {
-  $(".append_question").on("click", "#submit_button", function() {
+  $('.append_answer, .append_question,.append_question_comment,.append_answer_comment').on("click", "[id^=submit_]", function() {
+
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
+    var c_id = $(this).attr("comment_id");
+
     var upvote = $(this).attr("upvote")
     var downvote = $(this).attr("downvote")
     var error_class = ".alert-danger"
 
+    console.log(a_id);
 
     if (typeof(upvote) != "undefined"){
       upvote = upvote;
@@ -15,13 +19,32 @@ $( document ).ready(function() {
       downvote = downvote;
       upvote = null;
     }
+    if (typeof(c_id) != "undefined" ){
+      if (typeof(a_id) != "undefined"){
+        answer_id = a_id;
+        question_id = q_id;
+        comment_id = c_id;
+        $append = $(".append_answer_comment")
 
-    if (typeof(a_id) != "undefined"){
+      } else{
+        answer_id = null;
+        question_id = q_id;
+        comment_id = c_id;
+        $append = $(".append_question_comment")
+
+      }
+
+
+    }
+
+    else if(typeof(a_id) != "undefined" ){
       answer_id = a_id;
-      question_id = null;
+      question_id = q_id;
+      $append = $(".append_answer")
     } else {
       question_id = q_id;
       answer_id = null;
+      $append = $(".append_question")
     }
     console.log(q_id);
     console.log(a_id);
@@ -30,7 +53,7 @@ $( document ).ready(function() {
     $.ajax({
       type: "POST",
       url: '/votes/upvote',
-      data:{ vote : {current_count :hash_value }, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id},
+      data:{ vote : {current_count :hash_value }, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id, comment_id: c_id },
       success: function(result) {
         if (result.error) {
           // var msg = $(error_msg_string).children('span').attr('class')
@@ -39,7 +62,7 @@ $( document ).ready(function() {
           $(error_class).removeClass("hide");
         }
         else{
-          $(".append_question").html(result.html)
+          $append.html(result.html)
           $(error_class).addClass("hide");
         }
       }

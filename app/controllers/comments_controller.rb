@@ -26,20 +26,17 @@ class CommentsController < ApplicationController
   def update
     commentable = find_commentable
     if @commentable.check_history?
-      p true
       params = post_params.merge(history_id: @commentable.id)
       @commentable = commentable.comments.new(params)
       @commentable.user = current_user
       @commentable.save
     else
-      p false
       params = post_params.merge(history_id: @commentable.history_id)
       @commentable = commentable.comments.new(params)
       @commentable.user = current_user
       @commentable.save
 
     end
-    # @commentable.update(post_params)
     if(@commentable.commentable_type == "Question")
       redirect_to @question, notice: 'Question_Comment was successfully updated.'
     else
@@ -47,6 +44,7 @@ class CommentsController < ApplicationController
     end
 
   end
+
   def create
     commentable = find_commentable
     @commentable = commentable.comments.new(post_params)

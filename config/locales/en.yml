@@ -20,4 +20,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  question_create: "Question Comment was successfully created."
+  question_destroy: "Question Comment was successfully destroyed."

@@ -5,13 +5,16 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
   def append_vote_change(from_where)
-    if from_where.question_box.present?
-      render :json => {:html => render_to_string('/questions/_append_question_vote', :layout => false, :locals => {:question => from_where})} and return
-    elsif from_where.answer.present?
-      render :json => {:html => render_to_string('/answers/_append_answer_vote', :layout => false, :locals => {:answer => from_where})} and return
+    singular_object = from_where.get_object_table_name.singularize
+    if singular_object == 'comment'
+      query_object =  from_where.commentable_type == 'Answer' ? [from_where.commentable.question, from_where.commentable, 'answer'] : [from_where.commentable, nil, 'question']
+      render json: {html: render_to_string("/#{singular_object.pluralize}/_append_#{query_object[2]}_#{singular_object}_vote", layout: false, locals: {"question": query_object[0], "#{singular_object}": from_where.id})} and return
+    else
+      query_object = singular_object == 'answer' ? [from_where.question, 'question'] : [from_where, 'question']
 
+      render json: {html: render_to_string("/#{singular_object.pluralize}/_append_#{singular_object}_vote", layout: false, locals: {"#{query_object[1]}": query_object[0]})} and return
     end
   end
+
 end

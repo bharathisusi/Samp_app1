@@ -15,6 +15,8 @@ module Common
     self.history_id.blank?
   end
 
-
+  def get_object_table_name
+    self.class.name.singularize.classify.constantize.table_name
+  end
 
 end

@@ -2,18 +2,6 @@ class Vote < ActiveRecord::Base
   belongs_to :votable, polymorphic: true
   belongs_to :user
 
-  #validate :validate_upvote_downvote_message
-
-  # def validate_upvote_downvote_message
-  #   self_record = Vote.find self.id #rescue nil
-  #   p self_record
-  #   p self
-  #   if (self_record.upvote == 0 && self_record.downvote == -1)# || (self.upvote == 1 && self.downvote == 0 )
-
-  #     errors.add(:downvote, "can't vote")
-  #   end
-  # end
-
   def init_upvote
     self.upvote = 1
   end
@@ -91,6 +79,5 @@ class Vote < ActiveRecord::Base
       sum(:downvote)
     end
   end
-
 
 end

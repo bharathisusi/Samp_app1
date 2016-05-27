@@ -4,12 +4,13 @@
   %br
 .append_question
   = render partial: 'questions/append_question_vote', locals: {:question => @question}
-
-= render partial: "comments/index", locals: {comments: @comments, question: @question}
+.append_question_comment
+  = render partial: 'comments/append_question_comment_vote', locals: {comments: @comments, question: @question}
 %br/
 .linkbutton= link_to 'Add comment', new_question_comment_path(@question)
 %br/
-= render partial: "answers/index", locals: {answers: @answers, question: @question}
+= render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments}
+
 
 
 
