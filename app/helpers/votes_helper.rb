@@ -21,7 +21,7 @@ module VotesHelper
 
 
   def link_to_comment_vote(from, current_count, question, comment,answer = nil)
-    id_for_js = answer ? "submit_#{answer.get_object_table_name.singularize}_#{answer.id}" : "submit_#{question.get_object_table_name.singularize}_#{question.id}"
+    id_for_js = answer ? "submit_#{answer.get_object_table_name.singularize}_#{comment.get_object_table_name.singularize}_#{comment.id}" : "submit_#{question.get_object_table_name.singularize}_#{comment.get_object_table_name.singularize}_#{comment.id}"
     if from == 'upvote'
       arrow_class = 'up'
       if current_user.present?

@@ -2,16 +2,15 @@
 - if current_user.present?
   - if current_user.answers.where(question_id: question.id).first.blank?
     %span.linkbutton.link_space= link_to 'Add Answer', new_question_answer_path(question)
-
 %hr/
-.append_answer
-  = render partial: 'answers/append_answer_vote', locals: {question: question, answers: answers}
+- question.answers.where("history_id IS NULL").each do |answer|
+  %div{:class => "append_answer_#{answer.id}"}
+    = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
 %hr
-
-.append_answer_comment
-  = render partial: 'comments/append_answer_comment_vote', locals: {question: question, answers: answers, comments: comments}
-
-
-%hr
+  - question.answers.where("history_id IS NULL").each do |answer|
+    - answer.comments.where("history_id IS NULL").each do |comment|
+      %div{:class => "append_answer_comment_#{comment.id}"}
+        = render partial: 'comments/append_answer_comment_vote', locals: {question: question, answer: answer, comment: comment}
+  %hr
 
 

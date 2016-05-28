@@ -1,5 +1,6 @@
-- question.answers.where("history_id IS NULL").each do |answer|
-  - question_answer= Answer.show_history(answer.id)
+
+- question_answer= Answer.show_history(answer.id)
+.answers
   %span= link_to_vote('upvote', '', question, answer)
   %span= display_sum_of_votes(answer)
   %span= link_to_vote('downvote', '', question, answer)

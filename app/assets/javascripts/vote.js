@@ -1,6 +1,10 @@
-
+var vote = {};
 $( document ).ready(function() {
-  $('.append_answer, .append_question,.append_question_comment,.append_answer_comment').on("click", "[id^=submit_]", function() {
+  vote.upDownVote();
+});
+
+vote.upDownVote = function() {
+  $('[class^=append_answer_], .append_question, [class^=append_question_comment_], [class^=append_answer_comment_]').on("click", "[id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -24,13 +28,13 @@ $( document ).ready(function() {
         answer_id = a_id;
         question_id = q_id;
         comment_id = c_id;
-        $append = $(".append_answer_comment")
+        $append = $(".append_answer_comment_"+c_id);
 
       } else{
         answer_id = null;
         question_id = q_id;
         comment_id = c_id;
-        $append = $(".append_question_comment")
+        $append = $(".append_question_comment_"+c_id);
 
       }
 
@@ -40,7 +44,7 @@ $( document ).ready(function() {
     else if(typeof(a_id) != "undefined" ){
       answer_id = a_id;
       question_id = q_id;
-      $append = $(".append_answer")
+      $append = $(".append_answer_"+a_id);
     } else {
       question_id = q_id;
       answer_id = null;
@@ -62,10 +66,11 @@ $( document ).ready(function() {
           $(error_class).removeClass("hide");
         }
         else{
+          console.log($append);
           $append.html(result.html)
           $(error_class).addClass("hide");
         }
       }
     });
   });
-});
+}
