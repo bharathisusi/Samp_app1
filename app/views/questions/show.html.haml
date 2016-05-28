@@ -10,7 +10,6 @@
     -p comment
     %div{:class => "append_question_comment_#{comment.id}"}
       = render partial: 'comments/append_question_comment_vote', locals: {comment: comment, question: @question}
-%br/
 .linkbutton= link_to 'Add comment', new_question_comment_path(@question)
 %br/
 = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments}

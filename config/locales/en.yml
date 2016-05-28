@@ -20,5 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  question_create: "Question Comment was successfully created."
-  question_destroy: "Question Comment was successfully destroyed."
+  question_create: "Question was successfully created."
+  question_destroy: "Question was successfully destroyed."
+  question_create: "Question was successfully updated."
+  answer_create: "Answer was successfully created."
+  answer_destroy: "Answer was successfully destroyed."
+  answer_updated: "Answer was successfully updated."
+  question_comment_create: "Question Comment was successfully created."
+  question_comment_destroy: "Question Comment was successfully destroyed."
+  question_comment_updated: "Question Comment was successfully updated."
+  answer_comment_create: "Answer Comment was successfully created."
+  answer_comment_destroy: "Answer Comment was successfully destroyed."
+  answer_comment_updated: "Answer Comment was successfully updated."

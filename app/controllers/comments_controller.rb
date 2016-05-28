@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
   def destroy
     @commentable.destroy
     if(@commentable.commentable_type == "Question")
-      redirect_to @question, notice: 'Question_Comment was successfully destroyed.'
+      redirect_to @question, notice: t(:question_comment_destroy)
     else
-      redirect_to @question, notice: 'Answer_Comment was successfully created.'
+      redirect_to @question, notice: t(:answer_comment_destroy)
     end
   end
 
@@ -38,9 +38,8 @@ class CommentsController < ApplicationController
 
     end
     if(@commentable.commentable_type == "Question")
-      redirect_to @question, notice: 'Question_Comment was successfully updated.'
-    else
-      redirect_to @question, notice: 'Answer_Comment was successfully updated.'
+      redirect_to @question, notice: t(:question_comment_updated)
+      redirect_to @question, notice: t(:answer_comment_updated)
     end
 
   end
@@ -51,9 +50,9 @@ class CommentsController < ApplicationController
     @commentable.user = current_user
     if @commentable.save
       if(@commentable.commentable_type == "Question")
-        redirect_to @question, notice: 'Question_Comment was successfully created.'
+        redirect_to @question, notice: t(:question_comment_create)
       else
-        redirect_to @question, notice: 'Answer_Comment was successfully created.'
+        redirect_to @question, notice: t(:answer_comment_create)
       end
     else
       render :new

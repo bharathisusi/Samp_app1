@@ -5,6 +5,7 @@
     %span= link_to_vote('downvote', '', question)
   .pull-left
     %span= recent_question_update(question)
+  .pull-left
     %span.fullname= "- #{question.user.full_name}"
   .clearfix
   %hr

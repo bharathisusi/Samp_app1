@@ -13,5 +13,3 @@
         %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: question_comment.history_id, dont_show: question_comment.id)
 
       %span.fullname= link_to 'Destroy', question_answer_comment_path(id: question_comment.id,answer_id: answer.id, question_id:question), method: :delete, data: { confirm: 'Are you sure?' }
-- if current_user.present?
-  .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)

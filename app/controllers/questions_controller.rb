@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
     end
 
     if @question.save
-       redirect_to questions_path, notice: 'Question was successfully updated.'
+       redirect_to questions_path, notice: t(:question_updated)
     else
       render :edit
     end

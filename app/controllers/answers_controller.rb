@@ -39,7 +39,7 @@ class AnswersController < ApplicationController
 
     #@question = @user.questions.build(post_params)
     if @answer.save
-      redirect_to @question, notice: 'Answer was successfully created.'
+      redirect_to @question, notice: t(:answer_create)
       #format.json { render :show, status: :created, location: questions(@answer)}
     else
       render :new
@@ -68,7 +68,7 @@ class AnswersController < ApplicationController
 
 
     if @answer.save
-       redirect_to  @question, notice: 'Answer was successfully updated.'
+       redirect_to  @question, notice: t(:answer_updated)
 
     else
       render :edit
@@ -89,7 +89,7 @@ class AnswersController < ApplicationController
   def destroy
     p request.method
     @answer.destroy
-    redirect_to @question, notice: 'Answer was successfully destroyed.'
+    redirect_to @question, notice: t(:answer_destroy)
 
   end
   def answer_history
