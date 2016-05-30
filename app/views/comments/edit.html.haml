@@ -1,2 +1,5 @@
 %h1 Editing Comment
 = render 'form'
+%div{:class => "append_create_comment"}
+.linkbutton= link_to 'Add comment', "javascript:void();", class: "btn btn-primary", id: "create_comment", url_id: "#{@question.id}"
+

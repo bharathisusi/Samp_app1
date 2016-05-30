@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def new
     commentable = find_commentable
     @commentable= commentable.comments.new
+    render json: {html: render_to_string("/comments/_form", layout: false, locals: {question_id: @question, comment_id: @commentable})} and return
   end
 
   def index
@@ -50,7 +51,7 @@ class CommentsController < ApplicationController
     @commentable.user = current_user
     if @commentable.save
       if(@commentable.commentable_type == "Question")
-        redirect_to @question, notice: t(:question_comment_create)
+        redirect_to @question, notice: t(:question_comment_create), id: "question_comment"
       else
         redirect_to @question, notice: t(:answer_comment_create)
       end
