@@ -30,6 +30,9 @@ gem 'haml'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'twitter-bootstrap-rails'
+gem 'toastr-rails'
+
+
 
 
 

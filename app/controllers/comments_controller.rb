@@ -49,14 +49,17 @@ class CommentsController < ApplicationController
     commentable = find_commentable
     @commentable = commentable.comments.new(post_params)
     @commentable.user = current_user
-    if @commentable.save
-      if(@commentable.commentable_type == "Question")
-        redirect_to @question, notice: t(:question_comment_create), id: "question_comment"
-      else
-        redirect_to @question, notice: t(:answer_comment_create)
-      end
-    else
-      render :new
+    respond_to do |format|
+      @commentable.save
+        #format.json {}
+        # if(@commentable.commentable_type == "Question")
+          # render js: {action: 'show', status: :created, location: commentable}
+          format.html {redirect_to @question, notice: t(:question_comment_create), id: "question_comment"}
+          # format.js { render action: 'append', status: :created, location: commentable }
+          format.js { render '/questions/show.js.erb'}
+        # else
+        #   redirect_to @question, notice: t(:answer_comment_create)
+        # end
     end
   end
 

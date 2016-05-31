@@ -1,0 +1,10 @@
+$('.fa-spin').removeClass('hide');
+<% if @commentable.errors.size != 0 %>
+toastr.error("<%= all_views_side_error_messages!(@commentable)%>");
+<% else %>
+$('.answer-comment').append("<%= j render partial: '/comments/append_question_comment_vote', locals: {comment: @commentable, question: @question} %>");
+<% end %>
+$('.fa-spin').addClass('hide');
+$('.remove_new_comment').remove();
+$('#create_comment').removeClass("hide");
+

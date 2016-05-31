@@ -6,15 +6,11 @@
   = render partial: 'questions/append_question_vote', locals: {:question => @question}
 .answer-comment
   - @question.comments.where("history_id IS NULL").each do |comment|
-    -p "222222222222222222222222222222"
-    -p comment
     %div{:class => "append_question_comment_#{comment.id}"}
       = render partial: 'comments/append_question_comment_vote', locals: {comment: comment, question: @question}
 .linkbutton= link_to 'Add comment', "javascript:void();", class: "btn btn-primary", id: "create_comment", url_id: "#{@question.id}"
 %div{:class => "append_create_comment"}
-
-
-
+%i.fa.fa-refresh.fa-spin.hide{:style => "font-size:24px"}
 %br/
 = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments}
 

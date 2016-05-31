@@ -53,8 +53,10 @@ vote.upDownVote = function() {
       success: function(result) {
         if (result.error) {
           // var msg = $(error_msg_string).children('span').attr('class')
-          var error_msg_string = "<div class='alert fade in alert-danger'><button type='button' class='close' data-dismiss='alert'>×</button><span class='display_msg'>"+result.error+"</span></div>"
-          $('.show_error').html(error_msg_string);
+          // var error_msg_string = "<div class='alert fade in alert-danger'><button type='button' class='close' data-dismiss='alert'>×</button><span class='display_msg'>"+result.error+"</span></div>"
+          // $('.show_error').html(error_msg_string);
+          toastr.error(result.error);
+
           // $(error_class).removeClass("hide");
         }
         else{
@@ -75,6 +77,7 @@ vote.addComment = function() {
       url:  "/questions/"+url_id+"/comments/new",
       success: function(result) {
        $('.append_create_comment').html(result.html);
+       $('#create_comment').addClass("hide");
       }
     });
   });
