@@ -38,11 +38,17 @@ class CommentsController < ApplicationController
       @commentable.save
 
     end
-    if(@commentable.commentable_type == "Question")
-      redirect_to @question, notice: t(:question_comment_updated)
-      redirect_to @question, notice: t(:answer_comment_updated)
+    respond_to do |format|
+      if(@commentable.commentable_type == "Question")
+        # redirect_to @question, notice: t(:question_comment_updated)
+        format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable}}
+        p "gggggggggggggggggggg"
+        p @commentable
+        p @question
+      else
+        redirect_to @question, notice: t(:answer_comment_updated)
+      end
     end
-
   end
 
   def create
@@ -64,6 +70,8 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    render json: {html: render_to_string("/comments/_form", layout: false, locals: {question_id: @question, comment_id: @commentable})} and return
+
   end
 
 

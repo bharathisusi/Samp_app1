@@ -5,7 +5,7 @@ $( document ).ready(function() {
 });
 
 vote.upDownVote = function() {
-  $('[class^=append_answer_], .append_question, [class^=append_question_comment_], [class^=append_answer_comment_]').on("click", "[id^=submit_]", function() {
+  $('[class^=append_answer_], .append_question, .ques-cmt, [class^=append_answer_comment_]').on("click", "[class^=append_question_comment_] [id^=submit_], [id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -43,7 +43,7 @@ vote.upDownVote = function() {
     } else {
       question_id = q_id;
       answer_id = null;
-      $append = $(".append_question")
+      $append = $(".append_question");
     }
     var hash_value =0
     $.ajax({
@@ -52,16 +52,10 @@ vote.upDownVote = function() {
       data:{ vote : {current_count :hash_value }, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id, comment_id: c_id },
       success: function(result) {
         if (result.error) {
-          // var msg = $(error_msg_string).children('span').attr('class')
-          // var error_msg_string = "<div class='alert fade in alert-danger'><button type='button' class='close' data-dismiss='alert'>×</button><span class='display_msg'>"+result.error+"</span></div>"
-          // $('.show_error').html(error_msg_string);
           toastr.error(result.error);
-
-          // $(error_class).removeClass("hide");
         }
         else{
-          $append.html(result.html)
-          $(error_class).addClass("hide");
+          $append.html(result.html);
         }
       }
     });
@@ -70,13 +64,21 @@ vote.upDownVote = function() {
 
 
 vote.addComment = function() {
-  $('#create_comment').on("click", function() {
+  $('.create_comment, .ques-cmt').on("click", "[class^=edit_comment_] [id^=comment_], [id^=comment_]", function() {
     var url_id = $(this).attr("url_id");
+    var c_id = $(this).attr("url_comment_id");
+    if (typeof(c_id) != "undefined"){
+      var edit = c_id+"/edit";
+      $append = $(".append_edit_comment_"+c_id);
+    } else {
+      var edit = "new";
+      $append = $(".append_create_comment");
+    }
     $.ajax({
       type: "GET",
-      url:  "/questions/"+url_id+"/comments/new",
+      url:  "/questions/"+url_id+"/comments/"+edit,
       success: function(result) {
-       $('.append_create_comment').html(result.html);
+       $append.html(result.html);
        $('#create_comment').addClass("hide");
       }
     });
