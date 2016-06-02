@@ -1,29 +1,27 @@
+- if comment && !question
+  - comment = comment
+- else
+  - comment = Comment.show_history(comment)
 
-%div{:class => "append_q_comment_#{comment.id}"}
-  - if comment && !question
-    - comment = comment
-  - else
-    - comment = Comment.show_history(comment)
+%div{:class => "append_question_comment_#{comment.id}"}
+  .col-sm-1.allignment_vote
+    %span= link_to_comment_vote( 'upvote', '', comment.commentable, comment)
+    %span= display_sum_of_votes(comment)
+    %span= link_to_comment_vote('downvote', '', comment.commentable, comment)
+  .col-sm-11.allignment_text
+    %span= comment.comment.html_safe
 
-  .pull-left
-    - p "ttttttttttttttt"
-    %div{:class => "append_question_comment_#{comment.id}"}
-      - p comment.id
-      %span= link_to_comment_vote( 'upvote', '', comment.commentable, comment)
-      %span= display_sum_of_votes(comment)
-      %span= link_to_comment_vote('downvote', '', comment.commentable, comment)
-      %span= comment.comment.html_safe
-
-      %span.fullname= "- #{comment.user.full_name}"
-      - if current_user == comment.user
-        %div{:class => "edit_comment_#{comment.id}"}
-          %span.fullname= link_to 'Edit',  "javascript:void();", id: "comment_#{comment.id}",url_comment_id: "#{comment.id}", url_id: "#{comment.commentable.id}"
-          %div{:class => "append_edit_comment_#{comment.id}"}
-        - unless comment.check_history?
-          %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: comment.history_id, dont_show: comment.id)
+    %span.fullname= "- #{comment.user.full_name}"
+    - if current_user == comment.user
+      %div{:class => "edit_comment_#{comment.id}"}
+        %span.fullname= link_to 'Edit',  "javascript:void();", id: "comment_#{comment.id}",url_comment_id: "#{comment.id}", url_id: "#{comment.commentable.id}"
+        %div{:class => "append_edit_comment_#{comment.id}"}
+      - unless comment.check_history?
+        %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: comment.history_id, dont_show: comment.id), remote: true
 
 
-        %span.fullname= link_to 'Destroy', question_comment_path(path1(comment, comment.commentable)), method: :delete, data: { confirm: 'Are you sure?' }
+      %span.fullname= link_to 'Destroy',  "javascript:void();", id: "destroy_#{comment.id}",destroy_id: "#{comment.id}", url_id: "#{comment.commentable.id}"
+
   .clearfix
 %br/
 

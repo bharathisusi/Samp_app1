@@ -117,5 +117,14 @@ h2{
 .append_create_comment{
   width: 1400px;
 }
+.allignment_vote{
+  width: 5% !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.allignment_text{
+  padding-left: 0px !important;
+}
 
 

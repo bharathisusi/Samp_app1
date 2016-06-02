@@ -1,5 +1,5 @@
 var vote = {};
-$( document ).ready(function() {
+$( document ).on('ready page:load', function() {
   vote.upDownVote();
   vote.addComment();
 });
@@ -64,23 +64,43 @@ vote.upDownVote = function() {
 
 
 vote.addComment = function() {
-  $('.create_comment, .ques-cmt').on("click", "[class^=edit_comment_] [id^=comment_], [id^=comment_]", function() {
+  $('.create_comment, .ques-cmt').on("click", "[class^=edit_comment_] [id^=comment_], [id^=comment_],[id^=destroy_] ", function() {
+    // alert("ok");
     var url_id = $(this).attr("url_id");
     var c_id = $(this).attr("url_comment_id");
+    var d_id = $(this).attr("destroy_id");
     if (typeof(c_id) != "undefined"){
       var edit = c_id+"/edit";
+      var type = "GET"
       $append = $(".append_edit_comment_"+c_id);
-    } else {
+    }else if (typeof(d_id) != "undefined"){
+      if (!(confirm("Are you sure?"))) {
+        return false;
+      }
+
+      var type = "DELETE";
+      var edit = d_id;
+    }
+    else {
       var edit = "new";
+      var type ="GET";
       $append = $(".append_create_comment");
     }
     $.ajax({
-      type: "GET",
+      type: type,
       url:  "/questions/"+url_id+"/comments/"+edit,
       success: function(result) {
-       $append.html(result.html);
-       $('#create_comment').addClass("hide");
+        if(typeof(d_id) != "undefined"){
+          $('.append_question_comment_'+d_id).remove();
+          toastr.success('<%= I18n.t(:question_comment_destroy)%>');
+        }
+        else{
+          $append.html(result.html);
+          $('.hide-comment-button').addClass("hide");
+        }
       }
     });
   });
 }
+
+

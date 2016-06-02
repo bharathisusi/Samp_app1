@@ -1,3 +1,2 @@
-// alert("<%= @commentable.inspect %>");
-$('.append_question_comment_#{@commentable.id}').empty().append("<%= j render partial: '/comments/append_question_comment_vote', locals: {comment: @commentable, question: nil} %>");
+$(".append_question_comment_<%= id %>").empty().append("<%= j render partial: '/comments/append_question_comment_vote', locals: {comment: @commentable, question: nil} %>");
 

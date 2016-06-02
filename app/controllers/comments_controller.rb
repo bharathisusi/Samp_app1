@@ -17,34 +17,42 @@ class CommentsController < ApplicationController
 
   def destroy
     @commentable.destroy
-    if(@commentable.commentable_type == "Question")
-      redirect_to @question, notice: t(:question_comment_destroy)
-    else
-      redirect_to @question, notice: t(:answer_comment_destroy)
-    end
+    render :nothing => true
+    # if(@commentable.commentable_type == "Question")
+    #   redirect_to @question, notice: t(:question_comment_destroy)
+    # else
+    #   redirect_to @question, notice: t(:answer_comment_destroy)
+    # end
   end
 
   def update
     commentable = find_commentable
+    old_id = params[:id]
+    p "ooooooooooooooo"
+    p old_id
     if @commentable.check_history?
       params = post_params.merge(history_id: @commentable.id)
       @commentable = commentable.comments.new(params)
       @commentable.user = current_user
       @commentable.save
+      p "createeeeeeeeeeeeeeee"
     else
       params = post_params.merge(history_id: @commentable.history_id)
       @commentable = commentable.comments.new(params)
       @commentable.user = current_user
       @commentable.save
+      p "editttttttttttttttt"
 
     end
+    p "ccccccccccccccccc"
+    p @commentable
+
     respond_to do |format|
       if(@commentable.commentable_type == "Question")
         # redirect_to @question, notice: t(:question_comment_updated)
-        format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable}}
-        p "gggggggggggggggggggg"
-        p @commentable
-        p @question
+                # @commentable = Comment.show_history(@commentable)
+        format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
+
       else
         redirect_to @question, notice: t(:answer_comment_updated)
       end
