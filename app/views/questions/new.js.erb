@@ -1,0 +1,5 @@
+$('.modal-dialog').addClass('modal-lg');
+$('.modal-title').empty().append('Create Question');
+$.fn.modal.Constructor.prototype.enforceFocus = function() {
+  $('.modal-body').html("<%= j render partial: '/questions/form'%>")
+};

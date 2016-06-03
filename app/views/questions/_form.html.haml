@@ -6,7 +6,7 @@
     .field
       = f.label :Title
       %br/
-      = f.text_field :title, :placeholder => 'Enter your title', :rows => "8"
+      = f.text_field :title, :placeholder => 'Enter your title', class: "form-control"
 
     .field
       = f.label :Questions
@@ -16,5 +16,4 @@
     .actions
       = f.submit"Create Question",:class => " btn btn-primary btn-xs"
 
-      = link_to 'Back', questions_path
 .col-lg-2

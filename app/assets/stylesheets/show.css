@@ -126,5 +126,7 @@ h2{
 .allignment_text{
   padding-left: 0px !important;
 }
-
+.form-control{
+  width: 100% !important;
+}
 

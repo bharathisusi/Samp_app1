@@ -22,7 +22,7 @@
 en:
   question_create: "Question was successfully created."
   question_destroy: "Question was successfully destroyed."
-  question_create: "Question was successfully updated."
+  question_updated: "Question was successfully updated."
   answer_create: "Answer was successfully created."
   answer_destroy: "Answer was successfully destroyed."
   answer_updated: "Answer was successfully updated."

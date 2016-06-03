@@ -7,13 +7,9 @@
   - comment = Comment.show_history(comment)
   -p "aaaaaaaaaaaaaaaa"
 %div{class: "append_question_comment_#{comment.id}"}
-  .col-sm-1.allignment_vote
-    %span= link_to_comment_vote( 'upvote', '', comment.commentable, comment)
-    %span= display_sum_of_votes(comment)
-    %span= link_to_comment_vote('downvote', '', comment.commentable, comment)
+  = render partial: 'comments/trigger_question_comment_vote', locals: {comment: comment, question: question}
   .col-sm-11.allignment_text
     %span= comment.comment.html_safe
-
     %span.fullname= "- #{comment.user.full_name}"
     - if current_user == comment.user
       %div{:class => "edit_comment_#{comment.id}"}

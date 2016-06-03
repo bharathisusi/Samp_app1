@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(post_params)
     if @question.save
-      redirect_to questions_path, notice: t(:question_create)
+      redirect_to @question, notice: t(:question_create)
     else
       render :new
     end
