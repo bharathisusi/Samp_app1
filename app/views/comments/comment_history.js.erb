@@ -1,3 +1,1 @@
-alert(<%= params[:dont_show]%>);
-$("#model_popup").dialog({ autoOpen: true });
-
+$('.modal-body').html("<%= j render partial: '/comments/comment_history'%>")
