@@ -1,4 +1,4 @@
-.answer-comment
+.col-sm-12.answer-comment
   - @question_history.each do |question|
     %span= question.question_box.html_safe
     %span.fullname= "- #{question.user.full_name}"

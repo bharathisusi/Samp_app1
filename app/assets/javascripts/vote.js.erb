@@ -2,6 +2,7 @@ var vote = {};
 $( document ).on('ready page:load', function() {
   vote.upDownVote();
   vote.addComment();
+  vote.addAnswer();
 });
 
 vote.upDownVote = function() {
@@ -98,6 +99,20 @@ vote.addComment = function() {
           $append.html(result.html);
           $('.hide-comment-button').addClass("hide");
         }
+      }
+    });
+  });
+}
+
+vote.addAnswer = function() {
+  $('.create-answer').on("click", "[id^=answer_]", function() {
+    var url_id = $(this).attr("url_id");
+    $.ajax({
+      type: "GET",
+      url:  "/questions/"+url_id+"/answers/new",
+      success: function(result) {
+        $(".append_create_answer").html(result.html);
+        $('.hide-answer-button').addClass("hide");
       }
     });
   });

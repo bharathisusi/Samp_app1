@@ -19,37 +19,25 @@ class AnswersController < ApplicationController
   # GET /posts/new
   def new
     @answer= @question.answers.new
-    #@answer= Answer.new
+    render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question})} and return
   end
 
   def edit
 
   end
 
-  # GET /posts/1/edit
 
-
-  # POST /posts
-  # POST /posts.json
   def create
     @answer= @question.answers.new(post_params)
     @answer.user = current_user
+    respond_to do |format|
+      @answer.save
+        format.html {redirect_to @question, notice: t(:question_comment_create)}
+        format.js { render '/answers/show.js.erb'}
 
-    params[:test_date]
-
-    #@question = @user.questions.build(post_params)
-    if @answer.save
-      redirect_to @question, notice: t(:answer_create)
-      #format.json { render :show, status: :created, location: questions(@answer)}
-    else
-      render :new
-      #format.json { render json: @answer.errors, status: :unprocessable_entity }
     end
   end
 
-
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def update
 
     if @answer.check_history?

@@ -1,18 +1,23 @@
 %span.linkbutton= question.answers_count
 - if current_user.present?
   - if current_user.answers.where(question_id: question.id).first.blank?
-    %span.linkbutton.link_space= link_to 'Add Answer', new_question_answer_path(question)
-%hr/
-- question.answers.where("history_id IS NULL").each do |answer|
-  %div{:class => "append_answer_#{answer.id}"}
-    = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
-  %hr
+    .create-answer
+      - p question
+      %span.linkbutton.link_space.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary", id: "answer_#{question.id}", url_id: "#{question.id}"
+      %div{:class => "append_create_answer"}
 
-    - answer.comments.where("history_id IS NULL").each do |comment|
-      %div{:class => "append_answer_comment_#{comment.id}"}
-        = render partial: 'comments/append_answer_comment_vote', locals: {question: question, answer: answer, comment: comment}
-  - if current_user.present?
-    .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)
+%hr/
+.ques-ans
+  - question.answers.where("history_id IS NULL").each do |answer|
+    %div{:class => "append_answer_#{answer.id}"}
+      = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
+    %hr
+
+      - answer.comments.where("history_id IS NULL").each do |comment|
+        %div{:class => "append_answer_comment_#{comment.id}"}
+          = render partial: 'comments/append_answer_comment_vote', locals: {question: question, answer: answer, comment: comment}
+    - if current_user.present?
+      .linkbutton= link_to 'Add comment', new_question_answer_comment_path(question,answer)
 
   %hr
 
