@@ -2,7 +2,7 @@
   toastr.error("<%= all_views_side_error_messages!(@answer)%>");
 <% else %>
   $('.ques-ans').append("<%= j render partial: '/answers/append_answer_vote', locals: {question: @question, answer: @answer} %>");
-  toastr.success('<%= t(:answer_comment_create)%>');
+  toastr.success('<%= t(:answer_create)%>');
 <% end %>
 $('.remove-new-answer').remove();
 $('.hide-answer-button').removeClass("hide");

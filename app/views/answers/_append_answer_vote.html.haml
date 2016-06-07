@@ -1,3 +1,4 @@
+- p "bbbbbbbbbbbbbbbbbbbb"
 -p answer
 - question_answer= Answer.show_history(answer.id)
 .answers
@@ -14,4 +15,20 @@
 
 
       %span.fullname= link_to 'Destroy', question_answer_path(path(question_answer, question)), method: :delete, data: { confirm: 'Are you sure?' }
+%hr
+
+%div{:id => "ans_cmt"}
+  - answer.comments.where("history_id IS NULL").each do |comment|
+    -p "xxxxxxxxxxxxxx"
+    -p answer
+    %div{:class => "append_answer_comment_#{comment.id}"}
+      = render partial: 'comments/append_answer_comment_vote', locals: {question: question, comment: comment, answer: answer}
+
+
+%div{:class => "create_answer_comment_#{answer.id}"}
+  .linkbutton.hide-comment-button= link_to 'Add comment', "javascript:void();", class: "btn btn-primary", id: "comment_#{answer.id}", url_id: "#{question.id}", answer_id: "#{answer.id}"
+  %div{:class => "append_create_answer_comment_#{answer.id}"}
+%hr
+
+
 

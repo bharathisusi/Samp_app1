@@ -1,17 +1,22 @@
-
-- question_comment = Comment.show_history(comment.id)
-- p "fffffffffffffffffff"
-- p question_comment
-%p.answer-comment
-  %span= link_to_comment_vote( 'upvote','', question, comment, answer)
+- question_comment = Comment.show_history(comment)
+- p "helllllllllllllllllllll"
+- p question
+- p "heeeeeeeeeeeeeeeeee"
+- p comment
+- p "huuuuuuuuuuuuuuuuuuuu"
+.answer-comment
+  %span= link_to_comment_vote( 'upvote','', question, comment, @answer)
   %span= display_sum_of_votes(comment)
-  %span= link_to_comment_vote( 'downvote','', question, comment, answer)
+  %span= link_to_comment_vote( 'downvote','', question, comment, @answer)
   %span= question_comment.comment.html_safe
+  - p "hiiiiiiiiiiiiiiiii"
+  - p question_comment.comment.html_safe
   %span.fullname= "- #{question_comment.user.full_name}"
   - if current_user.present?
     - if current_user == comment.user
-      %span.fullname= link_to 'Edit', edit_question_answer_comment_path(id: question_comment.id, answer_id: answer.id, question_id:question)
+      %span.fullname= link_to 'Edit'
       - unless question_comment.check_history?
-        %span.fullname= link_to 'Edited', comments_comment_history_path(history_id: question_comment.history_id, dont_show: question_comment.id)
+        %span.fullname= link_to 'Edited'
 
-      %span.fullname= link_to 'Destroy', question_answer_comment_path(id: question_comment.id,answer_id: answer.id, question_id:question), method: :delete, data: { confirm: 'Are you sure?' }
+      %span.fullname= link_to 'Destroy'
+
