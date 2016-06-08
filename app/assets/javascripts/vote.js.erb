@@ -1,0 +1,163 @@
+var vote = {};
+$( document ).on('ready page:load', function() {
+  vote.upDownVote();
+  vote.addComment();
+  vote.addAnswer();
+  vote.addAnswerComment();
+});
+
+vote.upDownVote = function() {
+  $('[class^=append_answer_], .append_question, .ques-cmt, [class^=append_answer_comment_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [id^=submit_]", function() {
+
+    var q_id = $(this).attr("question_id");
+    var a_id = $(this).attr("answer_id");
+    var c_id = $(this).attr("comment_id");
+
+    var upvote = $(this).attr("upvote")
+    var downvote = $(this).attr("downvote")
+    var error_class = ".alert-danger"
+
+    if (typeof(upvote) != "undefined"){
+      upvote = upvote;
+      downvote = null;
+    } else {
+      downvote = downvote;
+      upvote = null;
+    }
+    if (typeof(c_id) != "undefined" ){
+      if (typeof(a_id) != "undefined"){
+        answer_id = a_id;
+        question_id = q_id;
+        comment_id = c_id;
+        $append = $(".append_answer_comment_"+c_id);
+
+      } else{
+        answer_id = null;
+        question_id = q_id;
+        comment_id = c_id;
+        $append = $(".trigger_question_comment_"+c_id);
+      }
+    }
+    else if(typeof(a_id) != "undefined" ){
+      answer_id = a_id;
+      question_id = q_id;
+      $append = $(".append_answer_"+a_id);
+    } else {
+      question_id = q_id;
+      answer_id = null;
+      $append = $(".append_question");
+    }
+    var hash_value =0
+    $.ajax({
+      type: "POST",
+      url: '/votes/upvote',
+      data:{ vote : {current_count :hash_value }, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id, comment_id: c_id },
+      success: function(result) {
+        if (result.error) {
+          toastr.error(result.error);
+        }
+        else{
+          $append.html(result.html);
+        }
+      }
+    });
+  });
+}
+
+
+vote.addComment = function() {
+  $('.create_comment, .ques-cmt').on("click", "[class^=edit_comment_] [id^=comment_], [id^=comment_],[id^=destroy_] ", function() {
+    // alert("ok");
+    var url_id = $(this).attr("url_id");
+    var c_id = $(this).attr("url_comment_id");
+    var d_id = $(this).attr("destroy_id");
+    if (typeof(c_id) != "undefined"){
+      var edit = c_id+"/edit";
+      var type = "GET"
+      $append = $(".append_edit_comment_"+c_id);
+    }else if (typeof(d_id) != "undefined"){
+      if (!(confirm("Are you sure?"))) {
+        return false;
+      }
+
+      var type = "DELETE";
+      var edit = d_id;
+    }
+    else {
+      var edit = "new";
+      var type ="GET";
+      $append = $(".append_create_comment");
+    }
+    $.ajax({
+      type: type,
+      url:  "/questions/"+url_id+"/comments/"+edit,
+      success: function(result) {
+        if(typeof(d_id) != "undefined"){
+          $('.append_question_comment_'+d_id).remove();
+          toastr.success('<%= I18n.t(:question_comment_destroy)%>');
+        }
+        else{
+          $append.html(result.html);
+          $('.hide-comment-button').addClass("hide");
+        }
+      }
+    });
+  });
+}
+
+vote.addAnswer = function() {
+  $('.create-answer').on("click", "[id^=answer_]", function() {
+    var url_id = $(this).attr("url_id");
+    $.ajax({
+      type: "GET",
+      url:  "/questions/"+url_id+"/answers/new",
+      success: function(result) {
+        $(".append_create_answer").html(result.html);
+        $('.hide-answer-button').addClass("hide");
+      }
+    });
+  });
+}
+
+
+vote.addAnswerComment = function() {
+  $('[class^=create_answer_comment_]').on("click", "[id^=comment_] ", function() {
+    // alert("ok");
+    var url_id = $(this).attr("url_id");
+    var a_id = $(this).attr("answer_id");
+    // var c_id = $(this).attr("url_comment_id");
+    // var d_id = $(this).attr("destroy_id");
+    // if (typeof(c_id) != "undefined"){
+    //   var edit = c_id+"/edit";
+    //   var type = "GET"
+    //   $append = $(".append_edit_comment_"+c_id);
+    // }else if (typeof(d_id) != "undefined"){
+    //   if (!(confirm("Are you sure?"))) {
+    //     return false;
+    //   }
+
+    //   var type = "DELETE";
+    //   var edit = d_id;
+    // }
+    // else {
+    //   var edit = "new";
+    //   var type ="GET";
+    //   $append = $(".append_create_comment");
+    // }
+    $append = $('.append_create_answer_comment_'+a_id);
+    $.ajax({
+      type: "GET",
+      url:  "/questions/"+url_id+"/answers/"+a_id+"/comments/new",
+      success: function(result) {
+        // if(typeof(d_id) != "undefined"){
+        //   $('.append_question_comment_'+d_id).remove();
+        //   toastr.success('<%= I18n.t(:question_comment_destroy)%>');
+        // }
+        // else{
+        $append.html(result.html);
+        // $('.hide-comment-button').addClass("hide");
+        // }
+      }
+    });
+  });
+}

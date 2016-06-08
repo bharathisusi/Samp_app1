@@ -1,0 +1,8 @@
+<% if @answer.errors.size != 0 %>
+  toastr.error("<%= all_views_side_error_messages!(@answer)%>");
+<% else %>
+  $('.ques-ans').append("<%= j render partial: '/answers/append_answer_vote', locals: {question: @question, answer: @answer} %>");
+  toastr.success('<%= t(:answer_create)%>');
+<% end %>
+$('.remove-new-answer').remove();
+$('.hide-answer-button').removeClass("hide");

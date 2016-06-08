@@ -21,8 +21,11 @@
     margin-left: 40px;
     font-size: 15px;
   }
+  .question_title{
+    font-size: 35px;
+  }
   .question{
-    font-size: 50px;
+    font-size: 20px;
   }
 .sign_right{
     position: relative;
@@ -57,7 +60,7 @@ footer {
  width: 100%;
  /* Set the fixed height of the footer here */
  height: 60px;
- background-color: #808080;
+ background-color: #e6ccff !important;
 
 }
 
@@ -73,9 +76,6 @@ footer {
   color: violet !important;
   margin-top: -2px !important;
 
-}
-.navbar-brand {
-  margin-top: -10px;
 }
 p {
   position: relative;
@@ -94,25 +94,39 @@ h2{
 
 }
 .inner-box {
-    width: 600px;
-    padding: 25px;
-    border: 2px solid black;
-    margin: 25px;
-    border-radius: 10px;
-    background-color: #f5f5f5;
+  width: 600px;
+  padding: 25px;
+  border: 2px solid black;
+  margin: 25px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
 }
 .signed-in-navbar{
   margin-left: -10px;
 
 }
-.minimum_password{
+.minimum_password {
 
-text-align: right !important;
-
-
-
-
+  text-align: right !important;
 
 }
+.navbar.navbar-default {
+  background-color: #e6ccff;
 
+}
+.append_create_comment{
+  width: 1400px;
+}
+.allignment_vote{
+  width: 5% !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.allignment_text{
+  padding-left: 0px !important;
+}
+.form-control{
+  width: 100% !important;
+}
 

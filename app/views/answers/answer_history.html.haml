@@ -1,0 +1,6 @@
+.answer-comment
+  - @answer_history.each do |answer|
+    %span= answer.answer.html_safe
+    %span.fullname= "- #{answer.user.full_name}"
+    %br/
+    %br/

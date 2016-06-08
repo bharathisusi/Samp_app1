@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505094906) do
+ActiveRecord::Schema.define(version: 20160523134231) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -19,10 +19,27 @@ ActiveRecord::Schema.define(version: 20160505094906) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.text     "answer",      limit: 65535
+    t.integer  "history_id",  limit: 4
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",    limit: 255, null: false
+    t.string   "data_content_type", limit: 255
+    t.integer  "data_file_size",    limit: 4
+    t.integer  "assetable_id",      limit: 4
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width",             limit: 4
+    t.integer  "height",            limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "comment",          limit: 65535
@@ -31,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160505094906) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "user_id",          limit: 4
+    t.integer  "history_id",       limit: 4
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
@@ -38,9 +56,11 @@ ActiveRecord::Schema.define(version: 20160505094906) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "question_box", limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id",      limit: 4
+    t.integer  "history_id",   limit: 4
+    t.string   "title",        limit: 255,   default: ""
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
@@ -66,8 +86,22 @@ ActiveRecord::Schema.define(version: 20160505094906) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "upvote",       limit: 4
+    t.integer  "downvote",     limit: 4
+    t.integer  "votable_id",   limit: 4
+    t.string   "votable_type", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",      limit: 4
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "votes", "users"
 end

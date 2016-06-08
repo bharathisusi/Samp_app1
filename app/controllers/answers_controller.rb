@@ -19,45 +19,57 @@ class AnswersController < ApplicationController
   # GET /posts/new
   def new
     @answer= @question.answers.new
-    #@answer= Answer.new
+    render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question})} and return
   end
 
   def edit
 
   end
 
-  # GET /posts/1/edit
 
-
-  # POST /posts
-  # POST /posts.json
   def create
     @answer= @question.answers.new(post_params)
     @answer.user = current_user
+    respond_to do |format|
+      @answer.save
+        format.html {redirect_to @question, notice: t(:question_comment_create)}
+        format.js { render '/answers/show.js.erb'}
 
-    params[:test_date]
-
-    #@question = @user.questions.build(post_params)
-    if @answer.save
-      redirect_to @question, notice: 'Answer was successfully created.'
-      #format.json { render :show, status: :created, location: questions(@answer)}
-    else
-      render :new
-      #format.json { render json: @answer.errors, status: :unprocessable_entity }
     end
   end
 
-
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def update
-    if @answer.update(post_params)
-      redirect_to @question, notice: 'Answer was successfully updated.'
-      #format.json { render :show, status: :ok, location: @article }
+
+    if @answer.check_history?
+      p true
+      params = post_params.merge(history_id: @answer.id)
+      @answer= @question.answers.new(params)
+       @answer.user = current_user
+      @answer.save
+    else
+      p false
+      params = post_params.merge(history_id: @answer.history_id)
+      @answer= @question.answers.new(params)
+       @answer.user = current_user
+      @answer.save
+    end
+
+
+    if @answer.save
+       redirect_to  @question, notice: t(:answer_updated)
+
     else
       render :edit
-      #format.json { render json: questions_path.errors, status: :unprocessable_entity }
+
     end
+
+    # if @answer.update(post_params)
+    #   redirect_to @question, notice: 'Answer was successfully updated.'
+    #   #format.json { render :show, status: :ok, location: @article }
+    # else
+    #   render :edit
+    #   #format.json { render json: questions_path.errors, status: :unprocessable_entity }
+    # end
   end
 
   # DELETE /posts/1
@@ -65,9 +77,13 @@ class AnswersController < ApplicationController
   def destroy
     p request.method
     @answer.destroy
-    redirect_to @question, notice: 'Answer was successfully destroyed.'
+    redirect_to @question, notice: t(:answer_destroy)
 
   end
+  def answer_history
+    @answer_history = Answer.list_comment_history(params[:history_id], params[:dont_show])
+  end
+
 
 
 

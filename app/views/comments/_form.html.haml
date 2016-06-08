@@ -1,24 +1,19 @@
-.col-lg-2
-.col-lg-8
-  = form_for([@question, @commentable]) do |f|
-    - if @commentable.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(@commentable.errors.count, "error")
-          prohibited this comment from being saved:
-        %ul
-          - @commentable.errors.full_messages.each do |message|
-            %li= message
+.col-lg-0
+.col-lg-8.remove_new_comment
+  = form_for([@question, @commentable], remote: true) do |f|
+    - all_views_side_error_messages!(@commentable)
     .field
       = f.label :Comment
       %br/
       = f.text_area :comment, :placeholder => 'Enter your comment', :class =>"form-control", :rows => "8"
-
-
-
       - if params[:answer_id].present?
         = hidden_field_tag :answer_id, params[:answer_id]
-    .actions
-      = f.submit "Create Comment", :class => " btn btn-primary btn-xs"
 
-.col-lg-2
+    .actions
+      = @commentable.commentable_id.present? ? (f.submit "Update Comment", :class => " btn btn-primary btn-xs") : (f.submit "Create Comment", :class => " btn btn-primary btn-xs")
+
+
+/ .col-lg-3
+.col-lg-4
+.clearfix
+
