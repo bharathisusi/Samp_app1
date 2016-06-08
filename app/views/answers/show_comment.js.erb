@@ -2,7 +2,9 @@ $('.fa-spin').removeClass('hide');
 <% if @commentable.errors.size != 0 %>
   toastr.error("<%= all_views_side_error_messages!(@commentable)%>");
 <% else %>
-  $('#ans_cmt').append("<%= j render partial: '/comments/append_answer_comment_vote', locals: {comment: @commentable, question: @question} %>");
+<%- puts "IIIIIIIIIIIIIIIIIIIIIIIII"%>
+<%- p @commentable.commentable.id%>
+  $('#ans_cmt_<%= @commentable.commentable.id %>').append("<%= j render partial: '/comments/append_answer_comment_vote', locals: {comment: @commentable, question: @question,answer: @answer} %>");
   toastr.success('<%= t(:answer_comment_create)%>');
 <% end %>
 $('.fa-spin').addClass('hide');

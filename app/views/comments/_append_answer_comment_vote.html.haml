@@ -5,9 +5,9 @@
 - p comment
 - p "huuuuuuuuuuuuuuuuuuuu"
 .answer-comment
-  %span= link_to_comment_vote( 'upvote','', question, comment, @answer)
+  %span= link_to_comment_vote( 'upvote','', question, comment, answer)
   %span= display_sum_of_votes(comment)
-  %span= link_to_comment_vote( 'downvote','', question, comment, @answer)
+  %span= link_to_comment_vote( 'downvote','', question, comment, answer)
   %span= question_comment.comment.html_safe
   - p "hiiiiiiiiiiiiiiiii"
   - p question_comment.comment.html_safe
