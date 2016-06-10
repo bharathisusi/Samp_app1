@@ -1,0 +1,5 @@
+alert("ok");
+$('.modal-dialog').addClass('modal-lg');
+$('.modal-title').empty().append('Edited Answer');
+$('.modal-body').html("<%= j render partial: '/answers/answer_history'%>")
+

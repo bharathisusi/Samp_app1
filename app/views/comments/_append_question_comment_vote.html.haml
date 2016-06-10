@@ -1,11 +1,15 @@
+- p "kkooooooooooooook"
 - p comment
--p question
-- puts "hhhhhhhhhhhhhhh"
 - if comment && !question
   - comment = comment
+  - p question
+  - p "fffffffffffffffff"
 - else
+  - p "ggggggggggggggggggggggggg"
+  - p question
   - comment = Comment.show_history(comment)
-  -p "aaaaaaaaaaaaaaaa"
+  - p "kkkkkkkkkkkkk"
+  - p comment
 %div{class: "append_question_comment_#{comment.id}"}
   = render partial: 'comments/trigger_question_comment_vote', locals: {comment: comment, question: question}
   .col-sm-11.allignment_text

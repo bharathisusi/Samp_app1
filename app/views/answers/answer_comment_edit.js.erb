@@ -1,0 +1,2 @@
+$(".append_answer_comment_<%= id %>").empty().append("<%= j render partial: '/comments/append_answer_comment_vote', locals: {comment: @commentable, question: @question, answer: nil} %>");
+

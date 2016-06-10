@@ -7,7 +7,7 @@ $( document ).on('ready page:load', function() {
 });
 
 vote.upDownVote = function() {
-  $('[class^=append_answer_], .append_question, .ques-cmt, [class^=append_answer_comment_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [id^=submit_]", function() {
+  $('.append_question, .ques-cmt, [class^=append_answer_comment_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_],[class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -29,7 +29,7 @@ vote.upDownVote = function() {
         answer_id = a_id;
         question_id = q_id;
         comment_id = c_id;
-        $append = $(".append_answer_comment_"+c_id);
+        $append = $(".trigger_answer_comment_"+c_id);
 
       } else{
         answer_id = null;
@@ -106,14 +106,37 @@ vote.addComment = function() {
 }
 
 vote.addAnswer = function() {
-  $('.create-answer').on("click", "[id^=answer_]", function() {
+  $('.create-answer, .ques-ans').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
     var url_id = $(this).attr("url_id");
+    var a_id = $(this).attr("a_id");
+    var d_id = $(this).attr("destroy_id");
+    if (typeof(a_id) != "undefined"){
+      var edit = a_id+"/edit";
+      var type = "GET"
+      $append = $(".append_edit_answer_test_"+a_id);
+    }else if (typeof(d_id) != "undefined"){
+      if (!(confirm("Are you sure?"))) {
+        return false;
+      }
+      var type = "DELETE";
+      var edit = d_id;
+    }else {
+      var edit = "new";
+      var type ="GET";
+      $append = $(".append_create_answer");
+    }
     $.ajax({
-      type: "GET",
-      url:  "/questions/"+url_id+"/answers/new",
+      type: type,
+      url:  "/questions/"+url_id+"/answers/"+edit,
       success: function(result) {
-        $(".append_create_answer").html(result.html);
-        $('.hide-answer-button').addClass("hide");
+        if(typeof(d_id) != "undefined"){
+          $('.append_edit_answer_'+d_id).remove();
+          toastr.success('<%= I18n.t(:answer_destroy)%>');
+        }
+        else{
+          $append.html(result.html);
+          $('.hide-answer-button').addClass("hide");
+        }
       }
     });
   });
@@ -121,42 +144,38 @@ vote.addAnswer = function() {
 
 
 vote.addAnswerComment = function() {
-  $('[class^=create_answer_comment_]').on("click", "[id^=comment_] ", function() {
-    // alert("ok");
-    var url_id = $(this).attr("url_id");
-    var a_id = $(this).attr("answer_id");
-    // var c_id = $(this).attr("url_comment_id");
-    // var d_id = $(this).attr("destroy_id");
-    // if (typeof(c_id) != "undefined"){
-    //   var edit = c_id+"/edit";
-    //   var type = "GET"
-    //   $append = $(".append_edit_comment_"+c_id);
-    // }else if (typeof(d_id) != "undefined"){
-    //   if (!(confirm("Are you sure?"))) {
-    //     return false;
-    //   }
+  $('[class^=create_answer_comment_], .ans-cmt').on("click", "[class^=edit_answer_comment_] [id^=comment_], [id^=comment_], [id^=destroy_]", function() {
+    var q_id = $(this).attr("q_id");
+    var a_id = $(this).attr("url_id");
+    var c_id = $(this).attr("url_comment_id");
+    var d_id = $(this).attr("destroy_id");
+     if (typeof(c_id) != "undefined"){
+      var edit = c_id+"/edit";
+      $append = $(".append_edit_answer_comment_"+c_id);
+     }else if (typeof(d_id) != "undefined"){
+      if (!(confirm("Are you sure?"))) {
+        return false;
+      }
 
-    //   var type = "DELETE";
-    //   var edit = d_id;
-    // }
-    // else {
-    //   var edit = "new";
-    //   var type ="GET";
-    //   $append = $(".append_create_comment");
-    // }
-    $append = $('.append_create_answer_comment_'+a_id);
+      var type = "DELETE";
+      var edit = d_id;
+    }
+      else{
+      var edit = "new";
+      $append = $(".append_create_answer_comment_"+a_id);
+    }
     $.ajax({
-      type: "GET",
-      url:  "/questions/"+url_id+"/answers/"+a_id+"/comments/new",
+      type: type ,
+      url:  "/questions/"+q_id+"/answers/"+a_id+"/comments/"+edit,
       success: function(result) {
-        // if(typeof(d_id) != "undefined"){
-        //   $('.append_question_comment_'+d_id).remove();
-        //   toastr.success('<%= I18n.t(:question_comment_destroy)%>');
-        // }
-        // else{
-        $append.html(result.html);
-        // $('.hide-comment-button').addClass("hide");
-        // }
+        if(typeof(d_id) != "undefined"){
+          $('.append_answer_comment_'+d_id).remove();
+          toastr.success('<%= I18n.t(:answer_comment_destroy)%>');
+        }
+        else{
+          $append.html(result.html);
+          $('.hide-ans-comment-button').addClass("hide");
+        }
       }
     });
   });

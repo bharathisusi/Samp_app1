@@ -23,6 +23,7 @@ class AnswersController < ApplicationController
   end
 
   def edit
+    render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question, answer_id: @answer})} and return
 
   end
 
@@ -39,6 +40,9 @@ class AnswersController < ApplicationController
   end
 
   def update
+    old_id = params[:id]
+    p "checccccccccccccccccccccccc"
+    p old_id
 
     if @answer.check_history?
       p true
@@ -53,14 +57,13 @@ class AnswersController < ApplicationController
        @answer.user = current_user
       @answer.save
     end
-
-
-    if @answer.save
-       redirect_to  @question, notice: t(:answer_updated)
-
-    else
-      render :edit
-
+    p @answer.id
+    p old_id
+    p "fffffffffffffffffff"
+    respond_to do |format|
+      @answer.save
+      format.html {redirect_to  @question, notice: t(:answer_updated)}
+      format.js { render '/answers/answer_edit.js.erb',locals: {question: @question, answer: @answer, id: old_id}}
     end
 
     # if @answer.update(post_params)
@@ -75,13 +78,13 @@ class AnswersController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    p request.method
     @answer.destroy
-    redirect_to @question, notice: t(:answer_destroy)
+    render :nothing => true
 
   end
   def answer_history
     @answer_history = Answer.list_comment_history(params[:history_id], params[:dont_show])
+    p "jjjjjjjjjjjjjjjj"
   end
 
 

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     else
       query_object = singular_object == 'answer' ? [from_where.question, from_where, 'question'] : [from_where,nil, 'question']
 
-      render json: {html: render_to_string("/#{singular_object.pluralize}/_append_#{singular_object}_vote", layout: false, locals: {"question": query_object[0], "answer": query_object[1]})} and return
+      render json: {html: render_to_string("/#{singular_object.pluralize}/_trigger_#{singular_object}_vote", layout: false, locals: {"question": query_object[0], "answer": query_object[1]})} and return
     end
   end
 

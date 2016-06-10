@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   def update
     commentable = find_commentable
     old_id = params[:id]
-    p "ooooooooooooooo"
+    p "ggggggggggggggggggg"
     p old_id
     if @commentable.check_history?
       params = post_params.merge(history_id: @commentable.id)
@@ -39,22 +39,30 @@ class CommentsController < ApplicationController
     else
       params = post_params.merge(history_id: @commentable.history_id)
       @commentable = commentable.comments.new(params)
+      p "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+      p @commentable
       @commentable.user = current_user
       @commentable.save
       p "editttttttttttttttt"
 
     end
     p "ccccccccccccccccc"
-    p @commentable
+    p @commentable.id
+
 
     respond_to do |format|
       if(@commentable.commentable_type == "Question")
         # redirect_to @question, notice: t(:question_comment_updated)
                 # @commentable = Comment.show_history(@commentable)
+        p "ppppppppppppppppppppppp"
+        p @question
+        p @commentable
         format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
 
       else
-        redirect_to @question, notice: t(:answer_comment_updated)
+
+        format.js { render '/answers/answer_comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
+        # redirect_to @question, notice: t(:answer_comment_updated)
       end
     end
   end
