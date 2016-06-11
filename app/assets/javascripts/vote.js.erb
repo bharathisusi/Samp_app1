@@ -7,7 +7,7 @@ $( document ).on('ready page:load', function() {
 });
 
 vote.upDownVote = function() {
-  $('.append_question, .ques-cmt, [class^=append_answer_comment_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_],[class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
+   $('.append_question, .ques-cmt, .ques-ans,.ans-cmt, [class^=append_answer_comment_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_],[class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -41,7 +41,7 @@ vote.upDownVote = function() {
     else if(typeof(a_id) != "undefined" ){
       answer_id = a_id;
       question_id = q_id;
-      $append = $(".append_answer_"+a_id);
+      $append = $(".trigger_answer_"+a_id);
     } else {
       question_id = q_id;
       answer_id = null;
@@ -144,7 +144,7 @@ vote.addAnswer = function() {
 
 
 vote.addAnswerComment = function() {
-  $('[class^=create_answer_comment_], .ans-cmt').on("click", "[class^=edit_answer_comment_] [id^=comment_], [id^=comment_], [id^=destroy_]", function() {
+  $('[class^=create_answer_comment_], [class^=answer_comment_]').on("click", "[class^=edit_answer_comment_] [id^=comment_], [id^=comment_], [id^=destroy_]", function() {
     var q_id = $(this).attr("q_id");
     var a_id = $(this).attr("url_id");
     var c_id = $(this).attr("url_comment_id");
@@ -180,3 +180,4 @@ vote.addAnswerComment = function() {
     });
   });
 }
+//[class^=append_answer_],

@@ -3,7 +3,7 @@
   = @question.title
   %br
 .append_question
-  = render partial: 'questions/append_question_vote', locals: {:question => @question}
+  = render partial: 'questions/trigger_question_vote', locals: {:question => @question}
 .answer-comment.ques-cmt
   - @question.comments.where("history_id IS NULL").each do |comment|
     .new

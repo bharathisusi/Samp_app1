@@ -4,7 +4,8 @@ $('.fa-spin').removeClass('hide');
 <% else %>
 <%- puts "IIIIIIIIIIIIIIIIIIIIIIIII"%>
 <%- p @commentable.commentable.id%>
-  $('.ans-cmt').append("<%= j render partial: '/comments/append_answer_comment_vote', locals: {comment: @commentable, question: @question, answer: @answer} %>");
+<%- puts "ssssssssssssssssssssssss"%>
+  $('.answer_comment_<%= @commentable.commentable.id %>').append("<%= j render partial: '/comments/append_answer_comment_vote', locals: {comment: @commentable, question: @question, answer: @answer} %>");
   toastr.success('<%= t(:answer_comment_create)%>');
 <% end %>
 $('.fa-spin').addClass('hide');

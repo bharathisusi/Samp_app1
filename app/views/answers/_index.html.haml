@@ -9,8 +9,8 @@
 %hr/
 .ques-ans
   - question.answers.where("history_id IS NULL").each do |answer|
-    %div{:class => "append_answer_#{answer.id}"}
-      = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
+    / %div{:class => "append_answer_#{answer.id}"}
+    = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
 
 %hr
 
