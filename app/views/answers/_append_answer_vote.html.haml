@@ -1,8 +1,9 @@
 = render partial: 'answers/append_answer_test', locals: {question: question, answer: answer}
 %hr
-%div{:class => "answer_comment_#{answer.id}"}
-  - answer.comments.where("history_id IS NULL").each do |comment|
-    = render partial: 'comments/append_answer_comment_vote', locals: {question: question, comment: comment, answer: answer}
+.answer-comment
+  %div{:class => "answer_comment_#{answer.id}"}
+    - answer.comments.where("history_id IS NULL").each do |comment|
+      = render partial: 'comments/append_answer_comment_vote', locals: {question: question, comment: comment, answer: answer}
 
 %div{:class => "create_answer_comment_#{answer.id}"}
   .linkbutton.hide-ans-button= link_to 'Add comment', "javascript:void();", class: "btn btn-primary", id: "comment_#{answer.id}", q_id: "#{question.id}", url_id: "#{answer.id}"

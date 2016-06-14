@@ -41,8 +41,6 @@ class AnswersController < ApplicationController
 
   def update
     old_id = params[:id]
-    p "checccccccccccccccccccccccc"
-    p old_id
 
     if @answer.check_history?
       p true
@@ -84,7 +82,6 @@ class AnswersController < ApplicationController
   end
   def answer_history
     @answer_history = Answer.list_comment_history(params[:history_id], params[:dont_show])
-    p "jjjjjjjjjjjjjjjj"
   end
 
 

@@ -1,16 +1,29 @@
-%h1 Question
-
+%h3 Question
+%hr
 - @questions.where("history_id IS NULL").each do |question|
   - question_edited = Question.show_history(question.id)
-  %span= link_to question_edited.title, question
-  - @a = question_edited.question_box
+  .align-count= display_sum_of_votes(question)
+  = "votes"
+  %span.align-question-title= link_to question_edited.title, question
+  .align-question-description
+    %span= truncate(question_edited.question_box, length: 20, escape: false)
+  .question-index-image
+    - if question_edited.user.image.thumb.url.present?
+      = image_tag(question_edited.user.image.thumb.url)
+    - else
+      = image_tag("download.png", width: "40px", height: "30px")
+    %span.fullname= "-#{question_edited.user.full_name}"
+  .align-count= question_edited.answers.count
+  = "answers"
   - if question.user.present?
     - if current_user == question_edited.user
-      %span.fullname= link_to 'Edit', edit_question_path(question_edited),  :class => " btn btn-primary btn-xs"
+      %span= link_to 'Edit |', edit_question_path(question_edited)
       - unless question_edited.check_history?
-        %span.fullname= link_to 'Edited', questions_question_history_path(history_id: question_edited.history_id, dont_show: question_edited.id), :class => " btn btn-primary btn-xs","data-target": "#myModal", "data-toggle": "modal", remote: true
-      %span.fullname= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }, :class => " btn btn-primary btn-xs"
+        %span= link_to 'Edited |', questions_question_history_path(history_id: question_edited.history_id, dont_show: question_edited.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
+      %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
+  %hr
   %br
+%br
 = link_to 'create question', new_question_path,  :class => "btn btn-primary btn-xs"
 
 

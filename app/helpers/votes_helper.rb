@@ -1,9 +1,6 @@
 module VotesHelper
 
   def link_to_vote(from, current_count, question, answer = nil)
-    puts "checkkkkkkkkkkkkkkkkkkkkk"
-    p question
-    p answer
     resource = answer ? answer : question
     id_for_js = answer ? "submit_#{answer.get_object_table_name.singularize}_#{answer.id}" : "submit_#{question.get_object_table_name.singularize}_#{question.id}"
     if from == 'upvote'
@@ -24,8 +21,6 @@ module VotesHelper
 
 
   def link_to_comment_vote(from, current_count, question, comment,answer = nil)
-    p "ffffffffffffooooooooooooooffff"
-    p answer
     id_for_js = answer ? "submit_#{answer.get_object_table_name.singularize}_#{comment.get_object_table_name.singularize}_#{comment.id}" : "submit_#{question.get_object_table_name.singularize}_#{comment.get_object_table_name.singularize}_#{comment.id}"
     if from == 'upvote'
       arrow_class = 'up'
@@ -41,10 +36,6 @@ module VotesHelper
      link_to "javascript:void();", current_count: current_count, question_id: question.id, comment_id: comment.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}", class: btn, id: id_for_js do
         "<i class='fa fa-chevron-#{arrow_class}'></i>".html_safe
     end
-
-    # link_to upvote_votes_path(vote: {current_count: current_count}, question_id: question.id, comment_id: comment.id, answer_id: answer ? answer.id : nil, "#{from}": "#{from}"), method: :post, class: btn do
-    #   "<i class='fa fa-chevron-#{arrow_class}'></i>".html_safe
-    # end
   end
 
   def calculate_upvote(question)

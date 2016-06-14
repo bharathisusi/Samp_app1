@@ -8,3 +8,5 @@ module QuestionsHelper
     Question.show_history(question).question_box.html_safe
   end
 end
+#
+# truncate(Question.show_history(question).question_box, :length => 10,escape: false)

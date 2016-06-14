@@ -1,13 +1,11 @@
-%span.linkbutton= question.answers_count
+%span.linkanswer= "#{question.answers.count} Answers"
 - if current_user.present?
   - if current_user.answers.where(question_id: question.id).first.blank?
     .create-answer
-      - p question
       %span.linkbutton.link_space.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary", id: "answer_#{question.id}", url_id: "#{question.id}"
       %div{:class => "append_create_answer"}
-
 %hr/
-.ques-ans
+%div{:class => "ques_ans_#{question.id}"}
   - question.answers.where("history_id IS NULL").each do |answer|
     / %div{:class => "append_answer_#{answer.id}"}
     = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}

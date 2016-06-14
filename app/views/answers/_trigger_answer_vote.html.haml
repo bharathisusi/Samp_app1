@@ -1,7 +1,5 @@
-- p "rrrrrrrrrrrr"
-- p answer
-- p answer.question
-%div{class: "trigger_answer_#{answer.id}"}
-  %span= link_to_vote('upvote', '', answer.question, answer)
-  %span= display_sum_of_votes(answer)
-  %span= link_to_vote('downvote', '', answer.question, answer)
+.pull-left
+  %div{class: "trigger_answer_#{answer.id}"}
+    %span= link_to_vote('upvote', '', answer.question, answer)
+    %span= display_sum_of_votes(answer)
+    %span= link_to_vote('downvote', '', answer.question, answer)

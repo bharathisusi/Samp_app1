@@ -20,7 +20,7 @@ class Question < ActiveRecord::Base
 
   def question_box_validation
     question_box_squish_method = ActionView::Base.full_sanitizer.sanitize(self.question_box).squish
-    if question_box_squish_method.size > 100
+    if question_box_squish_method.size > 200
       errors.add(:question_box, "is too long,maximum 100 characters only allowed")
     end
   end

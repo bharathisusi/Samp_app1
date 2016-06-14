@@ -1,37 +1,27 @@
-- p answer
 - if answer && !question
   - answer = answer
-  - p "lggggggggggggggggg"
-  - p answer
 - else
   - answer = Answer.show_history(answer)
-  - p "llllllllllllllllll"
-  - p answer
 %div{:class => "append_edit_answer_#{answer.id}"}
-  - p "gggggggggggggggggggggggggggggggg"
-  - p answer
-  - p answer.id
-  = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
-  %span.answer= answer.answer.html_safe
-  %span.fullname= "- #{answer.user.full_name}"
-  - if current_user == answer.user
-    %div{:class => "edit_answer_#{answer.id}"}
-      %span.fullname= link_to 'Edit',"javascript:void();", id: "answer_#{answer.id}",url_id: "#{answer.question.id}", a_id: "#{answer.id}"
+  .col-sm-1.allignment_answer_vote
+    = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
+  .col-sm-11.allignment_text
+    %span.answer= answer.answer.html_safe
+    .image-display
+      - if answer.user.image.thumb.url.present?
+        = image_tag(answer.user.image.thumb.url)
+      - else
+        = image_tag("download.png", width: "40px", height: "30px")
+      %span.fullname= "- #{answer.user.full_name}"
+    - if current_user == answer.user
+      %div{:class => "edit_answer_#{answer.id}"}
+        .pull-left
+          %span.fullname= link_to 'Edit |',"javascript:void();", id: "answer_#{answer.id}",url_id: "#{answer.question.id}", a_id: "#{answer.id}"
+
+      - unless answer.check_history?
+        %span.fullname= link_to 'Edited |', answers_answer_history_path(history_id: answer.history_id, dont_show: answer.id),"data-target": "#myModal", "data-toggle": "modal", remote: true
+
+      %span.fullname= link_to 'Destroy', "javascript:void();", id: "destroy_#{answer.id}",destroy_id: "#{answer.id}", url_id: "#{answer.question.id}"
       %div{:class => "append_edit_answer_test_#{answer.id}"}
+.clearfix
 
-    - unless answer.check_history?
-      %span.fullname= link_to 'Edited', answers_answer_history_path(history_id: answer.history_id, dont_show: answer.id),"data-target": "#myModal", "data-toggle": "modal", remote: true
-
-
-    %span.fullname= link_to 'Destroy', "javascript:void();", id: "destroy_#{answer.id}",destroy_id: "#{answer.id}", url_id: "#{answer.question.id}"
-
-/   - p "iiiiiiiiiiiiiiiiii"
-/ - p answer
-/ - if answer && !question
-/   - answer = answer
-/   - p "lggggggggggggggggg"
-/   - p answer
-/ - else
-/   - answer = Answer.show_history(answer)
-/   - p "llllllllllllllllll"
-/   - p answer

@@ -1,7 +1,6 @@
 .show_error
 .question_title
   = @question.title
-  %br
 .append_question
   = render partial: 'questions/trigger_question_vote', locals: {:question => @question}
 .answer-comment.ques-cmt

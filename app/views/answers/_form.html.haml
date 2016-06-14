@@ -7,8 +7,10 @@
       %br/
       = f.text_area :answer, :placeholder => 'Enter your answer', :class =>"form-control", :rows => "8"
       = hidden_field_tag :test_date, "#{request.remote_ip}"
+      - p @answer
     .actions
-      = f.submit "Create Answer", :class => " btn btn-primary btn-xs"
+      = @answer.id.present? ? (f.submit "Update Answer", :class => " btn btn-primary btn-xs") : (f.submit "Create Answer", :class => " btn btn-primary btn-xs")
+
 
 .col-lg-4
 .clearfix
