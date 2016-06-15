@@ -8,6 +8,7 @@
   .col-sm-11.allignment_text
     %span.answer= answer.answer.html_safe
     .image-display
+      = " asked #{answer.created_at.to_s(:short)} "
       - if answer.user.image.thumb.url.present?
         = image_tag(answer.user.image.thumb.url)
       - else

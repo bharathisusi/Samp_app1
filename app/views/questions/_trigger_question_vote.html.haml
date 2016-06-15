@@ -2,9 +2,10 @@
   %span= link_to_vote('upvote', '', question)
   %span= display_sum_of_votes(question)
   %span= link_to_vote('downvote', '', question)
-.col-sm-11.allignment_text.question
-  %span= recent_question_update(question)
+.col-sm-11.allignment_text
+  %span.question= recent_question_update(question)
   .question-show-image
+    = " asked #{question.created_at.to_s(:short)} "
     - if question.user.image.thumb.url.present?
       = image_tag(question.user.image.thumb.url)
     - else
