@@ -8,19 +8,21 @@
   .align-question-description
     %span= truncate(question_edited.question_box, length: 20, escape: false)
   .question-index-image
+    = " asked #{question_edited.created_at.to_s(:short)} "
     - if question_edited.user.image.thumb.url.present?
       = image_tag(question_edited.user.image.thumb.url)
     - else
       = image_tag("download.png", width: "40px", height: "30px")
     %span.fullname= "-#{question_edited.user.full_name}"
-  .align-count= question_edited.answers.count
-  = "answers"
-  - if question.user.present?
-    - if current_user == question_edited.user
-      %span= link_to 'Edit |', edit_question_path(question_edited)
-      - unless question_edited.check_history?
-        %span= link_to 'Edited |', questions_question_history_path(history_id: question_edited.history_id, dont_show: question_edited.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
-      %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
+  .align-question-index
+    .align-count= question_edited.answers.count
+    = "answers"
+    - if question.user.present?
+      - if current_user == question_edited.user
+        %span= link_to 'Edit |', edit_question_path(question_edited)
+        - unless question_edited.check_history?
+          %span= link_to 'Edited |', questions_question_history_path(history_id: question_edited.history_id, dont_show: question_edited.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
+        %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
   %hr
   %br
 %br
