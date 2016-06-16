@@ -5,11 +5,11 @@ class QuestionsController < ApplicationController
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @questions=Question.all
+    @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
+
   end
 
   def show
-
   end
 
   # GET /posts/new
@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
 
 
   def post_params
-    params.require(:question).permit(:title, :question_box)
+    params.require(:question).permit(:title, :question_box, :user_views)
   end
 
   def require_permission
