@@ -14,6 +14,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'ckeditor'
 
+gem 'will_paginate-bootstrap'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
