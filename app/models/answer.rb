@@ -7,4 +7,8 @@ class Answer < ActiveRecord::Base
   validates :answer, :presence => true
   #validates :user_id, :uniqueness => {:scope => :question_id, message: "you are not allowed to answer again this question...If any changes,you will edit your existing answer!"}
 
+  def self.pages(page)
+    paginate(page: page, per_page: 2)
+  end
+
 end

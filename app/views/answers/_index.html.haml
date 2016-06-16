@@ -4,6 +4,8 @@
     .create-answer
       %span.linkbutton.link_space.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary", id: "answer_#{question.id}", url_id: "#{question.id}"
       %div{:class => "append_create_answer"}
+.ans-pagination= will_paginate question.answers.pages(page), renderer:  BootstrapPagination::Rails
+
 %hr/
 %div{:class => "ques_ans_#{question.id}"}
   - question.answers.where("history_id IS NULL").each do |answer|

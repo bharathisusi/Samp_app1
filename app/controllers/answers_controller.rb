@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
   #before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @answers=Answer.all
+    # @answers=Answer.all
   end
 
   def show

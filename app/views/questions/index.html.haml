@@ -1,5 +1,5 @@
-= will_paginate @questions, renderer:  BootstrapPagination::Rails
 %h3 Question
+= link_to 'create question', new_question_path,class: "create-question-button"
 %hr
 - @questions.where("history_id IS NULL").each do |question|
   - question_edited = Question.show_history(question.id)
@@ -26,8 +26,7 @@
         %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
   %hr
   %br
-= link_to 'create question', new_question_path,  :class => "btn btn-primary btn-xs"
-= will_paginate @questions, renderer:  BootstrapPagination::Rails
-= question_pagination
+%span= will_paginate @questions, renderer:  BootstrapPagination::Rails
+%span.pull-right= question_pagination
 
 

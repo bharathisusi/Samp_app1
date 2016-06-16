@@ -13,4 +13,4 @@
   %div{:class => "append_create_comment"}
   %i.fa.fa-refresh.fa-spin.hide{:style => "font-size:24px"}
 %br/
-= render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments}
+= render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments,page: params[:page]}

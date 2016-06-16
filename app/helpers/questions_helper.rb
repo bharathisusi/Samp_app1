@@ -1,9 +1,4 @@
 module QuestionsHelper
-  # def question_error_messages!
-  #  return '' if @question.errors.empty?
-  #  flash.now[:error] = @question.errors.full_messages.map { |msg| "#{msg}." }[0]
-  # end
-
   def recent_question_update(question)
     Question.show_history(question).question_box.html_safe
   end
@@ -11,7 +6,9 @@ module QuestionsHelper
   def question_pagination
     param = params[:per_page]
     content_tag(:ul, class: ["pagination", "pagination"]) do
-      if param == '10'
+      if param == '5'
+        li_tag(param)
+      elsif param == '10'
         li_tag(param)
       elsif param == '20'
         li_tag(param)
@@ -23,6 +20,9 @@ module QuestionsHelper
 
   def li_tag(active="")
     links = ""
+    links += "#{content_tag(:li, class: "#{active == '5' ? 'active' : ''}") do
+        link_to(5, '/questions?per_page=5', :rel => 'next')
+      end}"
     links += "#{content_tag(:li, class: "#{active == '10' ? 'active' : ''}") do
         link_to(10, '/questions?per_page=10', :rel => 'next')
       end}"

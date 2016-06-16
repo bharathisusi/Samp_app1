@@ -6,10 +6,10 @@ class QuestionsController < ApplicationController
 
   def index
     @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
-
   end
 
   def show
+    @answer=Answer.paginate(page: params[:page])
   end
 
   # GET /posts/new

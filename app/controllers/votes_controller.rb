@@ -39,6 +39,7 @@ class VotesController < ApplicationController
 
   def find_votable
     if params[:question_id] && params[:answer_id] && params[:comment_id]
+
       klass = "comments"
       id = params[:comment_id]
     elsif params[:question_id] && params[:answer_id]
@@ -51,6 +52,9 @@ class VotesController < ApplicationController
       klass = "questions"
       id = params[:question_id]
     end
+    p params[:question_id]
+    p params[:vote][:test]
+    puts "ddddddddddddddddd"
     return "#{klass}".singularize.classify.constantize.find(id)
   end
 
