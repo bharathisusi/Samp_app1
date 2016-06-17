@@ -11,6 +11,10 @@
       = f.label :Questions
       %br/
       = f.text_area :question_box, :placeholder => 'Enter your question', :class =>"ckeditor", :rows => "8"
+    .field
+      = f.label :Tag
+      %br/
+      = f.text_field :tag_list, :placeholder => 'Enter your tag', class: "form-control"
     %br
     .actions
       = f.submit"Create Question",:class => " btn btn-primary btn-xs"

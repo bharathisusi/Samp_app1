@@ -5,11 +5,16 @@ class QuestionsController < ApplicationController
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
+    if params[:tag]
+      @questions= Question.tagged_with(params[:tag])
+    else
+      @questions=Question.where("history_id IS NULL").paginate(page: params[:page], per_page: params[:per_page])
+    end
+
   end
 
   def show
-    @answer=Answer.paginate(page: params[:page])
+    # @answers=Answer.paginate(page: params[:page], per_page: params[:per_page])
   end
 
   # GET /posts/new
@@ -35,13 +40,10 @@ class QuestionsController < ApplicationController
   def update
     if @question.check_history?
       params = post_params.merge(history_id: @question.id)
-      @question = current_user.questions.new(params)
-      @question.save
     else
       params = post_params.merge(history_id: @question.history_id)
-      @question = current_user.questions.new(params)
-      @question.save
     end
+    @question = current_user.questions.new(params)
 
     if @question.save
        redirect_to questions_path, notice: t(:question_updated)
@@ -68,7 +70,7 @@ class QuestionsController < ApplicationController
 
 
   def post_params
-    params.require(:question).permit(:title, :question_box, :user_views)
+    params.require(:question).permit(:title, :question_box, :user_views, :tag_list)
   end
 
   def require_permission
@@ -78,5 +80,11 @@ class QuestionsController < ApplicationController
   end
 
 end
+
+# if params[:tag]
+#       @questions= Question.tagged_with(params[:tag])
+#     else
+#       @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
+#     end
 
 

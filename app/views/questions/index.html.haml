@@ -1,5 +1,7 @@
 %h3 Question
 = link_to 'create question', new_question_path,class: "create-question-button"
+- unless params[:tag]
+  %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
 %hr
 - @questions.where("history_id IS NULL").each do |question|
   - question_edited = Question.show_history(question.id)
@@ -18,6 +20,8 @@
   .align-question-index
     .align-count= question_edited.answers.count
     = "answers"
+    = question_edited.tag_list.map{ |t| link_to t, tag_path(t)}.join('').html_safe
+    %br
     - if question.user.present?
       - if current_user == question_edited.user
         %span= link_to 'Edit |', edit_question_path(question_edited)
@@ -26,7 +30,8 @@
         %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
   %hr
   %br
-%span= will_paginate @questions, renderer:  BootstrapPagination::Rails
-%span.pull-right= question_pagination
+- unless params[:tag]
+  %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
+  %span.pull-right= question_pagination
 
 

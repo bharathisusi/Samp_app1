@@ -13,7 +13,7 @@ module QuestionsHelper
       elsif param == '20'
         li_tag(param)
       else
-        li_tag(param)
+        li_tag
       end
     end
   end
