@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616130062) do
+ActiveRecord::Schema.define(version: 20160617122051) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20160616130062) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.text     "answer",      limit: 65535
-    t.integer  "history_id",  limit: 4
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
@@ -48,18 +47,28 @@ ActiveRecord::Schema.define(version: 20160616130062) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "user_id",          limit: 4
-    t.integer  "history_id",       limit: 4
   end
 
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "histories", force: :cascade do |t|
+    t.integer  "historiable_id",   limit: 4
+    t.string   "historiable_type", limit: 255
+    t.string   "title",            limit: 255
+    t.text     "description",      limit: 65535
+    t.string   "tags",             limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "histories", ["historiable_type", "historiable_id"], name: "index_histories_on_historiable_type_and_historiable_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.text     "question_box", limit: 65535
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.integer  "user_id",      limit: 4
-    t.integer  "history_id",   limit: 4
     t.string   "title",        limit: 255,   default: ""
     t.string   "user_views",   limit: 255,   default: ""
   end

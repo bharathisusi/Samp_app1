@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  historiable_id: 
+  historiable_type: Historiable
+  title: MyString
+  description: MyText
+  tags: MyString
+
+two:
+  historiable_id: 
+  historiable_type: Historiable
+  title: MyString
+  description: MyText
+  tags: MyString
