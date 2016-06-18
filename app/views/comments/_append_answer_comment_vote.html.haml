@@ -1,9 +1,3 @@
-- if comment && !answer
-  - comment = comment
-- else
-  - comment = Comment.show_history(comment)
-  -p comment
-  -p "sssssssssssssssssssssse"
 %div{class: "append_answer_comment_#{comment.id}"}
   .col-sm-11.allignment_vote
     = render partial: 'comments/trigger_answer_comment_vote', locals: {comment: comment, question: question, answer: answer}
@@ -15,7 +9,7 @@
         .pull-left
           %span.fullname= link_to 'Edit |',  "javascript:void();", id: "comment_#{comment.id}",url_comment_id: "#{comment.id}", url_id: "#{comment.commentable.id}", q_id: "#{question.id}"
       - unless comment.check_history?
-        %span.fullname= link_to 'Edited |', comments_comment_history_path(history_id: comment.history_id, dont_show: comment.id),"data-target": "#myModal", "data-toggle": "modal", remote: true
+        %span.fullname= link_to 'Edited |', comments_comment_history_path(history_id: comment.id, dont_show: comment.id),"data-target": "#myModal", "data-toggle": "modal", remote: true
 
       %span.fullname= link_to 'Destroy',  "javascript:void();", id: "destroy_#{comment.id}",destroy_id: "#{comment.id}", url_id: "#{comment.commentable.id}", q_id: "#{question.id}"
       %div{:class => "append_edit_answer_comment_#{comment.id}"}

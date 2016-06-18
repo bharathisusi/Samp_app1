@@ -1,6 +1,6 @@
 module QuestionsHelper
   def recent_question_update(question)
-    Question.show_history(question).question_box.html_safe
+    question.question_box.html_safe
   end
 
   def question_pagination

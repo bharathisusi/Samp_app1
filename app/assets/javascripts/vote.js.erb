@@ -51,7 +51,7 @@ vote.upDownVote = function() {
     $.ajax({
       type: "POST",
       url: '/votes/upvote',
-      data:{ vote : {current_count :hash_value, test :"testing" }, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id, comment_id: c_id },
+      data:{ vote : {current_count :hash_value}, upvote: upvote, downvote: downvote, question_id: q_id, answer_id: a_id, comment_id: c_id },
       success: function(result) {
         if (result.error) {
           toastr.error(result.error);
@@ -121,6 +121,7 @@ vote.addAnswer = function() {
       var type = "GET"
       $append = $(".append_edit_answer_test_"+a_id);
     }else if (typeof(d_id) != "undefined"){
+      console.log(d_id)
       if (!(confirm("Are you sure?"))) {
         return false;
       }

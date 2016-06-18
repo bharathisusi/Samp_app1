@@ -28,48 +28,30 @@ class CommentsController < ApplicationController
   def update
     commentable = find_commentable
     old_id = params[:id]
-    p "ggggggggggggggggggg"
-    p old_id
-    if @commentable.check_history?
-      params = post_params.merge(history_id: @commentable.id)
-      @commentable = commentable.comments.new(params)
-      @commentable.user = current_user
-      @commentable.save
-      p "createeeeeeeeeeeeeeee"
+    p "=============id=======#{old_id}"
+    p  @commentable.comment
+    p params[:comment][:comment]
+    if @commentable.comment != params[:comment][:comment]
+      @commentable.histories.new(description: @commentable.comment)
+      @commentable.update_attributes(comment_params)
+
     else
-      params = post_params.merge(history_id: @commentable.history_id)
-      @commentable = commentable.comments.new(params)
-      p "aaaaaaaaaaaaaaaaaaaaaaaaaa"
-      p @commentable
-      @commentable.user = current_user
-      @commentable.save
-      p "editttttttttttttttt"
-
+      p "jjjjjjjjjjjjjjjjjjjjj"
+      @commentable.update_attributes(comment_params)
     end
-    p "ccccccccccccccccc"
-    p @commentable.id
-
-
+    @commentable.save
     respond_to do |format|
       if(@commentable.commentable_type == "Question")
-        # redirect_to @question, notice: t(:question_comment_updated)
-                # @commentable = Comment.show_history(@commentable)
-        p "ppppppppppppppppppppppp"
-        p @question
-        p @commentable
         format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
-
       else
-
         format.js { render '/answers/answer_comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
-        # redirect_to @question, notice: t(:answer_comment_updated)
       end
     end
   end
 
   def create
     commentable = find_commentable
-    @commentable = commentable.comments.new(post_params)
+    @commentable = commentable.comments.new(comment_params)
     @commentable.user = current_user
     respond_to do |format|
       @commentable.save
@@ -94,13 +76,13 @@ class CommentsController < ApplicationController
 
 
   def comment_history
-    @comment_history = Comment.list_comment_history(params[:history_id], params[:dont_show])
+    @comment_history = Comment.list_comment_history(params[:history_id])
   end
 
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def post_params
+  def comment_params
     params.require(:comment).permit(:comment)
   end
 

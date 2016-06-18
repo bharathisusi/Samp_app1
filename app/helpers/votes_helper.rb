@@ -48,6 +48,7 @@ module VotesHelper
 
   def display_sum_of_votes(question)
     calculate_upvote(question) + calculate_downvote(question)
+
   end
 
 end

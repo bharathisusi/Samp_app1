@@ -6,13 +6,13 @@ module Common
       where("history_id IS NULL AND id =? OR history_id =? AND id != ?", num, num, num).order("id DESC").first
     end
 
-    def list_comment_history(num,not_num)
-      where("history_id IS NULL AND id =? XOR history_id =? AND id != ? AND id != ?",num,num,num, not_num).order("id DESC")
+    def list_comment_history(num)
+      where(id: num).first.histories.order("id DESC")
     end
   end
 
   def check_history?
-    self.history_id.blank?
+    self.histories.blank?
   end
 
   def get_object_table_name

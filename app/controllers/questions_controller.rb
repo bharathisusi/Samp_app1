@@ -8,13 +8,13 @@ class QuestionsController < ApplicationController
     if params[:tag]
       @questions= Question.tagged_with(params[:tag])
     else
-      @questions=Question.where("history_id IS NULL").paginate(page: params[:page], per_page: params[:per_page])
+      @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
     end
 
   end
 
   def show
-    # @answers=Answer.paginate(page: params[:page], per_page: params[:per_page])
+
   end
 
   # GET /posts/new
@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @question = current_user.questions.new(post_params)
+    @question = current_user.questions.new(question_params)
     if @question.save
       redirect_to @question, notice: t(:question_create)
     else
@@ -38,12 +38,24 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.check_history?
-      params = post_params.merge(history_id: @question.id)
+    p @question
+    p "questionnnnnnnnnnnnnnn"
+    p params[:question][:title]
+    p params[:question][:question_box]
+    if @question.question_box!= params[:question][:question_box]
+      @question.histories.new(description: @question.question_box, title: params[:question][:title], tags: params[:question][:tag_list])
+      @question.update_attributes(question_params)
     else
-      params = post_params.merge(history_id: @question.history_id)
+      p "jjjjjjjjjjjjjjjjjjjjj"
+      @question.update_attributes(question_params)
     end
-    @question = current_user.questions.new(params)
+# if @question.check_history?
+    #   params = post_params.merge(history_id: @question.id)
+    # else
+    #   params = post_params.merge(history_id: @question.history_id)
+    # end
+    # @question = current_user.questions.new(params)
+
 
     if @question.save
        redirect_to questions_path, notice: t(:question_updated)
@@ -59,7 +71,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_history
-    @question_history = Question.list_comment_history(params[:history_id], params[:dont_show])
+    @question_history = Question.list_comment_history(params[:history_id])
   end
 
   private
@@ -69,7 +81,7 @@ class QuestionsController < ApplicationController
   end
 
 
-  def post_params
+  def question_params
     params.require(:question).permit(:title, :question_box, :user_views, :tag_list)
   end
 

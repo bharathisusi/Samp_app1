@@ -1,6 +1,6 @@
 .answer-comment
-  - @comment_history.each do |comment|
-    %span= comment.comment
-    %span.fullname= "- #{comment.user.full_name}"
+  - @comment_history.each do |history|
+    %span= history.description
+    %span.fullname= "- #{history.historiable.user.full_name}"
     %br/
     %br/

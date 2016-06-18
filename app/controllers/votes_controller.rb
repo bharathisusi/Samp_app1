@@ -23,9 +23,11 @@ class VotesController < ApplicationController
         if current_user_upvote.downvote == -1
           render :json => {error: "you already downvoted.so you cant voted"} and return
         else
+          p "aaaaaaaaaaaaaaaaaa"
           append_vote_change(from_where)
         end
       else
+        p "wwwwwwwwwwwwwwwwwwwwww"
         append_vote_change(from_where)
       end
     end

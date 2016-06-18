@@ -2,7 +2,7 @@
 %hr
 .answer-comment
   %div{:class => "answer_comment_#{answer.id}"}
-    - answer.comments.where("history_id IS NULL").each do |comment|
+    - answer.comments.each do |comment|
       = render partial: 'comments/append_answer_comment_vote', locals: {question: question, comment: comment, answer: answer}
       %hr
 

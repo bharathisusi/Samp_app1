@@ -28,8 +28,8 @@
 
 .image-display
 {
-  width: 160px;
-  height: 63px;
+  width: 165px;
+  height: 65px;
   padding: 10px;
   background-color:#E1ECF4;
   float: right;
@@ -58,8 +58,8 @@
 }
 .question-index-image
 {
-  width: 160px;
-  height: 63px;
+  width: 165px;
+  height: 65px;
   padding: 10px;
   background-color:#F4F6F8;
   float: right;
@@ -69,8 +69,8 @@
 }
 .question-show-image
 {
-  width: 160px;
-  height: 63px;
+  width: 165px;
+  height: 65px;
   padding: 10px;
   background-color:#E1ECF4;
   float: right;
@@ -79,14 +79,14 @@
 
 }
 
-  .fullname{
-    font-size: 15px;
-    color: blue;
-  }
-  .ques-fullname
-  {
-    color:  #000066!important;
-  }
+.fullname{
+  font-size: 15px;
+  color: blue;
+}
+.ques-fullname
+{
+  color:  #000066!important;
+}
 
 .align
 {
@@ -95,56 +95,56 @@
   padding-right: 0px !important;
 
 }
-  .answer{
+.answer{
   font-size: 20px;
   color: black;
   font-family: verdana;
 
 }
-  .linkbutton{
-    position: relative;
-    margin-left: 40px;
-    font-size: 15px;
-  }
-  .linkanswer{
-    position: relative;
-    margin-left: 20px;
-    font-size: 15px;
-  }
-  .question_title{
-    font-size: 25px;
-  }
-  .question{
-    font-size: 18px;
-  }
+.linkbutton{
+  position: relative;
+  margin-left: 40px;
+  font-size: 15px;
+}
+.linkanswer{
+  position: relative;
+  margin-left: 20px;
+  font-size: 15px;
+}
+.question_title{
+  font-size: 25px;
+}
+.question{
+  font-size: 18px;
+}
 .sign_right{
-    position: relative;
-    left: 850px;
-    top: 15px;
-    font-size: 15px;
-    color: black;
+  position: relative;
+  left: 850px;
+  top: 15px;
+  font-size: 15px;
+  color: black;
   }
-  .image{
-    position: relative;
-    left: 1100px;
+.image{
+  position: relative;
+  left: 1100px;
 
-  }
-  .align-question-title
-  {
-    margin-left: 20px;
-    position: relative;
-    bottom: 20px;
-  }
-  .align-question-description
-  {
-    margin-left: 55px;
-    position: relative;
-    bottom: 20px;
-  }
-  .link_space
-  {
-    margin-left:10px !important;
-  }
+}
+.align-question-title
+{
+  margin-left: 20px;
+  position: relative;
+  bottom: 20px;
+}
+.align-question-description
+{
+  margin-left: 55px;
+  position: relative;
+  bottom: 20px;
+}
+.link_space
+{
+  margin-left:10px !important;
+}
 html, body {
  height: 100%;
  padding-top: 35px;
