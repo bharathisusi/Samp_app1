@@ -19,4 +19,8 @@ module Common
     self.class.name.singularize.classify.constantize.table_name
   end
 
+  def get_class_name
+    self.class.name
+  end
+
 end
