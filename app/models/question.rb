@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :answered_users, :source => :user, :through => :answers
   has_many :comments, as: :commentable
-  has_many :histories, as: :historiable
+  has_many :histories, as: :historiable, dependent: :destroy
   validates :title, :presence => true
   validates_length_of :title, :minimum => 3, :maximum => 15, :allow_blank => false
   validate :question_box_validation

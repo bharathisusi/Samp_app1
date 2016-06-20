@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(version: 20160617122051) do
   create_table "histories", force: :cascade do |t|
     t.integer  "historiable_id",   limit: 4
     t.string   "historiable_type", limit: 255
-    t.string   "title",            limit: 255
+    t.string   "title",            limit: 255,   default: ""
     t.text     "description",      limit: 65535
-    t.string   "tags",             limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "tags",             limit: 255,   default: ""
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "histories", ["historiable_type", "historiable_id"], name: "index_histories_on_historiable_type_and_historiable_id", using: :btree

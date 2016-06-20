@@ -23,11 +23,9 @@ class VotesController < ApplicationController
         if current_user_upvote.downvote == -1
           render :json => {error: "you already downvoted.so you cant voted"} and return
         else
-          p "aaaaaaaaaaaaaaaaaa"
           append_vote_change(from_where)
         end
       else
-        p "wwwwwwwwwwwwwwwwwwwwww"
         append_vote_change(from_where)
       end
     end
@@ -54,9 +52,6 @@ class VotesController < ApplicationController
       klass = "questions"
       id = params[:question_id]
     end
-    p params[:question_id]
-    p params[:vote][:test]
-    puts "ddddddddddddddddd"
     return "#{klass}".singularize.classify.constantize.find(id)
   end
 

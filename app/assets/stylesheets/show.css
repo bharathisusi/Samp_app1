@@ -28,7 +28,7 @@
 
 .image-display
 {
-  width: 165px;
+  width: 175px;
   height: 65px;
   padding: 10px;
   background-color:#E1ECF4;
@@ -58,8 +58,8 @@
 }
 .question-index-image
 {
-  width: 165px;
-  height: 65px;
+  width: 175px;
+  height: 70px;
   padding: 10px;
   background-color:#F4F6F8;
   float: right;
@@ -69,7 +69,7 @@
 }
 .question-show-image
 {
-  width: 165px;
+  width: 175px;
   height: 65px;
   padding: 10px;
   background-color:#E1ECF4;

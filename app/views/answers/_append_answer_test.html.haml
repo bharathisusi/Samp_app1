@@ -1,6 +1,5 @@
 %div{:class => "append_edit_answer_#{answer.id}"}
-  .col-sm-1.allignment_answer_vote
-    = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
+  = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
   .col-sm-11.allignment_text
     %span.answer= answer.answer.html_safe
     .image-display

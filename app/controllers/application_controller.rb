@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def append_vote_change(from_where)
+    p from_where
+    p "render voteeeeeeeeeeeeeeeeeeee"
+
     singular_object = from_where.get_object_table_name.singularize
     if singular_object == 'comment'
       query_object =  from_where.commentable_type == 'Answer' ? [from_where.commentable.question, from_where.commentable, 'answer'] : [from_where.commentable, nil, 'question']
