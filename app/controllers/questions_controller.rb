@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
     if params[:tag]
       @questions= Question.tagged_with(params[:tag])
     else
-      @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
+      @questions=Question.includes(:user, :votes, :answers, :histories, :tags).order("created_at DESC").paginate(page: params[:page], per_page: params[:per_page])
+      #
     end
 
   end
@@ -17,17 +18,14 @@ class QuestionsController < ApplicationController
 
   end
 
-  # GET /posts/new
   def new
     @question= current_user.questions.new
+
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
@@ -38,24 +36,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    p @question
-    p "questionnnnnnnnnnnnnnn"
-    p params[:question][:title]
-    p params[:question][:question_box]
     if @question.question_box!= params[:question][:question_box]
       @question.histories.new(description: @question.question_box, title: params[:question][:title], tags: params[:question][:tag_list])
       @question.update_attributes(question_params)
     else
-      p "jjjjjjjjjjjjjjjjjjjjj"
       @question.update_attributes(question_params)
     end
-# if @question.check_history?
-    #   params = post_params.merge(history_id: @question.id)
-    # else
-    #   params = post_params.merge(history_id: @question.history_id)
-    # end
-    # @question = current_user.questions.new(params)
-
 
     if @question.save
        redirect_to questions_path, notice: t(:question_updated)
@@ -63,7 +49,6 @@ class QuestionsController < ApplicationController
       render :edit
     end
   end
-
 
   def destroy
     @question.destroy
@@ -80,7 +65,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
-
   def question_params
     params.require(:question).permit(:title, :question_box, :user_views, :tag_list)
   end
@@ -93,10 +77,5 @@ class QuestionsController < ApplicationController
 
 end
 
-# if params[:tag]
-#       @questions= Question.tagged_with(params[:tag])
-#     else
-#       @questions=Question.paginate(page: params[:page], per_page: params[:per_page])
-#     end
 
 

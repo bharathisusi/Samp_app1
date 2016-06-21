@@ -7,7 +7,7 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :histories, as: :historiable, dependent: :destroy
   validates :title, :presence => true
-  validates_length_of :title, :minimum => 3, :maximum => 15, :allow_blank => false
+  validates_length_of :title, :minimum => 3, :maximum => 100, :allow_blank => false
   validate :question_box_validation
   acts_as_taggable
 
@@ -22,7 +22,7 @@ class Question < ActiveRecord::Base
 
   def question_box_validation
     question_box_squish_method = ActionView::Base.full_sanitizer.sanitize(self.question_box).squish
-    if question_box_squish_method.size > 200
+    if question_box_squish_method.size > 500
       errors.add(:question_box, "is too long,maximum 100 characters only allowed")
     end
   end

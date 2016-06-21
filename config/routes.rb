@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'tags/:tag', to: 'questions#index', as: :tag
+  resources :tags, except: [:show] do
+    collection do
+      get 'tags/:tag', to: 'questions#index', as: :tag
+    end
+  end
   get 'comments/comment_history'
   get 'questions/question_history'
   get 'answers/answer_history'

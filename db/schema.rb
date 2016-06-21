@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160617122051) do
+ActiveRecord::Schema.define(version: 20160621125706) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -90,7 +90,8 @@ ActiveRecord::Schema.define(version: 20160617122051) do
 
   create_table "tags", force: :cascade do |t|
     t.string  "name",           limit: 255
-    t.integer "taggings_count", limit: 4,   default: 0
+    t.integer "taggings_count", limit: 4,     default: 0
+    t.text    "description",    limit: 65535
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160617122051) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.string   "image",                  limit: 255
+    t.boolean  "is_admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

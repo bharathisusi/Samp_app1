@@ -1,8 +1,7 @@
 %div{class: "append_answer_comment_#{comment.id}"}
-  .col-sm-11.allignment_vote
-    = render partial: 'comments/trigger_answer_comment_vote', locals: {comment: comment, question: question, answer: answer}
+  = render partial: 'comments/trigger_answer_comment_vote', locals: {comment: comment, question: question, answer: answer}
   .col-sm-11.allignment_text
-    %span= comment.comment.html_safe
+    %span.comment-font= comment.comment.html_safe
     %span.fullname= "- #{comment.user.full_name}"
     - if current_user == comment.user
       %div{:class => "edit_answer_comment_#{comment.id}"}

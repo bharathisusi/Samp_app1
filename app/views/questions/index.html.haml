@@ -1,37 +1,40 @@
-%h3 Question
-= link_to 'create question', new_question_path,class: "create-question-button"
-- unless params[:tag]
-  %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
-%hr
-- @questions.each do |question|
-  / - question_edited = Question.show_history(question.id)
-  .align-count= display_sum_of_votes(question)
-  = "votes"
-  %span.align-question-title= link_to question.title, question
-  .align-question-description
-    %span= truncate(question.question_box, length: 20, escape: false)
-  .question-index-image
-    = " asked #{question.created_at.to_s(:short)} "
-    - if question.user.image.thumb.url.present?
-      = image_tag(question.user.image.thumb.url)
-    - else
-      = image_tag("download.png", width: "40px", height: "30px")
-    %span.fullname= "-#{question.user.full_name}"
-  .align-question-index
-    .align-count= question.answers.count
-    = "answers"
-    = question.tag_list.map{ |t| link_to t, tag_path(t)}.join('').html_safe
-    %br
-    - if question.user.present?
-      - if current_user == question.user
-        %span= link_to 'Edit |', edit_question_path(question)
-        - unless question.check_history?
-          %span= link_to 'Edited |', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
-        %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
+.col-lg-0
+.col-lg-8
+  %h3 Question
+  = link_to 'create question', new_question_path,class: "create-question-button"
+
+  - unless params[:tag]
+    %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
   %hr
-  %br
-- unless params[:tag]
-  %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
-  %span.pull-right= question_pagination
+  - @questions.each do |question|
+    .align-count= display_sum_of_votes(question)
+    = "votes"
+    %span.align-question-title= link_to question.title, question
+    .align-question-description
+      %span= truncate(question.question_box, length: 20, escape: false)
+    .question-index-image
+      = " asked #{question.created_at.to_s(:short)} "
+      - if question.user.image.thumb.url.present?
+        = image_tag(question.user.image.thumb.url)
+      - else
+        = image_tag("download.png", width: "40px", height: "30px")
+      %span.fullname= "-#{question.user.full_name}"
+    .align-question-index
+      .align-count= question.answers.count
+      = "answers"
+    .question-tag= question.tag_list.map{ |t| link_to t, tag_path(t)}.join('').html_safe
+    .index-edit
+      - if question.user.present?
+        - if current_user == question.user
+          %span= link_to 'Edit |', edit_question_path(question)
+          - unless question.check_history?
+            %span= link_to 'Edited |', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
+          %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
+    %hr
+
+  - unless params[:tag]
+    %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
+    %span.pull-right= question_pagination
+.col-lg-4
 
 
