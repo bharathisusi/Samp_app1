@@ -1,0 +1,12 @@
+= form_tag '/tags', method: :post do
+  .field
+    = label_tag :Tag
+    %br/
+    = text_field_tag "tag[name]"," ", :placeholder => 'Enter your tag', class: "form-control"
+    %br
+  .field
+    = label_tag :Description
+    %br/
+    = text_area_tag "tag[description]"," ", :placeholder => 'Enter your description', :class =>"ckeditor", :rows => "8"
+  .actions
+    = submit_tag"Create Tag",:class => " btn btn-primary btn-xs"
