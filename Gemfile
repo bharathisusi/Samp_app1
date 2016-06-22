@@ -18,12 +18,13 @@ gem 'will_paginate-bootstrap'
 
 gem 'acts-as-taggable-on'
 
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -37,6 +38,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'twitter-bootstrap-rails'
 gem 'toastr-rails'
+gem 'rails4-autocomplete'
 
 
 
