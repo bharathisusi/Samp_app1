@@ -9,6 +9,10 @@ module Common
     def list_comment_history(num)
       where(id: num).first.histories.order("id DESC")
     end
+
+    def questions_list(params=nil)
+      includes(:user, :votes, :answers, :histories, :tags).order("created_at DESC").paginate(page: params[:page], per_page: params[:per_page])
+    end
   end
 
   def check_history?

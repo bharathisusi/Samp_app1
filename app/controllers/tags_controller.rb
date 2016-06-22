@@ -1,13 +1,21 @@
 class TagsController < ApplicationController
+  autocomplete :tag, :name
+
 
   def index
-    @tags =  ActsAsTaggableOn::Tag.all
+    if params[:tag]
+      p "tagggggggggggggggg"
+      @questions= Question.tagged_with(params[:tag])
+      render '/questions/index'
+    else
+      @tags =  ActsAsTaggableOn::Tag.all
+    end
+
   end
 
   def new
+    p "tagggggggnewwwwwwwwwwwww"
     @tag = ActsAsTaggableOn::Tag.new
-    p @tag
-    p "gggggggggggggggggg"
   end
 
   def create

@@ -2,10 +2,9 @@
 .col-lg-8
   %h3 Question
   = link_to 'create question', new_question_path,class: "create-question-button"
-
+  = create_tag(current_user)
   - unless params[:tag]
     %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
-  %hr
   - @questions.each do |question|
     .align-count= display_sum_of_votes(question)
     = "votes"
@@ -22,7 +21,9 @@
     .align-question-index
       .align-count= question.answers.count
       = "answers"
-    .question-tag= question.tag_list.map{ |t| link_to t, tag_path(t)}.join('').html_safe
+    .question-tag= question.tag_list.map{ |t| link_to t, tag_questions_path(t)}.join('').html_safe
+    / - question.tags.each do |tag|
+    /   .question-tag= link_to tag.name, tag_path(tag.name)
     .index-edit
       - if question.user.present?
         - if current_user == question.user
@@ -30,7 +31,7 @@
           - unless question.check_history?
             %span= link_to 'Edited |', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
           %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
-    %hr
+    %hr.hor-line
 
   - unless params[:tag]
     %span= will_paginate @questions, renderer:  BootstrapPagination::Rails

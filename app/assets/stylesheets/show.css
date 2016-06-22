@@ -20,6 +20,22 @@
   text-decoration: none!important;
 
 }
+
+.create-tag-button
+{
+  margin-left: 780px;
+  position: relative;
+  bottom: 55px;
+  border: none!important;
+  background: #cccc00;
+
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none!important;
+
+}
 .create-question-button:hover
 {
   background-color: grey;

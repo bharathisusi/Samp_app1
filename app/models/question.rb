@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   validates :title, :presence => true
   validates_length_of :title, :minimum => 3, :maximum => 100, :allow_blank => false
   validate :question_box_validation
-  acts_as_taggable
+  acts_as_taggable_on :tags
 
   def answers_count
     a= self.answers.count
@@ -26,12 +26,9 @@ class Question < ActiveRecord::Base
       errors.add(:question_box, "is too long,maximum 100 characters only allowed")
     end
   end
-  # def tag_list
-  #   self.tags.map(&:name).join(', ')
-  # end
 
-  # def self.pages(page, per_page)
-  #   paginate(page: page, per_page: per_page)
-  # end
+  def save_history(params="")
+    self.histories.new(description: self.question_box, title: params[:question][:title], tags: params[:question][:tag_list])
+  end
 
 end

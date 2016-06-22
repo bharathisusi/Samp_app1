@@ -34,5 +34,10 @@ module QuestionsHelper
       end}"
     links.html_safe
   end
+  def create_tag(current_user)
+    if current_user && current_user.is_admin
+      link_to 'Tag', new_tag_path,class: "create-tag-button"
+    end
+  end
 end
 
