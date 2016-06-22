@@ -3,24 +3,18 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :append_question_vote, :edit, :update, :destroy]
   before_filter :require_permission, only: [:edit, :destroy]
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+  autocomplete :question, :title
 
   def index
-    if params[:tag]
-      @questions= Question.tagged_with(params[:tag])
-    else
-      @questions=Question.includes(:user, :votes, :answers, :histories, :tags).order("created_at DESC").paginate(page: params[:page], per_page: params[:per_page])
-      #
-    end
-
+    @questions=Question.questions_list(params)
   end
 
   def show
-
   end
 
   def new
     @question= current_user.questions.new
-
   end
 
   def edit
@@ -37,14 +31,12 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.question_box!= params[:question][:question_box]
-      @question.histories.new(description: @question.question_box, title: params[:question][:title], tags: params[:question][:tag_list])
-      @question.update_attributes(question_params)
-    else
-      @question.update_attributes(question_params)
+      @question.save_history(params)
     end
+    @question.update_attributes(question_params)
 
     if @question.save
-       redirect_to questions_path, notice: t(:question_updated)
+      redirect_to questions_path, notice: t(:question_updated)
     else
       render :edit
     end

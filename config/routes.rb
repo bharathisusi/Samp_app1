@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :tags, except: [:show] do
-    collection do
-      get 'tags/:tag', to: 'questions#index', as: :tag
-    end
-  end
+  resources :tags, except: [:show]
+
   get 'comments/comment_history'
   get 'questions/question_history'
   get 'answers/answer_history'
-  #get 'questions/index'
+
   resources :votes, :except => [:edit, :update, :show, :destroy] do
     collection do
       post 'upvote'
@@ -19,11 +16,14 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
   resources :questions, concerns: :commentable do
+    collection do
+      get 'tagged/:tag', to: 'tags#index', as: :tag
+      get :autocomplete_tag_name
+      get :autocomplete_question_title
+    end
     resources :answers, concerns: :commentable
   end
-
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

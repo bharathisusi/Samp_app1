@@ -5,8 +5,9 @@
     .field
       = f.label :Title
       %br/
-      = f.text_field :title, :placeholder => 'Enter your title', class: "form-control"
-
+      / = f.text_field :title, :placeholder => 'Enter your title', class: "form-control"
+      = f.autocomplete_field :title, autocomplete_question_title_questions_path, class: "form-control"
+    / %br/
     .field
       = f.label :Questions
       %br/
@@ -14,7 +15,7 @@
     .field
       = f.label :Tag
       %br/
-      = f.text_field :tag_list, :placeholder => 'Enter your tag', class: "form-control"
+      = f.autocomplete_field :tag_list,  autocomplete_tag_name_questions_path, :placeholder => 'Enter your tag', class: "form-control"
     %br
     .actions
       = f.submit"Create Question",:class => " btn btn-primary btn-xs"
