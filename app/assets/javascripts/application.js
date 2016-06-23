@@ -15,8 +15,17 @@
 //= require autocomplete-rails
 //= require ckeditor/init
 //= require twitter/bootstrap
+//= require select2
 //= require turbolinks
 //= require toastr
 //= require vote
 //= require_tree .
+
+
+$( document ).on('ready page:load', function() {
+  console.log( "ready!" );
+  $(".select-multiple").select2({
+    theme: "bootstrap"
+  });
+});
 

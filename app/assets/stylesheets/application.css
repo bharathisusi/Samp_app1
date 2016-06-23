@@ -13,6 +13,13 @@
  *= require jquery-ui
  *= require toastr
  *= require show
+ *= require select2
+ *= require select2-bootstrap
  *= require_tree .
  *= require_self
  */
+
+
+.select2-container.form-control {
+     height: auto !important;
+}
