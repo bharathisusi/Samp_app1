@@ -11,5 +11,11 @@
     - else
       = image_tag("download.png", width: "40px", height: "30px")
     %span.fullname= "- #{question.user.full_name}"
+  - if question.user.present?
+    - if current_user == question.user
+      %span= link_to 'Edit |', edit_question_path(question)
+      - unless question.check_history?
+        %span= link_to 'Edited |', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
+      %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
 .clearfix
 

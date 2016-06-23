@@ -21,6 +21,7 @@ class TagsController < ApplicationController
   def create
 
     @tag =  ActsAsTaggableOn::Tag.new(tag_params)
+    p "ddddddddddddddddddddddd"
     if @tag.save
       redirect_to questions_path, notice: t(:question_create)
     else
