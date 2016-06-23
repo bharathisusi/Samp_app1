@@ -2,7 +2,6 @@
 .col-lg-8
   %h3 Question
   = link_to 'create question', new_question_path,class: "create-question-button"
-  = create_tag(current_user)
   - unless params[:tag]
     %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
   - @questions.each do |question|
@@ -19,11 +18,11 @@
         = image_tag("download.png", width: "40px", height: "30px")
       %span.fullname= "-#{question.user.full_name}"
     .align-question-index
-      .align-count= question.answers.count
+      .align-count= question.answers.size
       = "answers"
-    .question-tag= question.tag_list.map{ |t| link_to t, tag_questions_path(t)}.join('').html_safe
-    / - question.tags.each do |tag|
-    /   .question-tag= link_to tag.name, tag_path(tag.name)
+    .question-list-tag
+      - question.tags.each do |tag|
+        = link_to tag, tag_questions_path(tag.name), class: "question-tag"
     .index-edit
       - if question.user.present?
         - if current_user == question.user

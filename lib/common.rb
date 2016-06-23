@@ -11,7 +11,7 @@ module Common
     end
 
     def questions_list(params=nil)
-      includes(:user, :votes, :answers, :histories, :tags).order("created_at DESC").paginate(page: params[:page], per_page: params[:per_page])
+      includes(:user, :votes, :answers, :histories, :tags, :taggings).order("created_at DESC").paginate(page: params[:page], per_page: params[:per_page])
     end
   end
 
