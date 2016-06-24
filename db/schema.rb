@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621125706) do
+ActiveRecord::Schema.define(version: 20160624150100) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20160621125706) do
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "phone_country_code", limit: 255
+    t.string   "currency",           limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "histories", force: :cascade do |t|
     t.integer  "historiable_id",   limit: 4
     t.string   "historiable_type", limit: 255
@@ -64,6 +72,20 @@ ActiveRecord::Schema.define(version: 20160621125706) do
 
   add_index "histories", ["historiable_type", "historiable_id"], name: "index_histories_on_historiable_type_and_historiable_id", using: :btree
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "tag",          limit: 255
+    t.string   "organization", limit: 255
+    t.string   "description",  limit: 255
+    t.integer  "country",      limit: 4
+    t.integer  "state",        limit: 4
+    t.string   "city",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",      limit: 4
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
   create_table "questions", force: :cascade do |t|
     t.text     "question_box", limit: 65535
     t.datetime "created_at",                              null: false
@@ -74,6 +96,15 @@ ActiveRecord::Schema.define(version: 20160621125706) do
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "country_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "states", ["country_id"], name: "index_states_on_country_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
@@ -111,8 +142,8 @@ ActiveRecord::Schema.define(version: 20160621125706) do
     t.datetime "updated_at",                                      null: false
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
-    t.string   "image",                  limit: 255
     t.boolean  "is_admin"
+    t.string   "image",                  limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -134,6 +165,8 @@ ActiveRecord::Schema.define(version: 20160621125706) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "states", "countries"
   add_foreign_key "votes", "users"
 end

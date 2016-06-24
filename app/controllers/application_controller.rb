@@ -17,4 +17,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:Firstname,:lastname,:email, :password, :password_confirmation) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:Firstname,:lastname,:email, :password, :password_confirmation, :current_password, :image, :image_cache, :remove_image, :profile_attributes => [:tag, :organization, :country, :state, :city, :description]) }
+  end
+
 end

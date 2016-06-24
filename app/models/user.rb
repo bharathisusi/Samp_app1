@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :votes
+  has_one :profile
+  accepts_nested_attributes_for :profile
 
   def full_name
     "#{first_name.capitalize} #{last_name}"

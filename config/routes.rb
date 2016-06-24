@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :tags, except: [:show]
+  resources :tags, except: [:show] do
+    get :autocomplete_tag_name, :on => :collection
+  end
 
   get 'comments/comment_history'
   get 'questions/question_history'
