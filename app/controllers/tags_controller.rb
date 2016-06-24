@@ -1,10 +1,9 @@
 class TagsController < ApplicationController
-  autocomplete :tag, :name
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
 
   def index
     if params[:tag]
-      p "tagggggggggggggggg"
       @questions= Question.tagged_with(params[:tag])
       render '/questions/index'
     else
@@ -14,15 +13,16 @@ class TagsController < ApplicationController
   end
 
   def new
-    p "tagggggggnewwwwwwwwwwwww"
     @tag = ActsAsTaggableOn::Tag.new
   end
 
   def create
-
     @tag =  ActsAsTaggableOn::Tag.new(tag_params)
-    p "ddddddddddddddddddddddd"
+    # if @tag.name == @tags
+    #   p "kkkkkkkkkkkkkkkkkkkk"
+    #   redirect_to new_tag_path, notice: t(:question_update)
     if @tag.save
+      p "sssssssssssssssssssss"
       redirect_to questions_path, notice: t(:question_create)
     else
       render :new
@@ -33,7 +33,7 @@ class TagsController < ApplicationController
   private
 
   def tag_params
-    params.require(:tag).permit(:name, :description)
+    params.require(:tags).permit(:name, :description)
   end
 
 end

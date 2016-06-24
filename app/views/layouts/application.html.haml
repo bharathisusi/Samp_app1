@@ -76,6 +76,7 @@
                   %a.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
                     = image_tag(current_user.image.thumb.url)#image_tag(current_user.image.url)
                     = current_user.full_name
+                    %span.caret
                   %ul.dropdown-menu
                     %li
                       = link_to "Edit Profile",edit_user_registration_path

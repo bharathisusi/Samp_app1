@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  tag: MyString
+  organization: MyString
+  description: MyString
+  country: 1
+  state: 1
+  city: MyString
+
+two:
+  image: MyString
+  tag: MyString
+  organization: MyString
+  description: MyString
+  country: 1
+  state: 1
+  city: MyString

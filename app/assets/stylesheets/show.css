@@ -205,12 +205,12 @@ footer {
   color: white !important;
   font-size: 14px !important;
   margin-top: -2px !important;
-  margin-left: -24px !important;
+  /*margin-left: -24px !important;*/
 }
 .dropdown-toggle {
   color: white !important;
   margin-top: -2px !important;
- /* background-color:  #404040 !important;*/
+  background-color:  #404040 !important;*/
 
 }
 .nav navbar-nav navbar-right{

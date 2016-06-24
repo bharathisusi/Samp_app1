@@ -1,13 +1,10 @@
 .col-lg-2
 .col-lg-8
   = form_for(@question) do |f|
-    -p @question
-    -p "qqqqqqqqqqqq"
     - all_views_side_error_messages!(@question)
     .field
       = f.label :Title
       %br/
-      / = f.text_field :title, :placeholder => 'Enter your title', class: "form-control"
       = f.autocomplete_field :title, autocomplete_question_title_questions_path, class: "form-control"
     / %br/
     .field
@@ -17,9 +14,7 @@
     .field
       = f.label :Tag
       %br/
-      / = f.autocomplete_field :tag_list,  autocomplete_tag_name_questions_path, :placeholder => 'Enter your tag', class: "form-control"
-      = f.select :tag_list, options_for_select(ActsAsTaggableOn::Tag.all.collect{|f| [f.name]}, :selected => params[:tag_list]),{},{prompt: "Enter your tag", class: "select-multiple form-control", multiple: 'multiple', include_blank: false}
-
+      = f.select :tag_list, options_for_select(ActsAsTaggableOn::Tag.all.collect{|f| [f.name]}, :selected => f.object.tag_list),{},{prompt: "Enter your tag", class: "select-multiple form-control", multiple: 'multiple', include_blank: false}
     %br
     .actions
       = f.submit"Create Question",:class => " btn btn-primary btn-xs"

@@ -5,13 +5,13 @@
     %h2
       Edit #{resource_name.to_s.humanize}
     %hr
+    - resource.build_profile if resource.profile.nil?
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       - devise_error_messages!
       .form-horizontal
         .form-group
           = f.label :firstname, :class => "col-sm-4 control-label"
           .col-sm-8
-
             = f.text_field :first_name, autofocus: true, :class => "form-control"
         .form-group
           = f.label :lastname, :class => "col-sm-4 control-label"
@@ -29,22 +29,18 @@
           = f.label :password, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.password_field :password, autocomplete: "off", :class => "form-control"
-
           %i.pull-right
             (leave blank if you don't want to change it)
         .form-group
           = f.label :password_confirmation, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.password_field :password_confirmation, autocomplete: "off", :class => "form-control"
-
         .form-group
           = f.label :current_password, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.password_field :current_password, autocomplete: "off",  :class => "form-control"
-
         .form-group
           = f.label :Add_Avatar, :class => "col-sm-4 control-label"
-
           = f.file_field :image, :class => "col-sm-8"
         .form-group
           - if current_user.image.url.present?
@@ -52,10 +48,32 @@
             .col-sm-5
               = f.check_box :remove_image
               = f.label :remove_avatar
+        = f.fields_for :profile do |profile_fields|
+          .form-group
+            = profile_fields.label :Tag, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.text_field :tag, autofocus: true, :class => "form-control"
+          .form-group
+            = profile_fields.label :Organization, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.text_field :organization, autofocus: true, :class => "form-control"
+          .form-group
+            = profile_fields.label :Country, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.select(:country, options_for_select(Country.show_country),{},{ class: "select-multiple form-control", "data-live-search": "true"})
+          .form-group
+            = profile_fields.label :State, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.select(:state, options_for_select(State.show_state),{},{ class: "select-multiple form-control", "data-live-search": "true"})
 
-
-
-          /= f.hidden_field :image_cache
+          .form-group
+            = profile_fields.label :City, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.text_field :city, autofocus: true, :class => "form-control"
+          .form-group
+            = profile_fields.label :Description, :class => "col-sm-4 control-label"
+            .col-sm-8
+              = profile_fields.text_field :description, autofocus: true, :class => "form-control"
         .actions
           = f.submit "Update",:class => " btn btn-primary"
 

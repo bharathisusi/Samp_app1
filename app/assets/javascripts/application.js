@@ -18,7 +18,7 @@
 //= require select2
 //= require turbolinks
 //= require toastr
-//= require vote
+
 //= require_tree .
 
 

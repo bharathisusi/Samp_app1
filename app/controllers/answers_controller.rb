@@ -36,23 +36,9 @@ class AnswersController < ApplicationController
       @answer.histories.new(description: @answer.answer)
       @answer.update_attributes(answer_params)
     else
-      p "jjjjjjjjjjjjjjjjjjjjj"
       @answer.update_attributes(answer_params)
     end
 
-    # if @answer.check_history?
-    #   p true
-    #   params = post_params.merge(history_id: @answer.id)
-    #   @answer= @question.answers.new(params)
-    #    @answer.user = current_user
-    #   @answer.save
-    # else
-    #   p false
-    #   params = post_params.merge(history_id: @answer.history_id)
-    #   @answer= @question.answers.new(params)
-    #    @answer.user = current_user
-    #   @answer.save
-    # end
     respond_to do |format|
       @answer.save
       format.html {redirect_to  @question, notice: t(:answer_updated)}
@@ -69,10 +55,6 @@ class AnswersController < ApplicationController
   def answer_history
     @answer_history = Answer.list_comment_history(params[:history_id])
   end
-
-
-
-
 
   private
   def set_post
