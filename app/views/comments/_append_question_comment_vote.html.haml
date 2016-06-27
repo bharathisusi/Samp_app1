@@ -2,7 +2,7 @@
   = render partial: 'comments/trigger_question_comment_vote', locals: {comment: comment, question: question}
   .col-sm-11.allignment_text
     %span.comment-font= comment.comment.html_safe
-    %span.fullname= "-#{comment.user.full_name}"
+    %span.fullname= "-#{comment.user.profile.full_name}"
     - if current_user == comment.user
       %div{:class => "edit_comment_#{comment.id}"}
         .pull-left

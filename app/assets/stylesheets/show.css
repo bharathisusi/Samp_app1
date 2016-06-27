@@ -224,6 +224,10 @@ h2{
   text-align: center;
 }
 
+.select2 {
+  text-align: left !important;
+}
+
 .inner-box {
   width: 600px;
   padding: 25px;

@@ -12,11 +12,11 @@
       %span= truncate(question.question_box, length: 20, escape: false)
     .question-index-image
       = " asked #{question.created_at.to_s(:short)} "
-      - if question.user.image.thumb.url.present?
-        = image_tag(question.user.image.thumb.url)
+      - if question.user.profile.image.thumb.url.present?
+        = image_tag(question.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      %span.fullname= "-#{question.user.full_name}"
+      %span.fullname= "-#{question.user.profile.full_name}"
     .align-question-index
       .align-count= question.answers.size
       = "answers"

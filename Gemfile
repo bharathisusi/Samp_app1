@@ -19,6 +19,7 @@ gem 'will_paginate-bootstrap'
 gem 'acts-as-taggable-on'
 
 
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -40,6 +41,7 @@ gem 'twitter-bootstrap-rails'
 gem 'toastr-rails'
 gem 'rails4-autocomplete'
 gem "select2-rails"
+
 
 
 

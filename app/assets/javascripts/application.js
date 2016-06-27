@@ -18,13 +18,11 @@
 //= require select2
 //= require turbolinks
 //= require toastr
-
 //= require_tree .
 
 
 $( document ).on('ready page:load', function() {
-  console.log( "ready!" );
-  $(".select-multiple").select2({
+  $(".select-field").select2({
     theme: "bootstrap"
   });
 });

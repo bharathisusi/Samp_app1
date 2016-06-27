@@ -1,0 +1,45 @@
+.form-group
+          = f.label :firstname, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :first_name, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :lastname, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :last_name, autofocus: true, :class => "form-control"
+            / .form-group
+        /   = f.label :Add_Avatar, :class => "col-sm-4 control-label"
+        /   = f.file_field :image, :class => "col-sm-8"
+        / .form-group
+        /   - if current_user.image.url.present?
+        /     .col-sm-3
+        /     .col-sm-5
+        /       = f.check_box :remove_image
+        /       = f.label :remove_avatar
+        / - @user.build_profile
+        / = f.fields_for :profile do |profile_fields|
+        /   .form-group
+        /     = profile_fields.label :Tag, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.text_field :tag, autofocus: true, :class => "form-control"
+        /   .form-group
+        /     = profile_fields.label :Organization, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.text_field :organization, autofocus: true, :class => "form-control"
+        /   .form-group
+        /     = profile_fields.label :Country, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.select(:country, options_for_select(Country.show_country),{},{ class: "select-field form-control", "data-live-search": "true"})
+        /   .form-group
+        /     = profile_fields.label :State, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.select(:state, options_for_select(State.show_state),{},{ class: "select-field form-control", "data-live-search": "true"})
+
+        /   .form-group
+        /     = profile_fields.label :City, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.text_field :city, autofocus: true, :class => "form-control"
+        /   .form-group
+        /     = profile_fields.label :Description, :class => "col-sm-4 control-label"
+        /     .col-sm-8
+        /       = profile_fields.text_field :description, autofocus: true, :class => "form-control"
+        /

@@ -1,0 +1,51 @@
+.inner-container
+  .col-lg-3
+  .col-lg-6
+    %h2
+      Edit Profile
+    %hr
+    = simple_form_for @profile do |f|
+      .form-horizontal
+        .form-group
+          = f.label :firstname, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :first_name, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :lastname, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :last_name, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :Tag, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :tag, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :Organization, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :organization, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :Country, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.select :country, options_for_select(Country.show_country),{},{ class: "select-field form-control", "data-live-search": "true"}
+        .form-group
+          = f.label :State, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.select :state, options_for_select(State.show_state),{},{ class: "select-field form-control", "data-live-search": "true"}
+        .form-group
+          = f.label :City, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :city, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :Description, :class => "col-sm-4 control-label"
+          .col-sm-8
+            = f.text_field :description, autofocus: true, :class => "form-control"
+        .form-group
+          = f.label :Add_Avatar, :class => "col-sm-4 control-label"
+          = f.file_field :image, :class => "col-sm-8"
+        .form-group
+          - if current_user.profile.image.present?
+            .col-sm-3
+            .col-sm-5
+              = f.check_box :remove_image
+              = f.label :remove_avatar
+        .actions
+          = f.submit "Update",:class => " btn btn-primary"

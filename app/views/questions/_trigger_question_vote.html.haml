@@ -6,11 +6,11 @@
   %span.question= recent_question_update(question)
   .question-show-image
     = " asked #{question.created_at.to_s(:short)} "
-    - if question.user.image.thumb.url.present?
-      = image_tag(question.user.image.thumb.url)
+    - if question.user.profile.image.thumb.url.present?
+      = image_tag(question.user.profile.image.thumb.url)
     - else
       = image_tag("download.png", width: "40px", height: "30px")
-    %span.fullname= "- #{question.user.full_name}"
+    %span.fullname= "- #{question.user.profile.full_name}"
   - if question.user.present?
     - if current_user == question.user
       %span= link_to 'Edit |', edit_question_path(question)

@@ -7,15 +7,16 @@
       = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
         .form-horizontal
           - devise_error_messages!
-          .form-group
-            = f.label :firstname, :class => "col-sm-3 control-label"
+          - @user.build_profile
+          = f.fields_for :profile do |p|
+            .form-group
+              = p.label :firstname, :class => "col-sm-3 control-label"
 
-            = f.text_field :first_name, autofocus: true, :class => "col-sm-9"
-          .form-group
-            = f.label :lastname, :class => "col-sm-3 control-label"
+              = p.text_field :first_name, autofocus: true, :class => "col-sm-9"
+            .form-group
+              = p.label :lastname, :class => "col-sm-3 control-label"
 
-
-            = f.text_field :last_name,  :class => "col-sm-9"
+              = p.text_field :last_name,  :class => "col-sm-9"
           .form-group
             = f.label :email, :class => "col-sm-3 control-label"
 
