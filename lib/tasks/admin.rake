@@ -10,9 +10,8 @@ namespace :admin do
     print "Enter the password :"
     password = STDIN.gets.chomp.strip
 
-
-    user = User.new(email: email, password: password, first_name: firstname, last_name: lastname, is_admin: true)
-    user.save!
+    user = User.create(email: email, password: password, is_admin: true)
+    user.build_profile(first_name: firstname, last_name: lastname).save!
 
   end
 end
