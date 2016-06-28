@@ -4,10 +4,7 @@ gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
-group :production do
- gem 'pg', '0.15.1'
- gem 'rails_12factor'
-end
+
 # Use mysql as the database for Active Record
 # gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -72,5 +69,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
 
+end
+group :production do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor'
+end
