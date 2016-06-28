@@ -313,7 +313,7 @@ h2{
   white-space: nowrap;
   text-decoration: none;
   text-align: center;*/
-  line-height: 1;
+  line-height: 1px;
   border-width: 1px;
   border-style: solid;
   border-radius: 0;
