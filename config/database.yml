@@ -46,7 +46,8 @@ test:
 #
 production:
   <<: *default
-  database: d1msrhck7ttb5d
-  host: ec2-54-243-201-107.compute-1.amazonaws.com
-  username: rkdcgutsbhpogg
+  database: detb1sojr2f0u4
+  host: ec2-54-243-201-3.compute-1.amazonaws.com
+  port: 5432
+  username: cuhxtvkjhgadcd
   password: <%= ENV['SAMP_APP1_DATABASE_PASSWORD'] %>

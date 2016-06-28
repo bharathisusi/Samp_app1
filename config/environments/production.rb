@@ -77,5 +77,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  ENV['SAMP_APP1_DATABASE_PASSWORD'] = "4V24D9Mzqc2VYtCcm-HU8WeSc3"
+  ENV['SAMP_APP1_DATABASE_PASSWORD'] = "TYWw_LTFQPA3emXl6gOfwJkllY"
+  ENV["SECRET_KEY_BASE"] = '516a8345582a493d7432ce067e7db9a43570151f7b4c91a0f7f6e038c4e6c3eb69b795d5cc5fc0738de9be9eed01930c3f1f6102edd815f3955274d372ac7131'
 end
