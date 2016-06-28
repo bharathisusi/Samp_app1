@@ -4,7 +4,7 @@
     %h2
       Edit Profile
     %hr
-    = simple_form_for @profile do |f|
+    = form_for @profile do |f|
       .form-horizontal
         .form-group
           = f.label :firstname, :class => "col-sm-4 control-label"
