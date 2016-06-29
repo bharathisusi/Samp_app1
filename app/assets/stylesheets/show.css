@@ -227,6 +227,10 @@ h2{
 .select2 {
   text-align: left !important;
 }
+.col-lg-5.5.forgot
+{
+  width: 50% ! important;
+}
 
 .inner-box {
 
@@ -234,6 +238,7 @@ h2{
   margin-top: 25px;
   border-radius: 10px;
   background-color: #f5f5f5;
+  width: 70%;
 }
 .signed-in-navbar{
   margin-left: -10px;
@@ -272,9 +277,9 @@ h2{
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
-.form-control{
-  width: 100% !important;
-}
+/*.form-control{
+  width: 70% !important;
+}*/
 .text-muted
 {
   top: 15px;
