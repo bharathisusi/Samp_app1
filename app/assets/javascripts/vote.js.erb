@@ -110,7 +110,7 @@ vote.addComment = function() {
 }
 
 vote.addAnswer = function() {
-  $('.create-answer, [class^=ques_ans_]').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
+  $('.create-answer, [class^=create_button_answer_], [class^=ques_ans_]').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
     var url_id = $(this).attr("url_id");
     if (typeof(url_id) == "undefined") {
       return false
