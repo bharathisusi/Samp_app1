@@ -1,4 +1,4 @@
-%span.linkanswer= "#{question_answers.count} Answers"
+%span.linkanswer= "#{question.answers.size} Answers"
 - if current_user.present?
   - if current_user.answers.where(question_id: question.id).first.blank?
     .create-answer
@@ -12,7 +12,7 @@
     / %div{:class => "append_answer_#{answer.id}"}
     = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
 
-%hr
+
 
 
 
