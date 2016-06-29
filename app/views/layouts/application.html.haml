@@ -84,10 +84,7 @@
                       = link_to "Account Update",edit_user_registration_path
                     %li.divider{:role => "separator"}
                     %li
-                      -p "profileeeeeeeeeeeeeeeeeee"
-                      -p current_user
-                      -p @profile
-                      -p current_user.profile
+
                       = link_to "Edit Profile",edit_profile_path(current_user.profile)
                     %li.divider{:role => "separator"}
 
