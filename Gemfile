@@ -4,10 +4,10 @@ gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
-group :production do
-  gem 'rails_12factor'
-  gem 'pg'
-end
+# group :production do
+gem 'rails_12factor'
+gem 'pg'
+# end
 
 
 # Use mysql as the database for Active Record
@@ -53,7 +53,6 @@ gem "select2-rails"
 
 
 
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -63,8 +62,7 @@ gem "select2-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+group :development, :test do# Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
 

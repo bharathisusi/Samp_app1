@@ -26,6 +26,7 @@
           = f.label :Country, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.select :country, options_for_select(Country.show_country),{},{ class: "select-field form-control", "data-live-search": "true"}
+
         .form-group
           = f.label :State, :class => "col-sm-4 control-label"
           .col-sm-8
