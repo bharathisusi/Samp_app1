@@ -5,7 +5,11 @@ gem 'devise'
 gem 'rails', '4.2.6'
 
 # group :production do
+<<<<<<< HEAD
 #gem 'rails_12factor'
+=======
+
+>>>>>>> a748ddbcf59a462ebce7948f132433790cb0076c
 gem 'pg'
 # end
 
@@ -22,6 +26,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'ckeditor'
 
 gem 'will_paginate-bootstrap'
+
+gem 'kaminari'
 
 gem 'acts-as-taggable-on'
 

@@ -9,7 +9,6 @@
   - if current_user
     .linkbutton.hide-ans-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{answer.id}", q_id: "#{question.id}", url_id: "#{answer.id}"
     %div{:class => "append_create_answer_comment_#{answer.id}"}
-%br
 /= will_paginate @answers, renderer:  BootstrapPagination::Rails
 
 

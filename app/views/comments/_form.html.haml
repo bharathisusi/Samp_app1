@@ -1,4 +1,4 @@
-.col-lg-1
+.col-lg-0
 .col-lg-8.remove_new_comment
   = form_for([@question, @commentable], remote: true) do |f|
     - all_views_side_error_messages!(@commentable)
@@ -11,6 +11,6 @@
     %br
     .actions
       = @commentable.id.present? ? (f.submit "Update Comment", :class => " btn btn-primary btn-xs") : (f.submit "Create Comment", :class => " btn btn-primary btn-xs")
-.col-lg-3
+.col-lg-4
 .clearfix
 
