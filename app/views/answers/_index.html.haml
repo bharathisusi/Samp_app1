@@ -4,14 +4,15 @@
     .create-answer
       - if current_user
         %span.linkbutton.link_space.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary btn-xs", id: "answer_#{question.id}", url_id: "#{question.id}"
+        %hr/
         %div{:class => "append_create_answer"}
 .ans-pagination= will_paginate question_answers, renderer:  BootstrapPagination::Rails
-%hr/
+%br
 %div{:class => "ques_ans_#{question.id}"}
   - question_answers.each do |answer|
     / %div{:class => "append_answer_#{answer.id}"}
     = render partial: 'answers/append_answer_vote', locals: {question: question, answer: answer}
-
+%br
 
 
 

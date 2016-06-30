@@ -18,7 +18,10 @@
   padding: 5px;
   text-align: center;
   text-decoration: none!important;
-
+}
+.text-area-size
+{
+  width: 70%;
 }
 .hr-color
 {
