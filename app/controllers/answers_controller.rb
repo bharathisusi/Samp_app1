@@ -26,7 +26,6 @@ class AnswersController < ApplicationController
       @answer.save
         format.html {redirect_to @question, notice: t(:question_comment_create)}
         format.js { render '/answers/show.js.erb'}
-
     end
   end
 

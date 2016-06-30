@@ -5,12 +5,10 @@
     - answer.comments.each do |comment|
       = render partial: 'comments/append_answer_comment_vote', locals: {question: question, comment: comment, answer: answer}
       %hr
-
 %div{:class => "create_answer_comment_#{answer.id}"}
   - if current_user
     .linkbutton.hide-ans-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{answer.id}", q_id: "#{question.id}", url_id: "#{answer.id}"
     %div{:class => "append_create_answer_comment_#{answer.id}"}
-
 /= will_paginate @answers, renderer:  BootstrapPagination::Rails
 
 

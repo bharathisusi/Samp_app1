@@ -1,15 +1,14 @@
 .col-lg-0
 .col-lg-8.remove-new-answer
-  = form_for([@question, @answer], remote: true) do |f|
+  = form_tag("/questions/#{params[:question_id]}", remote: true, method: :post) do
     - all_views_side_error_messages!(@answer)
     .field
-      = f.label :Answer
+      = label_tag :Answer
       %br/
-      = f.text_area :answer, :placeholder => 'Enter your answer', :class =>"form-control", :rows => "8"
-      = hidden_field_tag :test_date, "#{request.remote_ip}"
-      - p @answer
+      = text_area_tag "answer[answer]", "", :placeholder => 'Enter your answer', :class =>"form-control", :rows => "8"
+    %br
     .actions
-      = @answer.id.present? ? (f.submit "Update Answer", :class => " btn btn-primary btn-xs") : (f.submit "Create Answer", :class => " btn btn-primary btn-xs")
+      = @answer.id.present? ? (submit_tag "Update Answer", class: " btn btn-primary btn-xs") : (submit_tag "Create Answer", class: " btn btn-primary btn-xs")
 
 
 .col-lg-4

@@ -11,9 +11,10 @@
       = render partial: 'comments/append_question_comment_vote', locals: {comment: comment, question: @question}
   .create_comment
     - if current_user
-      .linkbutton.hide-comment-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{@question.id}", url_id: "#{@question.id}"
+      .hide-comment-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{@question.id}", url_id: "#{@question.id}"
       %div{:class => "append_create_comment"}
       %i.fa.fa-refresh.fa-spin.hide{:style => "font-size:24px"}
   %br/
-  = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments, question_answers: @question.answers.pages(params[:page])}
+  %div{:class => "ques_ans_page_#{@question.id}"}
+    = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments, question_answers: @question.answers.pages(params[:page])}
 .col-lg-4

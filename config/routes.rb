@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :tags, except: [:show] do
     get :autocomplete_tag_name, :on => :collection
   end
-
+  match "questions/:id" => "questions#show", via: [:get, :post]
   get 'comments/comment_history'
   get 'questions/question_history'
   get 'answers/answer_history'

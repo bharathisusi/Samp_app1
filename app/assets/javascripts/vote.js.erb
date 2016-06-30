@@ -7,7 +7,7 @@ $( document ).on('ready page:load', function() {
 });
 
 vote.upDownVote = function() {
-   $('.append_question, .ques-cmt,[class^=ques_ans_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_], [class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
+   $('.append_question, .ques-cmt,[class^=ques_ans_page_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_], [class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -110,7 +110,9 @@ vote.addComment = function() {
 }
 
 vote.addAnswer = function() {
-  $('.create-answer, [class^=create_button_answer_], [class^=ques_ans_]').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
+  $('.create-answer, [class^=ques_ans_]').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
+
+    // $('#create_ans_button').show();
     var url_id = $(this).attr("url_id");
     if (typeof(url_id) == "undefined") {
       return false
@@ -132,6 +134,7 @@ vote.addAnswer = function() {
       var edit = "new";
       var type ="GET";
       $append = $(".append_create_answer");
+
     }
     $.ajax({
       type: type,
@@ -140,6 +143,9 @@ vote.addAnswer = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_edit_answer_'+d_id).remove();
           toastr.success('<%= I18n.t(:answer_destroy)%>');
+          $('.hide-ans-button').addClass("hide");
+          $('.hide-answer-button').removeClass("hide");
+
         }
         else{
           $append.html(result.html);
@@ -153,6 +159,7 @@ vote.addAnswer = function() {
 
 vote.addAnswerComment = function() {
   $('[class^=create_answer_comment_], [class^=answer_comment_]').on("click", "[class^=edit_answer_comment_] [id^=comment_], [id^=comment_], [id^=destroy_]", function() {
+
     var q_id = $(this).attr("q_id");
     if (typeof(q_id) == "undefined") {
       return false

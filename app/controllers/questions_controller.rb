@@ -11,6 +11,18 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    if request.post?
+      @answer= @question.answers.new(answer_params)
+      @answer.user = current_user
+      @answer.save
+      # question_answers = question.answers.pages(page)
+      respond_to do |format|
+          format.html {redirect_to @question, notice: t(:question_comment_create)}
+          format.js { render '/answers/show.js.erb', locals: {question: @question, answers: @answer, page: params}}
+          # format.json (render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question, answer_id: @answer})} and return)
+
+      end
+    end
   end
 
   def new
@@ -59,6 +71,12 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []} )
+  end
+
+  def answer_params
+    if request.post?
+      params.require(:answer).permit(:answer)
+    end
   end
   # {:tag_list => [:id][:name]}
 
