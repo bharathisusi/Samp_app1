@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question, answer_id: @answer})} and return
+    render json: {html: render_to_string("/answers/_answer_edit", layout: false, locals: {question_id: @question, answer_id: @answer})} and return
   end
 
   def create

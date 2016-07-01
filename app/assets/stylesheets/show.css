@@ -5,6 +5,11 @@
   color: black;
 
   }
+  .align-pagination
+  {
+    position: relative;
+    margin-right: 500px;
+  }
 .create-question-button
 {
   float: right;

@@ -26,6 +26,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    p "gggggggggggggggggg"
     @question= current_user.questions.new
   end
 
