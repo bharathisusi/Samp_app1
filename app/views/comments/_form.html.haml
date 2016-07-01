@@ -6,8 +6,8 @@
       = f.label :Comment
       %br/
       = f.text_area :comment, :placeholder => 'Enter your comment', :class => 'form-control', :rows => "8"
-      - if params[:answer_id].present?
-        = hidden_field_tag :answer_id, params[:answer_id]
+      / - if params[:answer_id].present?
+      /   = hidden_field_tag :answer_id, params[:answer_id]
     %br
     .actions
       = @commentable.id.present? ? (f.submit "Update Comment", :class => " btn btn-primary btn-xs") : (f.submit "Create Comment", :class => " btn btn-primary btn-xs")

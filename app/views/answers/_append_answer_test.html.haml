@@ -1,10 +1,9 @@
--p "checkkkkkkkkkkkkkk"
 %div{:class => "append_edit_answer_#{answer.id}"}
   = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
   .col-sm-11.allignment_text
     %span.answer= answer.answer.html_safe
     .image-display
-      = " asked #{answer.created_at.to_s(:short)} "
+      = " answered #{answer.created_at.to_s(:short)} "
       - if answer.user.profile.image.thumb.url.present?
         = image_tag(answer.user.profile.image.thumb.url)
       - else

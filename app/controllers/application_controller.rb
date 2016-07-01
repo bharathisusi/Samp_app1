@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   add_flash_types :error
-
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
   def append_vote_change(from_where)
@@ -16,8 +14,6 @@ class ApplicationController < ActionController::Base
       render json: {html: render_to_string("/#{singular_object.pluralize}/_trigger_#{singular_object}_vote", layout: false, locals: {"question": query_object[0], "answer": query_object[1]})} and return
     end
   end
-
-  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
