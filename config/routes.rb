@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :answers, concerns: :commentable
   end
   match "questions/:id" => "questions#show", via: [:get, :post]
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

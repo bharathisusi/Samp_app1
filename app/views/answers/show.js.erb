@@ -1,12 +1,8 @@
 <% if @answer.errors.size != 0 %>
   toastr.error("<%= all_views_side_error_messages!(@answer)%>");
 <% else %>
-  // alert("<%= @question %>");
   $('.ques_ans_page_<%= @question.id %>').empty().append("<%= j render partial: '/answers/index', locals: {question: @question, answers: @answers, question_answers: @question.answers.pages(params[:page])} %>");
-  // $('.create_ans_button_<%= @question.id %>').empty().append("<%= j render partial: '/answers/answer_count', locals: {question: @question} %>");
-
-
-  toastr.success('<%= t(:answer_create)%>');
+// $('.create_ans_button_<%= @question.id %>').empty().append("<%= j render partial: '/answers/answer_count', locals: {question: @question} %>");  toastr.success('<%= t(:answer_create)%>');
 <% end %>
 $('.remove-new-answer').remove();
 $('.hide-answer-button').hide();

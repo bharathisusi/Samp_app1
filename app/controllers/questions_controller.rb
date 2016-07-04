@@ -70,7 +70,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []} )
+    params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []})
   end
 
   def answer_params
