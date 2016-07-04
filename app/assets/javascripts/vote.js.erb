@@ -90,7 +90,7 @@ vote.addComment = function() {
     else {
       var edit = "new";
       var type ="GET";
-      $append = $(".append_create_comment");
+      $append = $(".append_create_comment_"+url_id);
       $('.hide-comment-button').addClass("hide");
     }
     $.ajax({
@@ -100,7 +100,7 @@ vote.addComment = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_question_comment_'+d_id).remove();
           toastr.success('<%= I18n.t(:question_comment_destroy)%>');
-          // $('.hide-hr-line').addClass("hide");
+           // $('.hide-hr').remove();
 
         }
         else{
@@ -150,9 +150,10 @@ vote.addAnswer = function() {
           $('.append_edit_answer_'+d_id).remove();
           $('.answer_count').empty().append(reduce_count);
           toastr.success('<%= I18n.t(:answer_destroy)%>');
+          $('.answer-page').show();
           $('.hide-ans-button').addClass("hide");
           $('.hide-answer-button').show();
-          // $('.create-answer').show();
+
         }
         else{
           $append.html(result.html);
@@ -182,7 +183,6 @@ vote.addAnswerComment = function() {
       if (!(confirm("Are you sure?"))) {
         return false;
       }
-
       var type = "DELETE";
       var edit = d_id;
     }
