@@ -85,6 +85,7 @@ vote.addComment = function() {
       var type = "DELETE";
       var edit = d_id;
 
+
     }
     else {
       var edit = "new";
@@ -99,9 +100,12 @@ vote.addComment = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_question_comment_'+d_id).remove();
           toastr.success('<%= I18n.t(:question_comment_destroy)%>');
+          $('.hide-hr-line').addClass("hide");
+
         }
         else{
           $append.html(result.html);
+
 
         }
       }
@@ -130,6 +134,8 @@ vote.addAnswer = function() {
       }
       var type = "DELETE";
       var edit = d_id;
+      var count = parseInt($('.answer_count').text());
+      var reduce_count = count - 1
     }else {
       var edit = "new";
       var type ="GET";
@@ -142,6 +148,7 @@ vote.addAnswer = function() {
       success: function(result) {
         if(typeof(d_id) != "undefined"){
           $('.append_edit_answer_'+d_id).remove();
+          $('.answer_count').empty().append(reduce_count);
           toastr.success('<%= I18n.t(:answer_destroy)%>');
           $('.hide-ans-button').addClass("hide");
           $('.hide-answer-button').removeClass("hide");
