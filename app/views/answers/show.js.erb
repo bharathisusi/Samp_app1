@@ -5,5 +5,5 @@
 // $('.create_ans_button_<%= @question.id %>').empty().append("<%= j render partial: '/answers/answer_count', locals: {question: @question} %>");  toastr.success('<%= t(:answer_create)%>');
 <% end %>
 $('.remove-new-answer').remove();
-$('.hide-answer-button').addClass("hide");
+$('.hide-answer-button').hide();
 

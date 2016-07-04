@@ -9,6 +9,9 @@
   .answer-comment.ques-cmt
     - @question.comments.each do |comment|
       = render partial: 'comments/append_question_comment_vote', locals: {comment: comment, question: @question}
+      %hr.hide-hr-line
+
+
   .create_comment
     - if current_user
       .hide-comment-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{@question.id}", url_id: "#{@question.id}"

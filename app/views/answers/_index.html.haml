@@ -14,13 +14,13 @@
 %span.answer_count= "#{question.answers.count}"
 = "Answers"
 - if current_user.present?
-  / - if current_user.answers.where(question_id: question.id).first.blank?
-  .create-answer
-    - if current_user
-      %span.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary btn-xs", id: "answer_#{question.id}", url_id: "#{question.id}"
-      %div{:class => "append_create_answer"}
+  - if current_user.answers.where(question_id: question.id).first.blank?
+    .create-answer
+      - if current_user
+        %span.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary btn-xs", id: "answer_#{question.id}", url_id: "#{question.id}"
+        %div{:class => "append_create_answer"}
 
-= will_paginate question_answers, renderer:  BootstrapPagination::Rails
+.pull_left= will_paginate question_answers, renderer:  BootstrapPagination::Rails
 %hr/
 
 %div{:class => "ques_ans_#{question.id}"}
