@@ -56,11 +56,13 @@
 
 .image-display
 {
-  width: 175px;
-  height: 65px;
+  width: 170px;
+  height: 60px;
   padding: 10px;
   background-color:#E1ECF4;
   float: right;
+  /*top: -15px;
+  position: relative;*/
 }
 .ans-pagination
 {
@@ -99,7 +101,7 @@
 
 .question-index-image
 {
-  width: 175px;
+  width: 170px;
   height: 70px;
   padding: 10px;
   background-color:#F4F6F8;
@@ -110,12 +112,13 @@
 }
 .question-show-image
 {
-  width: 175px;
-  height: 65px;
+  width: 170px;
+  height: 70px;
   padding: 10px;
   background-color:#E1ECF4;
   float: right;
   position: relative;
+  bottom: 30px;
 
 
 }
@@ -137,7 +140,7 @@
 
 }
 .answer{
-  font-size: 20px;
+  font-size: 22px;
   color: black;
   font-family: verdana;
 
@@ -283,6 +286,11 @@ h2{
   padding-right: 0px !important;
 
 }
+.allignment_text_comment{
+  padding-left: -1px !important;
+  padding-right: -1px !important;
+
+}
 
 .allignment_answer_vote{
   width: 4% !important;
@@ -303,7 +311,14 @@ h2{
 }
 .hor-line
 {
-  bottom: 30px;
+  top:16px;
+  position: relative;
+}
+.hor-line-ques
+{
+  top:-40px;
+  position: relative;
+}
 
 .tag-align
 {

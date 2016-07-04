@@ -26,17 +26,13 @@ class CommentsController < ApplicationController
   end
 
   def update
-    commentable = find_commentable
     old_id = params[:id]
-    p "=============id=======#{old_id}"
-    p  @commentable.comment
-    p params[:comment][:comment]
+    commentable = find_commentable
     if @commentable.comment != params[:comment][:comment]
       @commentable.histories.new(description: @commentable.comment)
       @commentable.update_attributes(comment_params)
 
     else
-      p "jjjjjjjjjjjjjjjjjjjjj"
       @commentable.update_attributes(comment_params)
     end
     @commentable.save
