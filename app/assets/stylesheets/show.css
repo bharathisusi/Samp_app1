@@ -1,7 +1,7 @@
 .answer-comment{
   position: relative;
   margin-left: 40px;
-  font-size: 17px;
+  font-size: 14px;
   color: black;
 
   }
@@ -106,6 +106,7 @@
   float: right;
   position: relative;
   bottom: 50px;
+  background-image:
 
 }
 .question-show-image
@@ -122,7 +123,8 @@
 
 .fullname{
   font-size: 15px;
-  color: blue;
+  color: white;
+
 }
 .ques-fullname
 {
@@ -268,6 +270,7 @@ h2{
   top:-10px;
   margin-top:1rem;
   z-index: 5;
+  color: white;
 }
 .append_create_comment{
   width: 1400px;
@@ -348,6 +351,5 @@ bottom: 50px;
 {
   font-size: 15px;
   font-family: Arial;
-
 }
 

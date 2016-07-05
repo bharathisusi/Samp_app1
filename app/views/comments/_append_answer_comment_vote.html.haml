@@ -1,8 +1,8 @@
 %div{class: "append_answer_comment_#{comment.id}"}
   = render partial: 'comments/trigger_answer_comment_vote', locals: {comment: comment, question: question, answer: answer}
   .col-sm-11.allignment_text
-    %span.comment-font= comment.comment.html_safe
-    %span.fullname= "- #{comment.user.profile.full_name}"
+    %span.comment-font= comment.comment.humanize.html_safe
+    %span.fullname= "- #{comment.user.profile.full_name.humanize}"
     - if current_user == comment.user
       %div{:class => "edit_answer_comment_#{comment.id}"}
         .pull-left
@@ -12,7 +12,6 @@
 
       %span.fullname= link_to 'Destroy',  "javascript:void();", id: "destroy_#{comment.id}",destroy_id: "#{comment.id}", url_id: "#{comment.commentable.id}", q_id: "#{question.id}"
       %div{:class => "append_edit_answer_comment_#{comment.id}"}
-
   .clearfix
 %br/
 

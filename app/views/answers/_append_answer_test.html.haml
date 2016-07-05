@@ -1,14 +1,14 @@
 %div{:class => "append_edit_answer_#{answer.id}"}
   = render partial: 'answers/trigger_answer_vote', locals: {question: answer.question, answer: answer}
   .col-sm-11.allignment_text
-    %span.answer= answer.answer.html_safe
+    %span.answer= answer.answer.humanize.html_safe
     .image-display
-      = " answered #{answer.created_at.to_s(:short)} "
+      = " Answered #{answer.created_at.to_s(:short)} "
       - if answer.user.profile.image.thumb.url.present?
         = image_tag(answer.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      %span.fullname= "- #{answer.user.profile.full_name}"
+      %span= "- #{answer.user.profile.full_name.humanize}"
     - if current_user == answer.user
       %div{:class => "edit_answer_#{answer.id}"}
         .pull-left
