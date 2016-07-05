@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    render json: {html: render_to_string("/answers/_answer_edit", layout: false, locals: {question_id: @question, answer_id: @answer})} and return
+    render json: {html: render_to_string("/answers/_form", layout: false, locals: {question_id: @question, answer_id: @answer})} and return
   end
 
   def create
@@ -48,7 +48,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    render :nothing => true
+    render json: {html: render_to_string("/answers/_index", layout: false, locals: {question: @question, answer: @answer, question_answers: @question.answers.pages(params[:page])})} and return
   end
 
   def answer_history

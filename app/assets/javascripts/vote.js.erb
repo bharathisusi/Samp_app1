@@ -100,7 +100,8 @@ vote.addComment = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_question_comment_'+d_id).remove();
           toastr.success('<%= I18n.t(:question_comment_destroy)%>');
-          $('.hide-hr-line').addClass("hide");
+           // $('.hide-hr').remove();
+
 
         }
         else{
@@ -116,7 +117,6 @@ vote.addComment = function() {
 vote.addAnswer = function() {
   $('.create-answer, [class^=ques_ans_]').on("click", "[class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
 
-    // $('#create_ans_button').show();
     var url_id = $(this).attr("url_id");
     if (typeof(url_id) == "undefined") {
       return false
@@ -124,20 +124,22 @@ vote.addAnswer = function() {
     var a_id = $(this).attr("a_id");
     var d_id = $(this).attr("destroy_id");
     if (typeof(a_id) != "undefined"){
-      var edit = a_id+"/edit";
+     var edit = a_id+"/edit";
+      // var edit = url_id+"/answers/"+a_id+"/edit";
       var type = "GET"
       $append = $(".append_edit_answer_test_"+a_id);
     }else if (typeof(d_id) != "undefined"){
-      console.log(d_id)
       if (!(confirm("Are you sure?"))) {
         return false;
       }
       var type = "DELETE";
       var edit = d_id;
+      // var edit = url_id;
       var count = parseInt($('.answer_count').text());
       var reduce_count = count - 1
     }else {
-      var edit = "new";
+      // var edit = url_id+"/answers/new";
+      var edit = "new"
       var type ="GET";
       $append = $(".append_create_answer");
 
@@ -145,13 +147,15 @@ vote.addAnswer = function() {
     $.ajax({
       type: type,
       url:  "/questions/"+url_id+"/answers/"+edit,
+      // url:  "/questions/"+edit,
       success: function(result) {
         if(typeof(d_id) != "undefined"){
           $('.append_edit_answer_'+d_id).remove();
-          $('.answer_count').empty().append(reduce_count);
           toastr.success('<%= I18n.t(:answer_destroy)%>');
-          $('.hide-ans-button').addClass("hide");
-          $('.hide-answer-button').removeClass("hide");
+          // $('.answer-page').show();
+          // $('.hide-ans-button').addClass("hide");
+          $('.ques_ans_page_'+url_id).html(result.html);
+
 
         }
         else{
@@ -181,7 +185,6 @@ vote.addAnswerComment = function() {
       if (!(confirm("Are you sure?"))) {
         return false;
       }
-
       var type = "DELETE";
       var edit = d_id;
     }

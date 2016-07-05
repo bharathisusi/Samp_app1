@@ -2,6 +2,7 @@
 .col-lg-8.remove_new_comment
   = form_for([@question, @commentable], remote: true) do |f|
     - all_views_side_error_messages!(@commentable)
+    -p @commentable
     .field
       = f.label :Comment
       %br/

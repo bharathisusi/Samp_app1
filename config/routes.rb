@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+
   resources :questions, concerns: :commentable do
     collection do
       get 'tagged/:tag', to: 'tags#index', as: :tag
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
     end
     resources :answers, concerns: :commentable
   end
-  # match "questions/:id" => "questions#show", via: [:get, :post]
+
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

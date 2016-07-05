@@ -5,11 +5,10 @@
     = @question.title.humanize
   .append_question
     = render partial: 'questions/trigger_question_vote', locals: {:question => @question}
-  %hr
+    %hr.hor-line-ques
   .answer-comment.ques-cmt
     - @question.comments.each do |comment|
       = render partial: 'comments/append_question_comment_vote', locals: {comment: comment, question: @question}
-  / %hr.hide-hr-line
   .create_comment
     - if current_user
       .hide-comment-button= link_to 'Add comment', "javascript:void();", class: " btn btn-primary btn-xs", id: "comment_#{@question.id}", url_id: "#{@question.id}"
@@ -17,5 +16,5 @@
       %i.fa.fa-refresh.fa-spin.hide{:style => "font-size:24px"}
   %br/
   %div{:class => "ques_ans_page_#{@question.id}"}
-    = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments, question_answers: @question.answers.pages(params[:page])}
+    = render partial: "answers/index", locals: {answers: @answers, question: @question, comments: @comments, question_answers: @question.answers.order("created_at DESC").pages(params[:page])}
 .col-lg-4
