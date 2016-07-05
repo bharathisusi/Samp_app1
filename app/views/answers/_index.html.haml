@@ -8,9 +8,7 @@
       -p "hideeeeeeeeeeeeeeeeeeeeee"
       %span.hide-answer-button= link_to 'Add Answer', "javascript:void();", class: "btn btn-primary btn-xs", id: "answer_#{question.id}", url_id: "#{question.id}"
       %div{:class => "append_create_answer"}
-
-.answer-page
-  .pull_left= will_paginate question_answers, renderer:  BootstrapPagination::Rails
+.pull_left= will_paginate question_answers, params: {controller: 'questions', action: 'show', id: question.id},  renderer:  BootstrapPagination::Rails
 %hr/
 
 %div{:class => "ques_ans_#{question.id}"}
