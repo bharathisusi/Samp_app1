@@ -6,7 +6,7 @@
     - if current_user == comment.user
       %div{:class => "edit_comment_#{comment.id}"}
         .pull-left
-          %span.fullname= link_to 'Edit |',  "javascript:void();", id: "comment_#{comment.id}",url_comment_id: "#{comment.id}", url_id: "#{comment.commentable.id}"
+          %span.fullname= link_to 'Edit | ',  "javascript:void();", id: "comment_#{comment.id}",url_comment_id: "#{comment.id}", url_id: "#{comment.commentable.id}"
       - unless comment.check_history?
         %span.fullname= link_to 'Edited |', comments_comment_history_path(history_id: comment.id, dont_show: comment.id),"data-target": "#myModal", "data-toggle": "modal", remote: true
       %span.fullname= link_to 'Destroy',  "javascript:void();", id: "destroy_#{comment.id}",destroy_id: "#{comment.id}", url_id: "#{comment.commentable.id}"

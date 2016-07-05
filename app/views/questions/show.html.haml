@@ -2,7 +2,7 @@
 .col-lg-0
 .col-lg-8
   .question_title
-    = @question.title
+    = @question.title.humanize
   .append_question
     = render partial: 'questions/trigger_question_vote', locals: {:question => @question}
     %hr.hor-line-ques

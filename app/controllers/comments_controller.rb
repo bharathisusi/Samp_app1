@@ -20,7 +20,6 @@ class CommentsController < ApplicationController
 
   def update
     old_id = params[:id]
-    commentable = find_commentable
     if @commentable.comment != params[:comment][:comment]
       @commentable.histories.new(description: @commentable.comment)
       @commentable.update_attributes(comment_params)
@@ -33,12 +32,14 @@ class CommentsController < ApplicationController
       if(@commentable.commentable_type == "Question")
         format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
       else
+
         format.js { render '/answers/answer_comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
       end
     end
   end
 
   def create
+
     commentable = find_commentable
     @commentable = commentable.comments.new(comment_params)
     @commentable.user = current_user
@@ -80,6 +81,7 @@ class CommentsController < ApplicationController
     else
       klass = "questions"
       id = params[:question_id]
+
     end
     return "#{klass}".singularize.classify.constantize.find(id)
   end
