@@ -16,11 +16,6 @@ class CommentsController < ApplicationController
   def destroy
     @commentable.destroy
     render :nothing => true
-    # if(@commentable.commentable_type == "Question")
-    #   redirect_to @question, notice: t(:question_comment_destroy)
-    # else
-    #   redirect_to @question, notice: t(:answer_comment_destroy)
-    # end
   end
 
   def update
@@ -49,7 +44,6 @@ class CommentsController < ApplicationController
     @commentable.user = current_user
     respond_to do |format|
       @commentable.save
-        #format.json {}
       if(@commentable.commentable_type == "Question")
         # render js: {action: 'show', status: :created, location: commentable}
         format.html {redirect_to @question, notice: t(:question_comment_create), id: "question_comment"}
@@ -75,7 +69,6 @@ class CommentsController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
     params.require(:comment).permit(:comment)
   end
