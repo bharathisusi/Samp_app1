@@ -1,0 +1,13 @@
+.col-lg-0
+.col-lg-8
+  %br
+  %br
+  %hr
+  .profile-box
+    - if @user.profile.image.medium.url.present?
+      = image_tag(@user.profile.image.medium.url)
+    - else
+      = image_tag("download.png", width: "140px", height: "140px")
+  .profile-name= @user.profile.full_name
+  .profile-description= @user.profile.description
+.col-lg-4

@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:edit, :update]
+  # before_action :set_question, only: [:show]
 
   def new
     @profile = Profile.new
@@ -14,6 +15,7 @@ class ProfilesController < ApplicationController
 
   def index
     @profiles = Profile.all
+  #   @questionss = Question.all
   end
 
   def edit
@@ -31,6 +33,10 @@ class ProfilesController < ApplicationController
   def set_profile
     @profile = Profile.find(params[:id])
   end
+
+  # def set_question
+  #   @question = Question.find(params[:question_id])
+  # end
 
   def profile_params
     params.require(:profile).permit(:first_name, :last_name, :tag, :organization, :description, :country, :state, :city, :image, :image_cache, :remove_image)

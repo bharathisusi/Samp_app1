@@ -24,6 +24,19 @@
   text-align: center;
   text-decoration: none!important;
 }
+.profile-box
+{
+  border: 1px solid #c8ccd0;
+  border-radius: 3px;
+  padding: 10px;
+  width: 23%;
+  box-shadow: inset 0 100px 0 #e7e8ea;
+  /*margin-top: 25px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  width: 70%;*/
+}
 .text-area-size
 {
   width: 70%;
@@ -126,7 +139,7 @@
 
 .fullname{
   font-size: 15px;
-  color: white;
+  color: blue;
 
 }
 .ques-fullname
@@ -146,6 +159,21 @@
   color: black;
   font-family: verdana;
 
+}
+.profile-name
+{
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  margin-top:-130px;
+  margin-left:200px;
+}
+.profile-description
+{
+  font-size: 17px;
+  font-family: arial;
+  position: relative;
+  margin-left:200px;
 }
 .linkbutton{
   position: relative;
@@ -366,5 +394,10 @@ bottom: 50px;
 {
   font-size: 15px;
   font-family: Arial;
+}
+.profile-image
+{
+  width: 200px;
+  height:70px;
 }
 
