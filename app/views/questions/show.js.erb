@@ -4,6 +4,7 @@ $('.fa-spin').removeClass('hide');
 <% else %>
   $('.ques-cmt').append("<%= j render partial: '/comments/append_question_comment_vote', locals: {comment: @commentable, question: @question} %>");
   toastr.success('<%= t(:question_comment_create)%>');
+  $('.hide-hr-line').removeClass("hide");
 <% end %>
 $('.fa-spin').addClass('hide');
 $('.remove_new_comment').remove();

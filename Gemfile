@@ -6,7 +6,6 @@ gem 'rails', '4.2.6'
 
 # group :production do
 gem 'pg'
-gem 'rails_12factor'
 # end
 
 # Use mysql as the database for Active Record
@@ -22,9 +21,11 @@ gem 'ckeditor'
 
 gem 'will_paginate-bootstrap'
 
+gem 'kaminari'
+
 gem 'acts-as-taggable-on'
 gem 'therubyracer', platforms: :ruby
-
+gem 'country_state_select', :git => 'https://github.com/Abimathic/Country-State-Select.git'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -52,7 +53,6 @@ gem "select2-rails"
 
 
 
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -62,8 +62,7 @@ gem "select2-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+group :development, :test do# Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end
 

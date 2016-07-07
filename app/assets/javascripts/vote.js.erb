@@ -7,7 +7,7 @@ $( document ).on('ready page:load', function() {
 });
 
 vote.upDownVote = function() {
-   $('.append_question, .ques-cmt,[class^=ques_ans_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_], [class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
+   $('.append_question, .ques-cmt,[class^=ques_ans_page_]').on("click", " [class^=trigger_question_comment_] [id^=submit_], [class^=trigger_answer_comment_] [id^=submit_], [class^=trigger_answer_] [id^=submit_], [id^=submit_]", function() {
 
     var q_id = $(this).attr("question_id");
     var a_id = $(this).attr("answer_id");
@@ -85,11 +85,12 @@ vote.addComment = function() {
       var type = "DELETE";
       var edit = d_id;
 
+
     }
     else {
       var edit = "new";
       var type ="GET";
-      $append = $(".append_create_comment");
+      $append = $(".append_create_comment_"+url_id);
       $('.hide-comment-button').addClass("hide");
     }
     $.ajax({
@@ -99,9 +100,13 @@ vote.addComment = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_question_comment_'+d_id).remove();
           toastr.success('<%= I18n.t(:question_comment_destroy)%>');
+           // $('.hide-hr').remove();
+
+
         }
         else{
           $append.html(result.html);
+
 
         }
       }
@@ -110,7 +115,8 @@ vote.addComment = function() {
 }
 
 vote.addAnswer = function() {
-  $('.create-answer, [class^=ques_ans_]').on("click", " [class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
+  $('.create-answer, [class^=ques_ans_]').on("click", "[class^=edit_answer_] [id^=answer_], [id^=answer_], [id^=destroy_]", function() {
+
     var url_id = $(this).attr("url_id");
     if (typeof(url_id) == "undefined") {
       return false
@@ -118,20 +124,22 @@ vote.addAnswer = function() {
     var a_id = $(this).attr("a_id");
     var d_id = $(this).attr("destroy_id");
     if (typeof(a_id) != "undefined"){
-      var edit = a_id+"/edit";
-      var type = "GET"
+     var edit = a_id+"/edit";
+     var type = "GET"
       $append = $(".append_edit_answer_test_"+a_id);
     }else if (typeof(d_id) != "undefined"){
-      console.log(d_id)
       if (!(confirm("Are you sure?"))) {
         return false;
       }
       var type = "DELETE";
       var edit = d_id;
+      var count = parseInt($('.answer_count').text());
+      var reduce_count = count - 1
     }else {
-      var edit = "new";
       var type ="GET";
+      var edit = "new";
       $append = $(".append_create_answer");
+
     }
     $.ajax({
       type: type,
@@ -140,6 +148,11 @@ vote.addAnswer = function() {
         if(typeof(d_id) != "undefined"){
           $('.append_edit_answer_'+d_id).remove();
           toastr.success('<%= I18n.t(:answer_destroy)%>');
+          // $('.answer-page').show();
+          // $('.hide-ans-button').addClass("hide");
+          $('.ques_ans_page_'+url_id).html(result.html);
+
+
         }
         else{
           $append.html(result.html);
@@ -153,6 +166,7 @@ vote.addAnswer = function() {
 
 vote.addAnswerComment = function() {
   $('[class^=create_answer_comment_], [class^=answer_comment_]').on("click", "[class^=edit_answer_comment_] [id^=comment_], [id^=comment_], [id^=destroy_]", function() {
+
     var q_id = $(this).attr("q_id");
     if (typeof(q_id) == "undefined") {
       return false
@@ -167,7 +181,6 @@ vote.addAnswerComment = function() {
       if (!(confirm("Are you sure?"))) {
         return false;
       }
-
       var type = "DELETE";
       var edit = d_id;
     }

@@ -18,11 +18,7 @@ class TagsController < ApplicationController
 
   def create
     @tag =  ActsAsTaggableOn::Tag.new(tag_params)
-    # if @tag.name == @tags
-    #   p "kkkkkkkkkkkkkkkkkkkk"
-    #   redirect_to new_tag_path, notice: t(:question_update)
     if @tag.save
-      p "sssssssssssssssssssss"
       redirect_to questions_path, notice: t(:question_create)
     else
       render :new

@@ -1,6 +1,4 @@
-
 class CommentsController < ApplicationController
-
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :find_question, only: [:create, :show, :edit, :new, :update, :destroy]
@@ -18,25 +16,15 @@ class CommentsController < ApplicationController
   def destroy
     @commentable.destroy
     render :nothing => true
-    # if(@commentable.commentable_type == "Question")
-    #   redirect_to @question, notice: t(:question_comment_destroy)
-    # else
-    #   redirect_to @question, notice: t(:answer_comment_destroy)
-    # end
   end
 
   def update
-    commentable = find_commentable
     old_id = params[:id]
-    p "=============id=======#{old_id}"
-    p  @commentable.comment
-    p params[:comment][:comment]
     if @commentable.comment != params[:comment][:comment]
       @commentable.histories.new(description: @commentable.comment)
       @commentable.update_attributes(comment_params)
 
     else
-      p "jjjjjjjjjjjjjjjjjjjjj"
       @commentable.update_attributes(comment_params)
     end
     @commentable.save
@@ -44,18 +32,19 @@ class CommentsController < ApplicationController
       if(@commentable.commentable_type == "Question")
         format.js { render '/questions/comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
       else
+
         format.js { render '/answers/answer_comment_edit.js.erb',locals: {question: @question, comment: @commentable, id: old_id}}
       end
     end
   end
 
   def create
+
     commentable = find_commentable
     @commentable = commentable.comments.new(comment_params)
     @commentable.user = current_user
     respond_to do |format|
       @commentable.save
-        #format.json {}
       if(@commentable.commentable_type == "Question")
         # render js: {action: 'show', status: :created, location: commentable}
         format.html {redirect_to @question, notice: t(:question_comment_create), id: "question_comment"}
@@ -81,7 +70,6 @@ class CommentsController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
     params.require(:comment).permit(:comment)
   end
@@ -93,6 +81,7 @@ class CommentsController < ApplicationController
     else
       klass = "questions"
       id = params[:question_id]
+
     end
     return "#{klass}".singularize.classify.constantize.find(id)
   end

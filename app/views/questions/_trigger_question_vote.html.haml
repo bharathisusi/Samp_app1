@@ -2,20 +2,21 @@
   %span= link_to_vote('upvote', '', question)
   %span= display_sum_of_votes(question)
   %span= link_to_vote('downvote', '', question)
+  %br
 .col-sm-11.allignment_text
-  %span.question= recent_question_update(question)
+  %span.question= recent_question_update(question).html_safe
   .question-show-image
-    = " asked #{question.created_at.to_s(:short)} "
+    = " Asked #{question.created_at.to_s(:short)} "
     - if question.user.profile.image.thumb.url.present?
       = image_tag(question.user.profile.image.thumb.url)
     - else
       = image_tag("download.png", width: "40px", height: "30px")
-    %span.fullname= "- #{question.user.profile.full_name}"
+    %span= "- #{question.user.profile.full_name.humanize}"
   - if question.user.present?
     - if current_user == question.user
-      %span= link_to 'Edit |', edit_question_path(question)
+      %span= link_to 'Edit | ', edit_question_path(question)
       - unless question.check_history?
-        %span= link_to 'Edited |', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
+        %span= link_to 'Edited | ', questions_question_history_path(history_id: question.id, dont_show: question.id), "data-target": "#myModal", "data-toggle": "modal", remote: true
       %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
 .clearfix
 

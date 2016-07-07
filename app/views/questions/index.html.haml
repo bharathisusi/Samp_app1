@@ -1,25 +1,32 @@
 .col-lg-0
 .col-lg-8
-  %h3 Question
-  = link_to 'create question', new_question_path,class: "create-question-button"
   - unless params[:tag]
-    %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
+    %span.pull-right= will_paginate @questions, renderer:  BootstrapPagination::Rails
+    %span.pull-left= question_pagination
+  %br
+  %br
+  %br
+  %h3 Questions
+  = link_to 'create question', new_question_path,class: "create-question-button"
   - @questions.each do |question|
     .align-count= display_sum_of_votes(question)
-    = "votes"
-    %span.align-question-title= link_to question.title, question
+    = "Votes"
+    %span.align-question-title= link_to question.title.humanize, question
     .align-question-description
       %span= truncate(question.question_box, length: 20, escape: false)
     .question-index-image
-      = " asked #{question.created_at.to_s(:short)} "
+      = " Asked #{question.created_at.to_s(:short)} "
       - if question.user.profile.image.thumb.url.present?
         = image_tag(question.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      %span.fullname= "-#{question.user.profile.full_name}"
+      -p "ccccccccccccccccc"
+      -p question.user
+      -p question.user.profile
+      %span.fullname= link_to "-#{question.user.profile.full_name.humanize}", user_path(question.user)
     .align-question-index
       .align-count= question.answers.size
-      = "answers"
+      = "Answers"
     .question-list-tag
       - question.tags.each do |tag|
         = link_to tag, tag_questions_path(tag.name), class: "question-tag"
@@ -36,5 +43,4 @@
     %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
     %span.pull-right= question_pagination
 .col-lg-4
-
 

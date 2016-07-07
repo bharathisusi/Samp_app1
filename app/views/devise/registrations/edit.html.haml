@@ -32,7 +32,7 @@
           .col-sm-8
             = f.password_field :current_password, autocomplete: "off",  :class => "form-control"
         .actions
-          = f.submit "Update",:class => " btn btn-primary"
+          = f.submit "Update",:class => " btn btn-primary btn-s"
 
     %h5 Cancel my account
     Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}

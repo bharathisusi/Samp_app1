@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
   has_many :votes
-  has_one :profile
+  has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 
 

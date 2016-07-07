@@ -43,6 +43,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    # p params[:question_id]
+    # p params[:answer_id]
     @question.destroy
     redirect_to questions_url, notice: t(:question_destroy)
   end
@@ -58,9 +60,15 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []} )
+    params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []})
   end
-  # {:tag_list => [:id][:name]}
+
+  def answer_params
+    if request.post?
+      params.require(:answer).permit(:answer)
+    end
+  end
+
 
 
   def require_permission

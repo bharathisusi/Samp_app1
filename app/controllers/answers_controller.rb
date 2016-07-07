@@ -26,7 +26,6 @@ class AnswersController < ApplicationController
       @answer.save
         format.html {redirect_to @question, notice: t(:question_comment_create)}
         format.js { render '/answers/show.js.erb'}
-
     end
   end
 
@@ -49,7 +48,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    render :nothing => true
+    render json: {html: render_to_string("/answers/_index", layout: false, locals: {question: @question, answer: @answer, question_answers: @question.answers.pages(params[:page])})} and return
   end
 
   def answer_history
