@@ -325,7 +325,20 @@ bottom: 50px;
 .profile-question-button
 {
  position: relative;
- margin-top: -12px;
+ margin-left: 830px;
+ display: inline-block;
+ padding: .2em .2em;
+ border-width: 1px;
+ border-style: solid;
+ border-radius: 0;
+ color: white;
+ background-color: #cccc00;
+ border-color: transparent;
+ font-size: 12px;
+}
+.profile-question-all-button
+{
+ position: relative;
  display: inline-block;
  padding: .2em .2em;
  border-width: 1px;
@@ -370,25 +383,26 @@ bottom: -10px;
 {
   font-weight: bold;
   position: relative;
-  margin-top: -50px;
-  margin-left: 650px;
+  margin-top: 40px;
+
 }
 .ans-count
 {
   font-weight: bold;
   position: relative;
   margin-top: -40px;
-  margin-left: 730px;
+  margin-left: 100px;
+
 }
 .ques-display
 {
   position: relative;
-  margin-left: 650px;
+
 }
 .ans-display
 {
   position: relative;
-  margin-left: 730px;
+  margin-left: 100px;
 }
 .user-activity
 {
@@ -398,5 +412,12 @@ bottom: -10px;
 .activity-question
 {
   text-decoration: none ! important ;
-  font-size: 18px;
+  font-size: 16px;
 }
+.ques-profile-display
+{
+  font-weight: bold;
+  font-size: 20px;
+
+}
+
