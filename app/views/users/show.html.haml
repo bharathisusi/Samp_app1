@@ -1,12 +1,53 @@
 %br
-.profile-question-list
   / %span= link_to 'create question', new_question_path, class: "profile-question-button"
-  %span= link_to 'All Questions', questions_path, class: "profile-question-button"
-%hr
-.profile-box
-  - if @user.profile.image.medium.url.present?
-    = image_tag(@user.profile.image.medium.url)
-  - else
-    = image_tag("download.png", width: "140px", height: "140px")
-.profile-name= @user.profile.full_name
-.profile-description= @user.profile.description
+/ .pull-left= link_to 'Activity',users_path
+/ = link_to 'All Questions', questions_path, class: "profile-question-button"
+/ %hr
+%div
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active{:role => "presentation"}
+      %a{"aria-controls" => "profile", "data-toggle" => "tab", :href =>  "#profile", :role => "tab"} Profile
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "activity", "data-toggle" => "tab", :href => "#activity", :role => "tab"} Activity
+.tab-content
+  #profile.tab-pane.active{:role => "tabpanel"}
+    - if @user.profile.image.medium.url.present?
+      %br
+      = image_tag(@user.profile.image.medium.url)
+    - else
+      %br
+      = image_tag("download.png", width: "140px", height: "140px")
+    .profile-name= @user.profile.full_name
+    .profile-description= @user.profile.description
+    .ques-count= @user.questions.count
+    .ques-display= "questions"
+    .ans-count= @user.answers.count
+    .ans-display= "answers"
+  #activity.tab-pane{:role => "tabpanel"}
+    .col-lg-6
+      %br
+      = "Questions (#{@user.questions.count})"
+      %hr
+      - @user.questions.each do |question|
+        .activity-question= link_to question.question_box.html_safe, question
+    .col-lg-6
+      %br
+      = "Answers (#{@user.answers.count})"
+      %hr
+      - @user.answers.includes(:question).each do |answer|
+        .activity-question= link_to answer.answer.html_safe, answer.question
+      - @user.votes.includes(:votable).where(votable_type: "Question").each do |vote|
+        = link_to vote.votable.question_box.html_safe
+
+
+
+
+
+
+
+
+
+
+
+
+
