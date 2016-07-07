@@ -23,7 +23,7 @@ gem 'ckeditor'
 gem 'will_paginate-bootstrap'
 
 gem 'acts-as-taggable-on'
-
+gem 'therubyracer', platforms: :ruby
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
