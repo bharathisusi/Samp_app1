@@ -2,6 +2,7 @@
 .profile-question-list
   / %span= link_to 'create question', new_question_path, class: "profile-question-button"
   %span= link_to 'All Questions', questions_path, class: "profile-question-button"
+  %span= link_to 'Activity',user_path
 %hr
 .profile-box
   - if @user.profile.image.medium.url.present?
