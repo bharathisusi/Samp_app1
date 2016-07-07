@@ -9,7 +9,6 @@ gem 'rails', '4.2.6'
 gem 'pg'
 # end
 
-
 # Use mysql as the database for Active Record
 # gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -26,6 +25,7 @@ gem 'will_paginate-bootstrap'
 gem 'kaminari'
 
 gem 'acts-as-taggable-on'
+gem 'country_state_select', :git => 'https://github.com/Abimathic/Country-State-Select.git'
 
 
 

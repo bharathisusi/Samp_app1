@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :append_question_vote, :edit, :update, :destroy]
   before_filter :require_permission, only: [:edit, :destroy]
-  # before_action :set_ans, only: [:destroy]
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
   autocomplete :question, :title
 
@@ -12,16 +11,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # @answer= @question.answers.new(answer_params)
-    # if request.post?
-    #   p "ssssssssssssssssssssssss"
-    #   @answer.user = current_user
-    #   @answer.save
-    #   # question_answers = question.answers.pages(page)
-    #   respond_to do |format|
-    #       format.html {redirect_to @question, notice: t(:question_comment_create)}
-    #       format.js { render '/answers/show.js.erb', locals: {question: @question, answers: @answer, page: params}}
-
   end
 
   def new
@@ -71,10 +60,6 @@ class QuestionsController < ApplicationController
   def set_post
     @question = Question.find(params[:id])
   end
-  # def set_ans
-  #   @answer = Answer.find(params[:answer_id])
-  # end
-
 
   def question_params
     params.require(:question).permit(:title, :question_box, :user_views, {:tag_list => []})
@@ -85,7 +70,7 @@ class QuestionsController < ApplicationController
       params.require(:answer).permit(:answer)
     end
   end
-  # {:tag_list => [:id][:name]}
+
 
 
   def require_permission

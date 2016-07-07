@@ -26,11 +26,16 @@
           = f.label :Country, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.select :country, options_for_select(Country.show_country),{},{ class: "select-field form-control", "data-live-search": "true"}
+            / = f.select :country, collection: CountryStateSelect.countries_collection, class: "select-field form-control"
 
         .form-group
           = f.label :State, :class => "col-sm-4 control-label"
           .col-sm-8
             = f.select :state, options_for_select(State.show_state),{},{ class: "select-field form-control", "data-live-search": "true"}
+            / - options = { form: f, field_names: { :country => :country, :state => :state } }
+            / -p options
+            / -puts "KKKKKKKKKKKKK"
+            / = f.select :state, CountryStateSelect.state_options(options)
         .form-group
           = f.label :City, :class => "col-sm-4 control-label"
           .col-sm-8
@@ -38,7 +43,7 @@
         .form-group
           = f.label :Description, :class => "col-sm-4 control-label"
           .col-sm-8
-            = f.text_field :description, autofocus: true, :class => "form-control"
+            = f.text_area :description, autofocus: true, :class => "form-control", :rows => "8"
         .form-group
           = f.label :Add_Avatar, :class => "col-sm-4 control-label"
           = f.file_field :image, :class => "col-sm-8"

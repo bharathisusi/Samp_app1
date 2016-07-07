@@ -125,8 +125,7 @@ vote.addAnswer = function() {
     var d_id = $(this).attr("destroy_id");
     if (typeof(a_id) != "undefined"){
      var edit = a_id+"/edit";
-      // var edit = url_id+"/answers/"+a_id+"/edit";
-      var type = "GET"
+     var type = "GET"
       $append = $(".append_edit_answer_test_"+a_id);
     }else if (typeof(d_id) != "undefined"){
       if (!(confirm("Are you sure?"))) {
@@ -134,20 +133,17 @@ vote.addAnswer = function() {
       }
       var type = "DELETE";
       var edit = d_id;
-      // var edit = url_id;
       var count = parseInt($('.answer_count').text());
       var reduce_count = count - 1
     }else {
-      // var edit = url_id+"/answers/new";
-      var edit = "new"
       var type ="GET";
+      var edit = "new";
       $append = $(".append_create_answer");
 
     }
     $.ajax({
       type: type,
       url:  "/questions/"+url_id+"/answers/"+edit,
-      // url:  "/questions/"+edit,
       success: function(result) {
         if(typeof(d_id) != "undefined"){
           $('.append_edit_answer_'+d_id).remove();
