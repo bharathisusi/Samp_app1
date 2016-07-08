@@ -2,8 +2,12 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:edit, :update]
   # before_action :set_question, only: [:show]
 
+
   def new
     @profile = Profile.new
+  end
+  def show
+    @profile = Profile.find(params[:id])
   end
 
   def create
@@ -20,11 +24,11 @@ class ProfilesController < ApplicationController
 
   def edit
   end
+
   def update
     if @profile.update(profile_params)
       redirect_to questions_path, notice: t(:profile_update)
     end
-
   end
 
 

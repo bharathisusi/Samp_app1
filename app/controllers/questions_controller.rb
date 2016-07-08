@@ -27,6 +27,8 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
+    p "dddddddddddddddddddddd"
+
     if @question.save
       redirect_to @question, notice: t(:question_create)
     else

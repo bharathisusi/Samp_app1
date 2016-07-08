@@ -3,11 +3,9 @@ class UsersController < ApplicationController
   def show
   end
   def index
-    @user= User.all
+    @user=User.find(params[:id])
   end
-
   private
-
 
   def set_user
     @user = User.find(params[:id])
