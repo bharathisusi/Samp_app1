@@ -20,14 +20,6 @@
 //= require toastr
 //= require_tree .
 
-$(document).on('ready page:load', function() {
-  return CountryStateSelect({
-    country_id: "country_id",
-    state_id: "state_id"
-  });
-});
-
-
 
 
 

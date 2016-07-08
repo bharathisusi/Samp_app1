@@ -4,6 +4,7 @@ $( document ).on('ready page:load', function() {
   vote.addComment();
   vote.addAnswer();
   vote.addAnswerComment();
+  vote.newQuestionCreate();
 });
 
 vote.upDownVote = function() {
@@ -206,3 +207,24 @@ vote.addAnswerComment = function() {
   });
 }
 
+vote.loadCkeditor = function(){
+  $('.ckeditor-2').each(function() {
+    CKEDITOR.replace($(this).attr('id'));
+  });
+}
+
+vote.newQuestionCreate = function() {
+  $("#new_question_create").on('click', function() {
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url:  "/questions/new",
+      success: function(result) {
+        $(".modal-body").html(result.html);
+        $("#myModal").modal('show');
+        vote.loadCkeditor();
+      }
+    });
+  });
+
+}

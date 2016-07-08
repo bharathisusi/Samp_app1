@@ -20,10 +20,7 @@
         = image_tag(question.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      -p "ccccccccccccccccc"
-      -p question.user
-      -p question.user.profile
-      %span.fullname= link_to "-#{question.user.profile.full_name.humanize}", user_path(question.user)
+      %span.fullname= link_to "-#{question.user.profile.full_name}", user_path(question.user)
     .align-question-index
       .align-count= question.answers.size
       = "Answers"

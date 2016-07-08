@@ -15,6 +15,11 @@ class QuestionsController < ApplicationController
 
   def new
     @question= current_user.questions.new
+    @modal_dialog = false
+    if request.format == :json
+      @modal_dialog = true
+      render json: {html: render_to_string("/questions/_form", layout: false)} and return
+    end
   end
 
   def edit

@@ -11,7 +11,7 @@
       = image_tag(question.user.profile.image.thumb.url)
     - else
       = image_tag("download.png", width: "40px", height: "30px")
-    %span= "- #{question.user.profile.full_name.humanize}"
+    %span= link_to "- #{question.user.profile.full_name}",user_path(question.user)
   - if question.user.present?
     - if current_user == question.user
       %span= link_to 'Edit | ', edit_question_path(question)
