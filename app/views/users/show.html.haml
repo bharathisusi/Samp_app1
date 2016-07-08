@@ -1,9 +1,5 @@
 %br
-  / %span= link_to 'create question', new_question_path, class: "profile-question-button"
-/ .pull-left= link_to 'Activity',users_path
-/ = link_to 'All Questions', questions_path, class: "profile-question-button"
-/ %hr
-%div
+  %div
   %ul.nav.nav-tabs{:role => "tablist"}
     %span= link_to 'create question', new_question_path, class: "profile-question-button"
     = link_to 'All Questions', questions_path, class: "profile-question-all-button"
@@ -43,6 +39,15 @@
       %hr
       - @user.votes.includes(:votable).where(votable_type: "Question").each do |vote|
         .activity-question= link_to vote.votable.question_box.html_safe, vote.votable
+      %br
+      .ques-profile-display
+        %span= "Comments"
+        %span= "(#{@user.comments.includes(:commentable).size})"
+      %hr
+      - @user.comments.includes(:commentable).each do |c|
+        .activity-question= link_to c.comment, c.commentable_type == "Question" ? c.commentable : c.commentable.question
+
+        %br
     .col-lg-6
       %br
       .ques-profile-display
@@ -59,6 +64,8 @@
       %hr
       - @user.votes.includes(:votable).where(votable_type: "Answer").each do |vote|
         .activity-question= link_to vote.votable.answer.html_safe, vote.votable.question
+
+
 
 
 
