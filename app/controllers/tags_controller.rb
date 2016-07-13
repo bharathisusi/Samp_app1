@@ -3,16 +3,10 @@ class TagsController < ApplicationController
 
 
   def index
-    p "hhhhhhhh"
-    p params[:tag]
-    p params[:user_id]
-    p
-
     if params[:tag] && params[:user_id]
       if current_user
         @questions = current_user.questions.tagged_with(params[:tag])
         render '/questions/index'
-
       end
 
     elsif params[:tag]

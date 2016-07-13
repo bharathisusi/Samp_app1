@@ -48,8 +48,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    # p params[:question_id]
-    # p params[:answer_id]
     @question.destroy
     redirect_to questions_url, notice: t(:question_destroy)
   end

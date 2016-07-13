@@ -88,8 +88,6 @@
       .ques-profile-display
         = "Tags"
       %hr
-      - p @user
-      - p "lllllllllllllllll"
       - @user.questions.includes(:tags).each do |f|
         - f.tags.each do |n|
           %span.question-tag=link_to n.name,user_questions_path(n.name, @user), class: "activity-tag"
