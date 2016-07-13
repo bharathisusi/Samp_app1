@@ -23,18 +23,23 @@ Rails.application.routes.draw do
   end
 
 
+
   resources :questions, concerns: :commentable do
     collection do
       get 'tagged/:tag', to: 'tags#index', as: :tag
+      get 'tagged/:tag/:user_id', to: 'tags#index', as: :user
       get :autocomplete_tag_name
       get :autocomplete_question_title
     end
     resources :answers, concerns: :commentable
   end
+  get '/question/*id(/:title)' => 'questions#show', :as => :ques
+
+
 
 
   devise_for :users
-  resources :users, only: [:show, :index]
+  get '/user/*id(/:full_name)' => 'users#show', :as => :user
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -10,6 +10,12 @@ class Question < ActiveRecord::Base
   validates_length_of :title, :minimum => 3, :maximum => 100, :allow_blank => false
   validate :question_box_validation
   acts_as_taggable_on :tags
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
+  def to_param
+    "#{id}/#{title}"
+  end
 
   def answers_count
     a= self.answers.count
