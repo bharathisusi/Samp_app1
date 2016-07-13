@@ -27,6 +27,8 @@ gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'country_state_select', :git => 'https://github.com/Abimathic/Country-State-Select.git'
 
+gem 'friendly_id', '~> 5.1.0'
+
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
