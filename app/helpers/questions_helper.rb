@@ -5,6 +5,7 @@ module QuestionsHelper
 
   def question_pagination
     param = params[:per_page]
+    p param
     content_tag(:ul, class: ["pagination", "pagination"]) do
       if param == '5'
         li_tag(param)

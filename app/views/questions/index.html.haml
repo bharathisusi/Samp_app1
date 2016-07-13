@@ -1,8 +1,9 @@
 .col-lg-0
 .col-lg-8
-  - unless params[:tag]
-    %span.pull-right= will_paginate @questions, renderer:  BootstrapPagination::Rails
-    %span.pull-left= question_pagination
+  -if @questions.count >= 5
+    - unless params[:tag]
+      %span.pull-right= will_paginate @questions, renderer:  BootstrapPagination::Rails
+      %span.pull-left= question_pagination
   %br
   %br
   %br
@@ -36,9 +37,10 @@
           %span= link_to 'Destroy', question,method: :delete, data: { confirm: 'Are you sure?' }
     %hr.hor-line
 
-  - unless params[:tag]
-    %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
-    %span.pull-right= question_pagination
+  -if @questions.count >= 5
+    - unless params[:tag]
+      %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
+      %span.pull-right= question_pagination
 .col-lg-4
 
 
