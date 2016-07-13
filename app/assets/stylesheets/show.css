@@ -414,9 +414,33 @@ bottom: -10px;
 {
   text-decoration: none ! important ;
   font-size: 16px;
+  border: none!important;
+
 }
 .ques-profile-display
 {
   font-weight: bold;
   font-size: 20px;
+}
+
+.align-vote-profile
+{
+  font-size: 12px;
+  text-align: center;
+  min-width: 36px;
+  height: auto;
+  padding: 3px 6px;
+  margin-right: 10px;
+  display: inline-block;
+  border: 1px solid #b9b9b9;
+  border-radius: 2px;
+  border-color: #5fba7d;
+  background: #5fba7d;
+  color: #FFF;
+}
+.activity-tag
+{
+  text-decoration: none ! important ;
+  border: none!important;
+
 }

@@ -31,22 +31,33 @@
         %span= "(#{@user.questions.size})"
       %hr
       - @user.questions.each do |question|
-        .activity-question= link_to question.question_box.html_safe, question
-      %br
+        %span.align-vote-profile= display_sum_of_votes(question)
+        - if (question.question_box.length >= 100)
+          %span= link_to strip_tags(truncate(question.question_box, length: 50, escape: false)), question, class: "activity-question"
+        - else
+          %span= link_to strip_tags(question.question_box), question, class: "activity-question"
+        %br
+        %br
       .ques-profile-display
         %span= "Voted Questions"
         %span= "(#{@user.votes.includes(:votable).where(votable_type: "Question").size})"
       %hr
       - @user.votes.includes(:votable).where(votable_type: "Question").each do |vote|
-        .activity-question= link_to vote.votable.question_box.html_safe, vote.votable
-      %br
+        %span.align-vote-profile= display_sum_of_votes(vote.votable)
+        - if (vote.votable.question_box.length >= 100)
+          %span= link_to strip_tags(truncate(vote.votable.question_box, length: 50, escape: false)), vote.votable, class: "activity-question"
+        - else
+          %span= link_to strip_tags(vote.votable.question_box), vote.votable, class: "activity-question"
+        %br
+        %br
       .ques-profile-display
         %span= "Comments"
         %span= "(#{@user.comments.includes(:commentable).size})"
       %hr
       - @user.comments.includes(:commentable).each do |c|
-        .activity-question= link_to c.comment, c.commentable_type == "Question" ? c.commentable : c.commentable.question
-
+        %span.align-vote-profile= display_sum_of_votes(c.commentable_type == "Question" ? c.commentable : c.commentable.question)
+        %span= link_to strip_tags(c.comment), c.commentable_type == "Question" ? c.commentable : c.commentable.question, class: "activity-question"
+        %br
         %br
     .col-lg-6
       %br
@@ -55,15 +66,39 @@
         %span= "(#{@user.answers.size})"
       %hr
       - @user.answers.includes(:question).each do |answer|
-        .activity-question= link_to answer.answer.html_safe, answer.question
-      %br
-      %br
+        %span.align-vote-profile= display_sum_of_votes(answer)
+        - if (answer.answer.length >= 100)
+          %span= link_to truncate(answer.answer.html_safe, length: 50, escape: false), answer.question, class: "activity-question"
+        -else
+          %span= link_to answer.answer.html_safe, answer.question, class: "activity-question"
+        %br
+        %br
       .ques-profile-display
         %span= "Voted Answers"
         %span= "(#{@user.votes.includes(:votable).where(votable_type: "Answer").size})"
       %hr
       - @user.votes.includes(:votable).where(votable_type: "Answer").each do |vote|
-        .activity-question= link_to vote.votable.answer.html_safe, vote.votable.question
+        %span.align-vote-profile= display_sum_of_votes(vote.votable)
+        - if (vote.votable.answer.length >= 100)
+          %span= link_to truncate(vote.votable.answer.html_safe, length: 30, escape: false), vote.votable.question, class: "activity-question"
+        - else
+          %span= link_to vote.votable.answer.html_safe, vote.votable.question, class: "activity-question"
+        %br
+        %br
+      .ques-profile-display
+        = "Tags"
+      %hr
+      - p @user
+      - p "lllllllllllllllll"
+      - @user.questions.includes(:tags).each do |f|
+        - f.tags.each do |n|
+          %span.question-tag=link_to n.name,user_questions_path(n.name, @user), class: "activity-tag"
+          = (n.taggings_count - 1)
+          - if f.tags.size > 1
+            %span.tag-size= " * #{f.tags.size}"
+          %br
+          %br
+
 
 
 
