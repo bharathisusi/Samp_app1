@@ -11,7 +11,7 @@
   - @questions.each do |question|
     .align-count= display_sum_of_votes(question)
     = "Votes"
-    %span.align-question-title= link_to question.title.humanize, question
+    %span.align-question-title= link_to question.title.humanize, ques_path(question)
     .align-question-description
       %span= truncate(question.question_box, length: 20, escape: false)
     .question-index-image
@@ -20,7 +20,7 @@
         = image_tag(question.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      %span.fullname= link_to "-#{question.user.profile.full_name}", user_path(question.user)
+      %span.fullname= link_to "-#{question.user.profile.full_name_profile}", user_path(question.user, question.user.profile.full_name)
     .align-question-index
       .align-count= question.answers.size
       = "Answers"
@@ -40,4 +40,5 @@
     %span= will_paginate @questions, renderer:  BootstrapPagination::Rails
     %span.pull-right= question_pagination
 .col-lg-4
+
 

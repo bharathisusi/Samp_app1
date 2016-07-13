@@ -8,7 +8,7 @@
         = image_tag(answer.user.profile.image.thumb.url)
       - else
         = image_tag("download.png", width: "40px", height: "30px")
-      %span= link_to "- #{answer.user.profile.full_name}",user_path(answer.user)
+      %span= link_to "- #{answer.user.profile.full_name_profile}",user_path(answer.user, answer.user.profile.full_name)
     - if current_user == answer.user
       %div{:class => "edit_answer_#{answer.id}"}
         .pull-left

@@ -77,8 +77,8 @@
               -else
                 %li.dropdown
                   %a.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-                    = image_tag(current_user.profile.image.thumb.url)#image_tag(current_user.image.url)
-                    = current_user.profile.full_name
+                    = image_tag(current_user.profile.image.thumb.url)
+                    = current_user.profile.full_name_profile
                     %span.caret
                   %ul.dropdown-menu
                     %li

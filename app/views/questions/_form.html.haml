@@ -17,6 +17,6 @@
       = f.select :tag_list, options_for_select(ActsAsTaggableOn::Tag.all.collect{|f| [f.name]}, :selected => f.object.tag_list),{},{prompt: "Enter your tag", class: "select-multiple form-control", multiple: 'multiple', include_blank: false}
     %br
     .actions
-      = f.submit"Create Question",:class => " btn btn-primary btn-xs"
+      = @question.id.present? ? (f.submit "Update question", :class => " btn btn-primary btn-xs") : (f.submit "Create question", :class => " btn btn-primary btn-xs")
 
 .col-lg-2

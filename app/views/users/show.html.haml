@@ -16,7 +16,7 @@
       - else
         %br
         = image_tag("download.png", width: "140px", height: "140px")
-      .profile-name= @user.profile.full_name
+      .profile-name= @user.profile.full_name_profile
       .profile-description= @user.profile.description
     .col-lg-6
       .ques-count= @user.questions.size

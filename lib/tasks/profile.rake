@@ -7,7 +7,6 @@ namespace :profile do
         p.save!
       else
          u.profile.update(first_name: u.first_name, last_name: u.last_name)
-
       end
     end
 
